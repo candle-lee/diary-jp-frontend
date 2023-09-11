@@ -16,7 +16,7 @@ const authRoutes: RouteObject = {
   children: [
     {
       path: 'signin',
-      element: <SignInPage />,
+      element: <HomePage />,
     },
   ],
 };
