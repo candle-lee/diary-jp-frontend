@@ -1,6 +1,6 @@
 const SignInForm = () => {
     return (
-        <section className="bg-gray-50 dark:bg-gray-900">
+        <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
             <div className="bg-white w-[410px] h-[610px]">
                 <div className="">
                     <div className="w-[110px] h-[56px]">
@@ -16,28 +16,33 @@ const SignInForm = () => {
                             <img className="w-5 h-5 mr-[9px]" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
                             <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">Sign in with Google</span>
                         </button>
-                        <div>
-                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required={true} />
+                        <div className="relative flex items-center">
+                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
+                            <span className="w-[50px] text-[#A3AED0] text-center font-medium text-base leading-6 tracking-[-0.28px]">or</span>
+                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
                         </div>
                         <div>
-                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required={true} />
+                            <label htmlFor="email" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Email</label>
+                            <input type="email" name="email" id="email" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="name@company.com" required={true} />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Min. 8 characters" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" required={true} />
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required={true} />
+                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:bg-[#4318FF]" required={true} />
                                 </div>
                                 <div className="ml-3 text-sm">
-                                    <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                                    <label htmlFor="remember" className="text-[#2B3674] text-sm font-normal leading-5 tracking-[-0.28px]">Keep me logged in</label>
                                 </div>
                             </div>
-                            <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                            <a href="#" className="text-sm text-[#4318FF] font-medium leading-5 tracking-[-0.28px]">Forget password?</a>
                         </div>
-                        <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
-                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Don’t have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                        <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Sign In</button>
+                        <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
+                            Not registered yet? <a href="#" className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]">Create an Account</a>
                         </p>
                     </form>
                 </div>
