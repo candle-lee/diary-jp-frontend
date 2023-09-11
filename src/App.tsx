@@ -1,14 +1,17 @@
-// import './App.css'
-import { useRoutes } from "react-router-dom"
-import routes from "./router"
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+const HomePage = lazy(() => import('./pages/home.page'));
+const SignInPage = lazy(() => import('./pages/signin.page'));
 
 function App() {
-
-  const content = useRoutes(routes);
-
   return (
     <>
-      {content}
+      <Suspense fallback={<div className="container">Loading...</div>}></Suspense>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SignInPage />} />
+      </Routes>
     </>
   )
 }
