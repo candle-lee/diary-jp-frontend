@@ -14,6 +14,10 @@ const HomePage = Loadable(lazy(() => import('../pages/home.page')));
 const authRoutes: RouteObject = {
   path: '*',
   children: [
+    {
+      path: 'signin',
+      element: <SignInPage />,
+    },
   ],
 };
 
@@ -23,10 +27,6 @@ const normalRoutes: RouteObject = {
   children: [
     {
       index: true,
-      element: <HomePage />,
-    },
-    {
-      path: 'signin',
       element: <SignInPage />,
     },
   ],
