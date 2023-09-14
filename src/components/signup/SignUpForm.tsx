@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import HorizontalDivider from "../common/HorizontalDivider";
 
 const SignUpForm = () => {
     const navigate = useNavigate();
@@ -28,10 +29,7 @@ const SignUpForm = () => {
                             <label htmlFor="fullname" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Full Name</label>
                             <input type="text" name="fullname" id="fullname" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="e.g. Bonnie Green" required={true} />
                         </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Email</label>
-                            <input type="email" name="email" id="email" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="name@company.com" required={true} />
-                        </div>
+                        <HorizontalDivider />
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Password</label>
                             <input type="password" name="password" id="password" placeholder="Min. 8 characters" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" required={true} />

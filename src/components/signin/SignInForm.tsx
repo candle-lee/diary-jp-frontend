@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import HorizontalDivider from "../common/HorizontalDivider";
 
 const SignInForm = () => {
     const navigate = useNavigate();
@@ -19,11 +20,7 @@ const SignInForm = () => {
                             <img className="w-5 h-5 mr-[9px]" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
                             <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">Sign in with Google</span>
                         </button>
-                        <div className="relative flex items-center">
-                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
-                            <span className="w-[50px] text-[#A3AED0] text-center font-medium text-base leading-6 tracking-[-0.28px]">or</span>
-                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
-                        </div>
+                        <HorizontalDivider />
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Email</label>
                             <input type="email" name="email" id="email" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="name@company.com" required={true} />
