@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import HorizontalDivider from "../common/HorizontalDivider";
+import InputField from "../common/InputField";
 
 const SignUpForm = () => {
     const navigate = useNavigate();
@@ -20,20 +21,9 @@ const SignUpForm = () => {
                             <img className="w-5 h-5 mr-[9px]" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
                             <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">Sign up with Google</span>
                         </button>
-                        <div className="relative flex items-center">
-                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
-                            <span className="w-[50px] text-[#A3AED0] text-center font-medium text-base leading-6 tracking-[-0.28px]">or</span>
-                            <div className="flex-grow border-t border-[#E0E5F2]"></div>
-                        </div>
-                        <div>
-                            <label htmlFor="fullname" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Full Name</label>
-                            <input type="text" name="fullname" id="fullname" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="e.g. Bonnie Green" required={true} />
-                        </div>
                         <HorizontalDivider />
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Min. 8 characters" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" required={true} />
-                        </div>
+                        <InputField inputType="text" inputName="fullname" description="Full Name" placeholderText="e.g. Bonnie Green" isRequired={true} />
+                        <InputField inputType="password" inputName="password" description="Password" placeholderText="Min. 8 characters" isRequired={true} />
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="flex items-center h-5">

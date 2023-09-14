@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import HorizontalDivider from "../common/HorizontalDivider";
+import InputField from "../common/InputField";
 
 const SignInForm = () => {
     const navigate = useNavigate();
@@ -21,14 +22,8 @@ const SignInForm = () => {
                             <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">Sign in with Google</span>
                         </button>
                         <HorizontalDivider />
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Email</label>
-                            <input type="email" name="email" id="email" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" placeholder="name@company.com" required={true} />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Min. 8 characters" className="placeholder-[#A3AED0] w-[410px] h-[50px] flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]" required={true} />
-                        </div>
+                        <InputField inputType="email" inputName="email" description="Email" placeholderText="name@company.com" isRequired={true} />
+                        <InputField inputType="password" inputName="password" description="Password" placeholderText="Min. 8 characters" isRequired={true} />
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
