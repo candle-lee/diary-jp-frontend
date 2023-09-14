@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import HorizontalDivider from "../common/HorizontalDivider";
 import InputField from "../common/InputField";
 
 const SignUpForm = () => {
-    const navigate = useNavigate();
     return (
         <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
             <div className="bg-white w-[410px] h-[610px]">
@@ -36,7 +35,7 @@ const SignUpForm = () => {
                         </div>
                         <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Sign Up</button>
                         <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
-                            Already have an account? <a href="#" onClick={() => {navigate('/signin')}} className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]">Sign in here.</a>
+                            Already have an account? <Link to='/signin' className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]">Sign in here.</Link>
                         </p>
                     </form>
                 </div>
