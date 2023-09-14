@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const SignInForm = () => {
+    const navigate = useNavigate();
     return (
         <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
             <div className="bg-white w-[410px] h-[610px]">
@@ -32,7 +35,7 @@ const SignInForm = () => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:bg-[#4318FF]" required={true} />
+                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50" required={true} />
                                 </div>
                                 <div className="ml-3 text-sm">
                                     <label htmlFor="remember" className="text-[#2B3674] text-sm font-normal leading-5 tracking-[-0.28px]">Keep me logged in</label>
@@ -42,7 +45,7 @@ const SignInForm = () => {
                         </div>
                         <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Sign In</button>
                         <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
-                            Not registered yet? <a href="#" className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]">Create an Account</a>
+                            Not registered yet? <a href="#" onClick={() => {navigate('/signup')}} className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]">Create an Account</a>
                         </p>
                     </form>
                 </div>
