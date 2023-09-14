@@ -1,7 +1,7 @@
-import BackToDashboard from "../components/common/BackToDashboard";
-import SignInForm from "../components/signin/SignInForm";
+import BackToDashboard from "../components/common/BackToDashboard"
+import ForgetPasswordForm from "../components/forgetpassword/ForgetPasswordForm";
 
-const SignInPage = () => {
+const ForgetPasswordPage = () => {
     return (
         <div className="flex justify-between">
             <div className="ml-[308px]">
@@ -9,11 +9,11 @@ const SignInPage = () => {
                    <BackToDashboard />
                 </div>
                 <div className="mt-[201px]">
-                    <SignInForm />
+                    <ForgetPasswordForm />
                 </div>
             </div>
         </div>
     )
 }
 
-export default SignInPage;
+export default ForgetPasswordPage;
