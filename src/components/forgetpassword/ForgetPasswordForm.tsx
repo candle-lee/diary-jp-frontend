@@ -1,6 +1,25 @@
 import InputField from "../common/InputField";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const ForgetPasswordForm = () => {
+    const validationSchema = z.object({
+        email: z.string().min(3, {message: "Email is required"}).email({message: 'Must be a valid email'}),
+    });
+
+    type ValidationSchema = z.infer<typeof validationSchema>;
+
+    const { register, handleSubmit, formState: {errors}} = useForm<ValidationSchema>({
+        defaultValues: {
+            email: '',
+        },
+        resolver: zodResolver(validationSchema),
+    });
+    const onSubmit: SubmitHandler<ValidationSchema> = async (data: ValidationSchema) => {
+        console.log("data" + data);
+    };
+
     return (
         <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
             <div className="bg-white w-[410px] h-[610px]">
@@ -13,8 +32,8 @@ const ForgetPasswordForm = () => {
                     <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
                         Don't fret! Just type in your email.
                     </p>
-                    <form className="space-y-4 md:space-y-6" action="#">
-                        <InputField inputType="email" inputName="email" description="Your email" placeholderText="name@company@com" isRequired={true} />
+                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                        <InputField inputType="email" inputName="email" description="Your email" placeholderText="name@company@com" isRequired={true} register={register} error={errors.email?.message} />
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="flex items-center h-5">
@@ -25,7 +44,7 @@ const ForgetPasswordForm = () => {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Reset password</button>
+                        <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Send Code</button>
                     </form>
                 </div>
             </div>
