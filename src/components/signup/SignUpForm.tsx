@@ -4,8 +4,12 @@ import HorizontalDivider from "../common/HorizontalDivider";
 import InputField from "../common/InputField";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignUpUser } from "../../api/auth/hooks/useSignUp";
 
 const SignUpForm = () => {
+
+  const {isLoading, isError, error, mutate} = useSignUpUser();
+
   const validationSchema = z.object({
     fullname: z.string().min(3, { message: "FullName is required" }),
     email: z
@@ -37,7 +41,14 @@ const SignUpForm = () => {
   });
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
-  ) => {};
+  ) => {
+    const formData = {
+      username: data.fullname,
+      email: data.email,
+      password: data.password,
+    }
+    mutate(formData);
+  };
   const handleGoogleSubmit = () => {};
   return (
     <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
