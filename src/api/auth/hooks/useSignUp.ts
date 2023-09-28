@@ -14,7 +14,7 @@ export const useSignUpUser = () => {
     const navigate = useNavigate();
     const signUpUser = (formData: ISignUp) => axios.post('/users/register', {...formData});
 
-    const {mutate, isLoading, isError, error, data} = useMutation({
+    const {mutate} = useMutation({
         mutationFn: signUpUser,
         onSuccess: () => {
             toast.success(`User registered succesfully`, {
@@ -35,5 +35,5 @@ export const useSignUpUser = () => {
         },
     });
 
-    return {mutate, isLoading, isError, error, data}
+    return {mutate}
 }

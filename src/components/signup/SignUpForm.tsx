@@ -8,7 +8,7 @@ import { useSignUpUser } from "../../api/auth/hooks/useSignUp";
 
 const SignUpForm = () => {
 
-  const {isLoading, isError, error, mutate} = useSignUpUser();
+  const {mutate} = useSignUpUser();
 
   const validationSchema = z.object({
     fullname: z.string().min(3, { message: "FullName is required" }),
