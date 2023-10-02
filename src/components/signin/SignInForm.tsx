@@ -4,8 +4,13 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "flowbite-react";
+import { useLoginUser } from "../../api/auth/hooks/useLogin";
+import { ButtonSpinner } from "../common/ButtonSpinner";
 
 const SignInForm = () => {
+
+  const {mutate, isLoading} = useLoginUser();
 
   const validationSchema = z.object({
     email: z
@@ -34,13 +39,17 @@ const SignInForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    console.log("data" + data);
+    const formData = {
+      email: data.email,
+      password: data.password,
+    }
+    mutate(formData);
   };
 
   const handleGoogleSubmit = () => {};
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
+    <section className="bg-gray-50 dark:bg-gray-900">
       <div className="bg-white w-[410px] h-[610px]">
         <div className="">
           <div className="w-[110px] h-[56px]">
@@ -55,8 +64,9 @@ const SignInForm = () => {
             className="space-y-4 md:space-y-6"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <button
+            <Button
               type="button"
+              color="gray"
               onClick={() => handleGoogleSubmit()}
               className="flex items-center justify-center w-[410px] h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
             >
@@ -69,7 +79,7 @@ const SignInForm = () => {
               <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">
                 Sign in with Google
               </span>
-            </button>
+            </Button>
             <HorizontalDivider />
             <InputField
               inputType="email"
@@ -116,12 +126,12 @@ const SignInForm = () => {
                 Forget password?
               </Link>
             </div>
-            <button
-              type="submit"
-              className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
-            >
-              Sign In
-            </button>
+            {
+              isLoading ? <ButtonSpinner /> : <Button type="submit"
+              className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">
+                Sign In
+              </Button>
+            }
             <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
               Not registered yet?{" "}
               <Link
