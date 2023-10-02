@@ -9,7 +9,7 @@ export const useResetPassword = () => {
     const resetPassword = (formData: IResetPassword) => axios.post('/auth/forget-password', formData);
     const {mutate, isLoading} = useMutation({
         mutationFn: resetPassword,
-        onSuccess: ({data}: any) => {
+        onSuccess: () => {
             toast.success(`User registered succesfully`, {
                 hideProgressBar: true,
                 autoClose: 5000,
