@@ -4,6 +4,7 @@ import ForgetPasswordPage from './pages/forgetpassword.page';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { CircleSpinner } from './components/common/CircleSpinner';
 
 const HomePage = lazy(() => import('./pages/home.page'));
 const SignInPage = lazy(() => import('./pages/signin.page'));
@@ -13,7 +14,7 @@ function App() {
   const client = new QueryClient();
   return (
     <>
-      <Suspense fallback={<div className="container">Loading...</div>}>
+      <Suspense fallback={<CircleSpinner />}>
         <QueryClientProvider client={client}>
           <ToastContainer />
           <Routes>
