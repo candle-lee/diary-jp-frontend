@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { CircleSpinner } from './components/common/CircleSpinner';
+import ResetPasswordPage from './pages/resetpassword.page';
 
 const HomePage = lazy(() => import('./pages/home.page'));
 const SignInPage = lazy(() => import('./pages/signin.page'));
@@ -22,6 +23,7 @@ function App() {
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/forgetpassword" element={<ForgetPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
           </Routes>
         </QueryClientProvider>
       </Suspense>

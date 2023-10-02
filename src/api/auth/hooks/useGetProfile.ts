@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAxios } from "../../instance"
+import { httpAxios } from "../../instance"
 
 export const useGetProfile = () => {
-    const axios = useAxios();
+    const axios = httpAxios();
     const getProfile = () => axios.get('/auth/profile');
     const {data} = useQuery({
         queryKey: ['getProfile'],

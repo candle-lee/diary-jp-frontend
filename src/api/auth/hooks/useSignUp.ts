@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAxios } from "../../instance";
+import { httpAxios } from "../../instance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ISignUp } from "../../../constant/interfaces";
 
 export const useSignUpUser = () => {
-    const axios = useAxios();
+    const axios = httpAxios();
     const navigate = useNavigate();
     const signUpUser = (formData: ISignUp) => axios.post('/users/register', {...formData});
 

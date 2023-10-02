@@ -1,14 +1,15 @@
-import { useGetProfile } from "../../api/auth/hooks/useGetProfile"
+// import { useGetProfile } from "../../api/auth/hooks/useGetProfile"
 import { useLogout } from "../../api/auth/hooks/useLogout";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAutherStatus } from "../../redux/slices/auth.slice";
 
 export const AutherizedUser = () => {
-    const user = useGetProfile();
+    // const user = useGetProfile();
     const dispatch = useAppDispatch();
+    const logout=useLogout();
     const handleLogout = () => {
-        useLogout();
         dispatch(setAutherStatus(false));
+        logout();
     }
     return (
         <li>

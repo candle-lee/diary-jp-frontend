@@ -1,21 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance";
-import { useNavigate } from "react-router-dom";
+import { httpAxios } from "../../instance"
 import { toast } from "react-toastify";
-import { ILogin } from "../../../constant/interfaces";
-import { useAppDispatch } from "../../../redux/hooks";
-import { setAutherStatus } from "../../../redux/slices/auth.slice";
-import { setTokenToLocalStorage } from "../../../utils/storage";
+import { IResetPassword } from "../../../constant/interfaces";
 
-export const useLoginUser = () => {
+
+export const useResetPassword = () => {
     const axios = httpAxios();
-    const navigate = useNavigate();
-
-    const dispatch = useAppDispatch();
-    const loginUser = (formData: ILogin) => axios.post('/auth/login', {...formData});
-
+    const resetPassword = (formData: IResetPassword) => axios.post('/auth/forget-password', formData);
     const {mutate, isLoading} = useMutation({
-        mutationFn: loginUser,
+        mutationFn: resetPassword,
         onSuccess: ({data}: any) => {
             toast.success(`User registered succesfully`, {
                 hideProgressBar: true,
@@ -23,9 +16,6 @@ export const useLoginUser = () => {
                 type: "success",
                 position: "top-right",
             });
-            setTokenToLocalStorage(data);
-            dispatch(setAutherStatus(true));
-            navigate('/');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {

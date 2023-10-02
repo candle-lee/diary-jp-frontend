@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { removeTokenFromLocalStorate } from "../../../utils/storage"
 
 export const useLogout = () => {
+    return ()=>{
     const isSuccess = removeTokenFromLocalStorate();
     if (isSuccess) {
         toast.success(`User has logged out successfully.`, {
@@ -17,5 +18,5 @@ export const useLogout = () => {
             type: "success",
             position: "top-right",
         });
-    }
+    }}
 }
