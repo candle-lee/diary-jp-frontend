@@ -11,8 +11,7 @@ export const useSendCode = () => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    const sendCode = (passcode: string) => axios.post('/auth/verify', passcode);
-
+    const sendCode = (passcode: string) => axios.post('/auth/verify', {passcode});
     const {mutate, isLoading} = useMutation({
         mutationFn: sendCode,
         onSuccess: ({data}: any) => {
