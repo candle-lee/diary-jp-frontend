@@ -9,17 +9,14 @@ import { useLoginUser } from "../../api/auth/hooks/useLogin";
 import { ButtonSpinner } from "../common/ButtonSpinner";
 
 const SignInForm = () => {
-
-  const {mutate, isLoading} = useLoginUser();
+  const { mutate, isLoading } = useLoginUser();
 
   const validationSchema = z.object({
     email: z
       .string()
-      .min(3, { message: "Email is required" })
-      .email({ message: "Must be a valid email" }),
-    password: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters" }),
+      .min(3, { message: "Email is required." })
+      .email({ message: "Must be a valid email." }),
+    password: z.string().min(8, { message: "Password must be required." }),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -42,7 +39,7 @@ const SignInForm = () => {
     const formData = {
       email: data.email,
       password: data.password,
-    }
+    };
     mutate(formData);
   };
 
@@ -86,7 +83,6 @@ const SignInForm = () => {
               inputName="email"
               description="Email"
               placeholderText="name@company.com"
-              isRequired={true}
               register={register}
               error={errors.email?.message}
             />
@@ -95,7 +91,6 @@ const SignInForm = () => {
               inputName="password"
               description="Password"
               placeholderText="Min. 8 characters"
-              isRequired={true}
               register={register}
               error={errors.password?.message}
             />
@@ -107,7 +102,6 @@ const SignInForm = () => {
                     aria-describedby="remember"
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                    required={true}
                   />
                 </div>
                 <div className="ml-3 text-sm">
@@ -126,12 +120,16 @@ const SignInForm = () => {
                 Forget password?
               </Link>
             </div>
-            {
-              isLoading ? <ButtonSpinner /> : <Button type="submit"
-              className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">
+            {isLoading ? (
+              <ButtonSpinner />
+            ) : (
+              <Button
+                type="submit"
+                className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
+              >
                 Sign In
               </Button>
-            }
+            )}
             <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
               Not registered yet?{" "}
               <Link
