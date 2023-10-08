@@ -14,7 +14,6 @@ export interface IInputItem {
     inputName: string;
     description: string;
     placeholderText: string;
-    isRequired: boolean;
     register: any;
     error?: any;
 }

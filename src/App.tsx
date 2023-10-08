@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CircleSpinner } from './components/common/CircleSpinner';
 import ResetPasswordPage from './pages/resetpassword.page';
 import MainPage from './pages/main.page';
+import PasscodePage from './pages/passcode.page';
 
 const HomePage = lazy(() => import('./pages/home.page'));
 const SignInPage = lazy(() => import('./pages/signin.page'));
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path='/main' element={<MainPage />} />
             <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signin-validation" element={<PasscodePage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/forgetpassword" element={<ForgetPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />

@@ -3,29 +3,23 @@ import { httpAxios } from "../../instance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ILogin } from "../../../constant/interfaces";
-import { useAppDispatch } from "../../../redux/hooks";
-import { setAutherStatus } from "../../../redux/slices/auth.slice";
-import { setTokenToLocalStorage } from "../../../utils/storage";
 
 export const useLoginUser = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
 
-    const dispatch = useAppDispatch();
     const loginUser = (formData: ILogin) => axios.post('/auth/login', {...formData});
 
     const {mutate, isLoading} = useMutation({
         mutationFn: loginUser,
-        onSuccess: ({data}: any) => {
-            toast.success(`User registered succesfully`, {
+        onSuccess: () => {
+            toast.success(`Credentials are correct!`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            setTokenToLocalStorage(data);
-            dispatch(setAutherStatus(true));
-            navigate('/');
+            navigate('/signin-validation');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
