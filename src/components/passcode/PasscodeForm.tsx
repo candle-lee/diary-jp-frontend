@@ -9,7 +9,7 @@ const PasscodeForm = () => {
   const { mutate, isLoading } = useSendCode();
 
   const validationSchema = z.object({
-    passcode: z.string().min(8, { message: "Passcode is required" }),
+    passcode: z.string().min(5, { message: "Passcode is required" }),
     isAccepted: z.literal(true, {
       errorMap: () => ({ message: "You must accept Terms and Conditions" }),
     }),
