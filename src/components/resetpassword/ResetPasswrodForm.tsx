@@ -2,13 +2,8 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useResetPassword } from "../../api/auth/hooks/useResetPassword";
-import { ButtonSpinner } from "../common/ButtonSpinner";
 
-const ForgetPasswordForm = () => {
-
-    const {mutate, isLoading} = useResetPassword();
-
+const ResetPasswordForm = () => {
     const validationSchema = z.object({
         email: z.string().min(3, {message: "Email is required"}).email({message: 'Must be a valid email'}),
     });
@@ -22,10 +17,7 @@ const ForgetPasswordForm = () => {
         resolver: zodResolver(validationSchema),
     });
     const onSubmit: SubmitHandler<ValidationSchema> = async (data: ValidationSchema) => {
-        const formData = {
-            email: data.email,
-          }
-        mutate(formData);
+        console.log("data" + data);
     };
 
     return (
@@ -34,14 +26,13 @@ const ForgetPasswordForm = () => {
                 <div className="">
                     <div className="w-full h-[56px]">
                         <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
-                            Forgot your password?
+                            Reset your password
                         </h1>    
                     </div>
-                    <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
-                        Don't fret! Just type in your email.
-                    </p>
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         <InputField inputType="email" inputName="email" description="Your email" placeholderText="name@company@com" isRequired={true} register={register} error={errors.email?.message} />
+                        <InputField inputType="password" inputName="password" description="New Password" placeholderText="********" isRequired={true} register={register} error={errors.email?.message} />
+                        <InputField inputType="password" inputName="confirmPassword" description="Confirm New Password" placeholderText="********" isRequired={true} register={register} error={errors.email?.message} />
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="flex items-center h-5">
@@ -52,10 +43,7 @@ const ForgetPasswordForm = () => {
                                 </div>
                             </div>
                         </div>
-                        {
-                            isLoading ? <ButtonSpinner /> : 
-                            <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Reset Password</button>
-                        }
+                        <button type="submit" className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center">Reset Password</button>
                     </form>
                 </div>
             </div>
@@ -63,4 +51,4 @@ const ForgetPasswordForm = () => {
     )
 }
 
-export default ForgetPasswordForm;
+export default ResetPasswordForm;

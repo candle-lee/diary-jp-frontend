@@ -6,7 +6,7 @@ export const customHeader = {
     Accept: 'application/json',
 };
 
-export const useAxios = () => {
+export const httpAxios = () => {
     const instance = axios.create({
         baseURL: apiUrl,
         headers: customHeader,

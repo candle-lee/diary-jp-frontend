@@ -5,10 +5,13 @@ import InputField from "../common/InputField";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpUser } from "../../api/auth/hooks/useSignUp";
+("use client");
+
+import { Button } from "flowbite-react";
+import { ButtonSpinner } from "../common/ButtonSpinner";
 
 const SignUpForm = () => {
-
-  const {mutate} = useSignUpUser();
+  const { mutate, isLoading } = useSignUpUser();
 
   const validationSchema = z.object({
     fullname: z.string().min(3, { message: "FullName is required" }),
@@ -21,7 +24,42 @@ const SignUpForm = () => {
     }),
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters" }),
+      .min(8, { message: "Password must be 8 characters or more" })
+      .refine(
+        (value) => {
+          // Check if the password contains at least one letter
+          return /[a-zA-Z]/.test(value);
+        },
+        { message: "Password must contain at least one letter" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one number
+          return /\d/.test(value);
+        },
+        { message: "Password must contain at least one number" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one symbol (e.g., !@#$%^&*)
+          return /[!@#$%^&*]/.test(value);
+        },
+        { message: "Password must contain at least one symbol" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password doesn't start or end with a blank space
+          return !/^\s|\s$/.test(value);
+        },
+        { message: "Password cannot start or end with a blank space" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password is not particularly weak (e.g., password123)
+          return !/(password|123|admin)/i.test(value);
+        },
+        { message: "Password cannot be particularly weak" }
+      ),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -34,11 +72,12 @@ const SignUpForm = () => {
     defaultValues: {
       fullname: "",
       email: "",
-      isAccepted: true,
+      isAccepted: undefined,
       password: "",
     },
     resolver: zodResolver(validationSchema),
   });
+
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
@@ -46,12 +85,14 @@ const SignUpForm = () => {
       username: data.fullname,
       email: data.email,
       password: data.password,
-    }
+    };
     mutate(formData);
   };
+
   const handleGoogleSubmit = () => {};
+
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 mb-[271px]">
+    <section className="bg-gray-50 dark:bg-gray-900">
       <div className="bg-white w-[410px]">
         <div className="">
           <div className="w-[110px] h-[56px]">
@@ -66,7 +107,8 @@ const SignUpForm = () => {
             className="space-y-4 md:space-y-6"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <button
+            <Button
+              color="gray"
               type="button"
               onClick={() => handleGoogleSubmit()}
               className="flex items-center justify-center w-[410px] h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
@@ -80,14 +122,13 @@ const SignUpForm = () => {
               <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">
                 Sign up with Google
               </span>
-            </button>
+            </Button>
             <HorizontalDivider />
             <InputField
               inputType="text"
               inputName="fullname"
               description="Full Name"
               placeholderText="e.g. Bonnie Green"
-              isRequired={true}
               register={register}
               error={errors.fullname?.message}
             />
@@ -96,7 +137,6 @@ const SignUpForm = () => {
               inputName="email"
               description="Email"
               placeholderText="e.g. root@root.com"
-              isRequired={true}
               register={register}
               error={errors.email?.message}
             />
@@ -104,8 +144,7 @@ const SignUpForm = () => {
               inputType="password"
               inputName="password"
               description="Password"
-              placeholderText="Min. 8 characters"
-              isRequired={true}
+              placeholderText="********"
               register={register}
               error={errors.password?.message}
             />
@@ -153,12 +192,16 @@ const SignUpForm = () => {
                 {errors.isAccepted?.message}
               </p>
             )}
-            <button
-              type="submit"
-              className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
-            >
-              Sign Up
-            </button>
+            {isLoading ? (
+              <ButtonSpinner />
+            ) : (
+              <Button
+                type="submit"
+                className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
+              >
+                Sign Up
+              </Button>
+            )}
             <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
               Already have an account?{" "}
               <Link

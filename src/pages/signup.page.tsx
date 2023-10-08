@@ -8,7 +8,7 @@ const SignInPage = () => {
                 <div className="flex mt-[40px] items-center">
                     <BackToDashboard />
                 </div>
-                <div className="mt-[201px]">
+                <div className="mt-[70px]">
                     <SignUpForm />
                 </div>
             </div>
