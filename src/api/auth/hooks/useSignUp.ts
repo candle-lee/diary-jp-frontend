@@ -12,13 +12,13 @@ export const useSignUpUser = () => {
     const {mutate, isLoading} = useMutation({
         mutationFn: signUpUser,
         onSuccess: () => {
-            toast.success(`User registered successfully`, {
+            toast.success(`We sent code to your email.`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            navigate('/signin');
+            navigate('/signin-validation');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
