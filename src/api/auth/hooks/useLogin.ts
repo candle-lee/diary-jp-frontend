@@ -21,7 +21,7 @@ export const useLoginUser = () => {
             });
             navigate('/signin-validation');
         },
-        onError: (error:any) => {
+        onError: (error: any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
