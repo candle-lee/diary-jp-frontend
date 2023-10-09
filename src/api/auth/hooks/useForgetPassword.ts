@@ -1,21 +1,23 @@
 import { useMutation } from "@tanstack/react-query";
 import { httpAxios } from "../../instance"
 import { toast } from "react-toastify";
-import { IResetPassword } from "../../../constant/interfaces";
+import { useNavigate } from "react-router-dom";
 
-
-export const useResetPassword = () => {
+export const useForgetPassword = () => {
     const axios = httpAxios();
-    const resetPassword = (formData: IResetPassword) => axios.post('/auth/forget-password', formData);
+    const navigate = useNavigate()
+
+    const forgetPassword = (email: string) => axios.post('/auth/forget-password', {email});
     const {mutate, isLoading} = useMutation({
-        mutationFn: resetPassword,
+        mutationFn: forgetPassword,
         onSuccess: () => {
-            toast.success(`User registered succesfully`, {
+            toast.success(`We sent passcode to your email address`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
+            navigate('/reset-password')
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {

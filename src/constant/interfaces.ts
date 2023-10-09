@@ -29,6 +29,3 @@ export interface ISignUp {
     password: string;
 }
 
-export interface IResetPassword {
-    email: string;
-}

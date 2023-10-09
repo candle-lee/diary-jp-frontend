@@ -2,17 +2,20 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useResetPassword } from "../../api/auth/hooks/useResetPassword";
+import { useForgetPassword } from "../../api/auth/hooks/useForgetPassword";
 import { ButtonSpinner } from "../common/ButtonSpinner";
 
 const ForgetPasswordForm = () => {
-  const { mutate, isLoading } = useResetPassword();
+  const { mutate, isLoading } = useForgetPassword();
 
   const validationSchema = z.object({
     email: z
       .string()
       .min(3, { message: "Email is required" })
       .email({ message: "Must be a valid email" }),
+    isAccepted: z.literal(true, {
+      errorMap: () => ({ message: "You must accept Terms and Conditions" }),
+    }),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -24,16 +27,14 @@ const ForgetPasswordForm = () => {
   } = useForm<ValidationSchema>({
     defaultValues: {
       email: "",
+      isAccepted: undefined,
     },
     resolver: zodResolver(validationSchema),
   });
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    const formData = {
-      email: data.email,
-    };
-    mutate(formData);
+    mutate(data.email);
   };
 
   return (
@@ -68,7 +69,7 @@ const ForgetPasswordForm = () => {
                     aria-describedby="agree"
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                    required={true}
+                    {...register("isAccepted")}
                   />
                 </div>
                 <div className="ml-3 text-sm">
@@ -95,6 +96,15 @@ const ForgetPasswordForm = () => {
                 </div>
               </div>
             </div>
+            {errors.isAccepted && (
+              <p
+                className="text-start text-xs italic text-red-500"
+                style={{ marginTop: "8px" }}
+              >
+                {" "}
+                {errors.isAccepted?.message}
+              </p>
+            )}
             {isLoading ? (
               <ButtonSpinner />
             ) : (

@@ -17,8 +17,6 @@ export const useSendCode = () => {
                 type: "success",
                 position: "top-right",
             });
-            // setTokenToLocalStorage(data);
-            // dispatch(setAutherStatus(true));
             navigate('/signin');
         },
         onError: (error:any) => {
