@@ -7,6 +7,7 @@ interface DefaultAvatarProps {
 }
 
 const DefaultAvatar: React.FC<DefaultAvatarProps> = ({ size }) => {
+  console.log("Size", size);
   return (
     <>
       <div

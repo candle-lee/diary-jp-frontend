@@ -11,8 +11,8 @@ export const useSignUpUser = () => {
 
     const {mutate, isLoading} = useMutation({
         mutationFn: signUpUser,
-        onSuccess: () => {
-            toast.success(`We sent code to your email.`, {
+        onSuccess: ({data}) => {
+            toast.success(`${data['message']}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
