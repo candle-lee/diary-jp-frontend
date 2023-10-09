@@ -10,6 +10,7 @@ export const httpAxios = () => {
     const instance = axios.create({
         baseURL: apiUrl,
         headers: customHeader,
+        withCredentials: true,
     });
     
     instance.interceptors.request.use((requestConfig) => {

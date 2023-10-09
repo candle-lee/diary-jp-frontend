@@ -18,12 +18,6 @@ export const useSignUpUser = () => {
                 type: "success",
                 position: "top-right",
             });
-            toast.success(`Server sent passcode to your email`, {
-                hideProgressBar: true,
-                autoClose: 5000,
-                type: "success",
-                position: "top-right",
-            });
             navigate('/signin-validation');
         },
         onError: (error:any) => {
