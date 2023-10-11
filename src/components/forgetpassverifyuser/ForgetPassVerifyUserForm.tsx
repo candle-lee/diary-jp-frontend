@@ -2,60 +2,17 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "flowbite-react";
 import { ButtonSpinner } from "../common/ButtonSpinner";
-import { useResetPassword } from "../../api/auth/hooks/useResetPassword";
+import { useSendCodeResetPass } from "../../api/auth/hooks/useSendCodeResetPass";
 
-const ResetPasswordForm = () => {
-  const { mutate, isLoading } = useResetPassword();
+const ForgetPassVerifyUserForm = () => {
+  const { mutate, isLoading } = useSendCodeResetPass();
+
   const validationSchema = z.object({
+    passcode: z.string().min(5, { message: "Passcode is required" }),
     isAccepted: z.literal(true, {
       errorMap: () => ({ message: "You must accept Terms and Conditions" }),
     }),
-    password: z
-      .string()
-      .min(8, { message: "Password must be 8 characters or more" })
-      .refine(
-        (value) => {
-          // Check if the password contains at least one letter
-          return /[a-zA-Z]/.test(value);
-        },
-        { message: "Password must contain at least one letter" }
-      )
-      .refine(
-        (value) => {
-          // Check if the password contains at least one number
-          return /\d/.test(value);
-        },
-        { message: "Password must contain at least one number" }
-      )
-      .refine(
-        (value) => {
-          // Check if the password contains at least one symbol (e.g., !@#$%^&*)
-          return /[!@#$%^&*]/.test(value);
-        },
-        { message: "Password must contain at least one symbol" }
-      )
-      .refine(
-        (value) => {
-          // Check if the password doesn't start or end with a blank space
-          return !/^\s|\s$/.test(value);
-        },
-        { message: "Password cannot start or end with a blank space" }
-      )
-      .refine(
-        (value) => {
-          // Check if the password is not particularly weak (e.g., password123)
-          return !/(password|123|admin)/i.test(value);
-        },
-        { message: "Password cannot be particularly weak" }
-      ),
-    password1: z.string(),
-  });
-
-  validationSchema.refine((data) => data.password === data.password1, {
-    message: "Passwords don't match",
-    path: ["password1"],
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -66,19 +23,15 @@ const ResetPasswordForm = () => {
     formState: { errors },
   } = useForm<ValidationSchema>({
     defaultValues: {
-      password: "",
-      password1: "",
+      passcode: "",
+      isAccepted: undefined,
     },
     resolver: zodResolver(validationSchema),
   });
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    const formData = {
-      password: data.password,
-      password1: data.password1,
-    };
-    mutate(formData);
+    mutate(data.passcode);
   };
 
   return (
@@ -87,7 +40,7 @@ const ResetPasswordForm = () => {
         <div className="">
           <div className="w-full h-[56px]">
             <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
-              Reset your password
+              Please Enter Code
             </h1>
           </div>
           <form
@@ -95,20 +48,12 @@ const ResetPasswordForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputField
-              inputType="password"
-              inputName="password"
-              description="New Password"
-              placeholderText="********"
+              inputType="text"
+              inputName="passcode"
+              description="Your Passcode"
+              placeholderText="123456"
               register={register}
-              error={errors.password?.message}
-            />
-            <InputField
-              inputType="password"
-              inputName="confirmPassword"
-              description="Confirm New Password"
-              placeholderText="********"
-              register={register}
-              error={errors.password1?.message}
+              error={errors.passcode?.message}
             />
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -157,12 +102,12 @@ const ResetPasswordForm = () => {
             {isLoading ? (
               <ButtonSpinner />
             ) : (
-              <Button
+              <button
                 type="submit"
                 className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
               >
-                Sign Up
-              </Button>
+                Send
+              </button>
             )}
           </form>
         </div>
@@ -171,4 +116,4 @@ const ResetPasswordForm = () => {
   );
 };
 
-export default ResetPasswordForm;
+export default ForgetPassVerifyUserForm;

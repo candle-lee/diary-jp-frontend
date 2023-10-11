@@ -1,20 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { httpAxios } from "../../instance";
 import { useMutation } from "@tanstack/react-query";
+import { httpAxios } from "../../instance"
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-export interface IResetPassword {
-    password: string,
-    password1: string,
-}
-
-export const useResetPassword = () => {
+export const useForgetPassword = () => {
     const axios = httpAxios();
     const navigate = useNavigate()
 
-    const resetPassword = (formData: IResetPassword) => axios.post('/auth/reset-password', {...formData});
+    const forgetPassword = (email: string) => axios.post('/auth/forget-password', {email});
     const {mutate, isLoading} = useMutation({
-        mutationFn: resetPassword,
+        mutationFn: forgetPassword,
         onSuccess: ({data}) => {
             toast.success(`${data['message']}`, {
                 hideProgressBar: true,
@@ -22,9 +17,9 @@ export const useResetPassword = () => {
                 type: "success",
                 position: "top-right",
             });
-            navigate('/signin')
+            navigate('/forgetpassverifyuser')
         },
-        onError: (error: any) => {
+        onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
@@ -33,5 +28,6 @@ export const useResetPassword = () => {
             });
         },
     });
+
     return {mutate, isLoading}
 }

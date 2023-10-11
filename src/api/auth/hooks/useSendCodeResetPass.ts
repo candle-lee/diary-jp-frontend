@@ -1,30 +1,26 @@
-import { useNavigate } from "react-router-dom";
-import { httpAxios } from "../../instance";
 import { useMutation } from "@tanstack/react-query";
+import { httpAxios } from "../../instance";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export interface IResetPassword {
-    password: string,
-    password1: string,
-}
-
-export const useResetPassword = () => {
+export const useSendCodeResetPass = () => {
     const axios = httpAxios();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const resetPassword = (formData: IResetPassword) => axios.post('/auth/reset-password', {...formData});
+    const sendCode = (passcode: string) => axios.post('/auth/resetpass-verify', {passcode});
     const {mutate, isLoading} = useMutation({
-        mutationFn: resetPassword,
-        onSuccess: ({data}) => {
-            toast.success(`${data['message']}`, {
+        mutationFn: sendCode,
+        onSuccess: ({data}: any) => {
+            toast.success(`User verified successfully!`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            navigate('/signin')
+            console.log(data);
+            navigate('/reset-password');
         },
-        onError: (error: any) => {
+        onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
@@ -33,5 +29,6 @@ export const useResetPassword = () => {
             });
         },
     });
+
     return {mutate, isLoading}
 }

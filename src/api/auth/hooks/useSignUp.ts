@@ -18,7 +18,7 @@ export const useSignUpUser = () => {
                 type: "success",
                 position: "top-right",
             });
-            navigate('/signin-validation');
+            navigate('/verify-user');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
