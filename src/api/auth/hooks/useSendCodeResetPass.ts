@@ -11,13 +11,12 @@ export const useSendCodeResetPass = () => {
     const {mutate, isLoading} = useMutation({
         mutationFn: sendCode,
         onSuccess: ({data}: any) => {
-            toast.success(`User verified successfully!`, {
+            toast.success(`${data['message']}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            console.log(data);
             navigate('/reset-password');
         },
         onError: (error:any) => {
