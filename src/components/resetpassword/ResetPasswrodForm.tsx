@@ -53,6 +53,11 @@ const ResetPasswordForm = () => {
     password1: z.string(),
   });
 
+  validationSchema.refine((data) => data.password === data.password1, {
+    message: "Passwords don't match",
+    path: ["password1"],
+  });
+
   type ValidationSchema = z.infer<typeof validationSchema>;
 
   const {
