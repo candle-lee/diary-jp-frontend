@@ -2,11 +2,11 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForgetPassword } from "../../api/auth/hooks/useForgetPassword";
 import { ButtonSpinner } from "../common/ButtonSpinner";
+import { useResetPassPasscode } from "../../api/auth/hooks/useResetPassPasscode";
 
 const ForgetPasswordForm = () => {
-  const { mutate, isLoading } = useForgetPassword();
+  const { mutate, isLoading } = useResetPassPasscode();
 
   const validationSchema = z.object({
     email: z
@@ -34,7 +34,7 @@ const ForgetPasswordForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    mutate(data.email);
+    mutate({ email: data.email });
   };
 
   return (

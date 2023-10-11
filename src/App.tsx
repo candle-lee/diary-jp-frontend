@@ -29,7 +29,7 @@ function App() {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/forgetpassword" element={<ForgetPasswordPage />} />
             <Route
-              path="/forgetpassverifyuser"
+              path="/forgetpassword-validation"
               element={<ForgetPassVerifyUserPage />}
             />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
