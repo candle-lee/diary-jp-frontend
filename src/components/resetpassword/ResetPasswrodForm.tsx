@@ -2,8 +2,11 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useResetPassword } from "../../api/auth/hooks/useResetPasscord";
 
 const ResetPasswordForm = () => {
+  const { mutate, isLoading } = useResetPassword();
+
   const validationSchema = z.object({
     isAccepted: z.literal(true, {
       errorMap: () => ({ message: "You must accept Terms and Conditions" }),
@@ -102,7 +105,11 @@ const ResetPasswordForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    console.log("data" + data);
+    const formData = {
+      password: data.password,
+      password1: data.password1,
+    };
+    mutate(formData);
   };
 
   return (
