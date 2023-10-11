@@ -5,10 +5,85 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const ResetPasswordForm = () => {
   const validationSchema = z.object({
-    email: z
+    isAccepted: z.literal(true, {
+      errorMap: () => ({ message: "You must accept Terms and Conditions" }),
+    }),
+    password: z
       .string()
-      .min(3, { message: "Email is required" })
-      .email({ message: "Must be a valid email" }),
+      .min(8, { message: "Password must be 8 characters or more" })
+      .refine(
+        (value) => {
+          // Check if the password contains at least one letter
+          return /[a-zA-Z]/.test(value);
+        },
+        { message: "Password must contain at least one letter" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one number
+          return /\d/.test(value);
+        },
+        { message: "Password must contain at least one number" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one symbol (e.g., !@#$%^&*)
+          return /[!@#$%^&*]/.test(value);
+        },
+        { message: "Password must contain at least one symbol" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password doesn't start or end with a blank space
+          return !/^\s|\s$/.test(value);
+        },
+        { message: "Password cannot start or end with a blank space" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password is not particularly weak (e.g., password123)
+          return !/(password|123|admin)/i.test(value);
+        },
+        { message: "Password cannot be particularly weak" }
+      ),
+    password1: z
+      .string()
+      .min(8, { message: "Password must be 8 characters or more" })
+      .refine(
+        (value) => {
+          // Check if the password contains at least one letter
+          return /[a-zA-Z]/.test(value);
+        },
+        { message: "Password must contain at least one letter" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one number
+          return /\d/.test(value);
+        },
+        { message: "Password must contain at least one number" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password contains at least one symbol (e.g., !@#$%^&*)
+          return /[!@#$%^&*]/.test(value);
+        },
+        { message: "Password must contain at least one symbol" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password doesn't start or end with a blank space
+          return !/^\s|\s$/.test(value);
+        },
+        { message: "Password cannot start or end with a blank space" }
+      )
+      .refine(
+        (value) => {
+          // Check if the password is not particularly weak (e.g., password123)
+          return !/(password|123|admin)/i.test(value);
+        },
+        { message: "Password cannot be particularly weak" }
+      ),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -19,7 +94,8 @@ const ResetPasswordForm = () => {
     formState: { errors },
   } = useForm<ValidationSchema>({
     defaultValues: {
-      email: "",
+      password: "",
+      password1: "",
     },
     resolver: zodResolver(validationSchema),
   });
@@ -43,28 +119,20 @@ const ResetPasswordForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <InputField
-              inputType="email"
-              inputName="email"
-              description="Your email"
-              placeholderText="name@company@com"
-              register={register}
-              error={errors.email?.message}
-            />
-            <InputField
               inputType="password"
               inputName="password"
               description="New Password"
               placeholderText="********"
               register={register}
-              error={errors.email?.message}
+              error={errors.password?.message}
             />
             <InputField
-              inputType="password"
+              inputType="password1"
               inputName="confirmPassword"
               description="Confirm New Password"
               placeholderText="********"
               register={register}
-              error={errors.email?.message}
+              error={errors.password1?.message}
             />
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -74,7 +142,7 @@ const ResetPasswordForm = () => {
                     aria-describedby="agree"
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                    required={true}
+                    {...register("isAccepted")}
                   />
                 </div>
                 <div className="ml-3 text-sm">
@@ -101,6 +169,15 @@ const ResetPasswordForm = () => {
                 </div>
               </div>
             </div>
+            {errors.isAccepted && (
+              <p
+                className="text-start text-xs italic text-red-500"
+                style={{ marginTop: "8px" }}
+              >
+                {" "}
+                {errors.isAccepted?.message}
+              </p>
+            )}
             <button
               type="submit"
               className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"

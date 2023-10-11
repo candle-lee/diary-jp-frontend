@@ -10,14 +10,14 @@ export const useForgetPassword = () => {
     const forgetPassword = (email: string) => axios.post('/auth/forget-password', {email});
     const {mutate, isLoading} = useMutation({
         mutationFn: forgetPassword,
-        onSuccess: () => {
-            toast.success(`We sent passcode to your email address`, {
+        onSuccess: ({data}) => {
+            toast.success(`${data['message']}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            navigate('/reset-password')
+            navigate('/forgetpassverifyuser')
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
