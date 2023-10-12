@@ -1,6 +1,7 @@
 import AvatarCard from "../components/main/AvatarCard";
 import SearchBar from "../components/main/SearchBar";
 import StorageCard from "../components/main/StorageCard";
+import VideoUploadCard from "../components/main/VideoUploadCard";
 
 const MainPage = () => {
   return (
@@ -16,9 +17,8 @@ const MainPage = () => {
           <StorageCard />
         </div>
         <div className="col-span-12 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-4">
-          <AvatarCard />
+          <VideoUploadCard />
         </div>
-        {/* <StorageCard /> */}
       </div>
     </div>
   );
