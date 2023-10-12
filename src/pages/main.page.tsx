@@ -10,13 +10,13 @@ const MainPage = () => {
         <SearchBar />
       </div>
       <div className="grid grid-cols-12 gap-5">
-        <div className="col-span-12 sm:col-span-4 md:col-span-3 lg:col-span-4 xl:col-span-5">
+        <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-4">
           <AvatarCard />
         </div>
-        <div className="col-span-12 sm:col-span-4 md:col-span-6 lg:col-span-5 xl:col-span-3">
+        <div className="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-6 xl:col-span-3">
           <StorageCard />
         </div>
-        <div className="col-span-12 sm:col-span-4 md:col-span-3 lg:col-span-3 xl:col-span-4">
+        <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-5">
           <VideoUploadCard />
         </div>
       </div>
