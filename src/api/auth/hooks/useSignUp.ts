@@ -7,7 +7,7 @@ import { ISignUp } from "../../../constant/interfaces";
 export const useSignUpUser = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
-    const signUpUser = (formData: ISignUp) => axios.post('/users/register', {...formData});
+    const signUpUser = (formData: ISignUp) => axios.post('/user/register', {...formData});
 
     const {mutate, isLoading} = useMutation({
         mutationFn: signUpUser,

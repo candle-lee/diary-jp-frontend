@@ -34,7 +34,7 @@ const ForgetPasswordForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
-    mutate({ email: data.email });
+    mutate(data.email);
   };
 
   return (
