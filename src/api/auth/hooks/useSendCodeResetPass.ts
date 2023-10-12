@@ -10,8 +10,8 @@ export const useSendCodeResetPass = () => {
     const sendCode = (passcode: string) => axios.post('/auth/resetpass-verify', {passcode});
     const {mutate, isLoading} = useMutation({
         mutationFn: sendCode,
-        onSuccess: ({data}: any) => {
-            toast.success(`${data['message']}`, {
+        onSuccess: () => {
+            toast.success(`User verified successfully`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
