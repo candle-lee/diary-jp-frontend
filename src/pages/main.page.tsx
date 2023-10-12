@@ -6,7 +6,7 @@ import VideoUploadCard from "../components/main/VideoUploadCard";
 const MainPage = () => {
   return (
     <div className="bg-[#F4F7FE]">
-      <div className="flex justify-end">
+      <div className="flex justify-end py-5">
         <SearchBar />
       </div>
       <div className="grid grid-cols-12 gap-5">
