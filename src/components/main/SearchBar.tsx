@@ -11,7 +11,7 @@ const SearchBar = () => {
       <RingIcon />
       <MoonIcon />
       <InfoIcon />
-      <DefaultAvatar size="41px" />
+      <DefaultAvatar size="md" />
     </div>
   );
 };
