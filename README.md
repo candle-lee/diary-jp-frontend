@@ -16,4 +16,4 @@ start
 yarn run dev
 ```
 
-Server is running in http://localhost:5173
+Client is running in http://localhost:5173
