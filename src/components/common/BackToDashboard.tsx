@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Arrow_Down from "../../assets/icons/Arrow_Down";
+import ArrowDownSVGIcon from "../../assets/icons/ArrowDownSVGIcon";
 
 const BackToDashboard = () => {
   return (
     <>
       <Link to="/" className="flex items-center">
-        <Arrow_Down />
+        <ArrowDownSVGIcon />
         <p className="text-[#A3AED0] text-sm font-medium leading-[30px] tracking-[-0.28px] ml-[6px]">
           Back to dashboard
         </p>
