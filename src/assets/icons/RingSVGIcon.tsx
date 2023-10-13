@@ -1,4 +1,4 @@
-const RingIcon = () => {
+const RingSVGIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,4 +22,4 @@ const RingIcon = () => {
   );
 };
 
-export default RingIcon;
+export default RingSVGIcon;
