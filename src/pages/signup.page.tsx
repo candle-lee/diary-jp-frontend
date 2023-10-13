@@ -1,19 +1,15 @@
-import BackToDashboard from "../components/common/BackToDashboard";
 import SignUpForm from "../components/signup/SignUpForm";
+import ImageSection from "../layout/ImageSection";
 
 const SignInPage = () => {
-    return (
-        <div className="flex justify-between">
-            <div className="ml-[308px]">
-                <div className="flex mt-[40px] items-center">
-                    <BackToDashboard />
-                </div>
-                <div className="mt-[70px]">
-                    <SignUpForm />
-                </div>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="bg-white dark:bg-gray-900">
+      <div className="grid lg:h-screen lg:grid-cols-2">
+        <SignUpForm />
+        <ImageSection />
+      </div>
+    </div>
+  );
+};
 
 export default SignInPage;

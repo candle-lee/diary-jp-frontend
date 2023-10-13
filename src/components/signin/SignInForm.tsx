@@ -54,7 +54,7 @@ const SignInForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <BackToDashboard />
-        <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
+        <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
           Sign In
         </h1>
         <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
