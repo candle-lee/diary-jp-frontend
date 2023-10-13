@@ -171,7 +171,7 @@ const SignUpForm = () => {
           </div>
           {errors.isAccepted && (
             <p
-              className="text-start text-xs italic text-red-500"
+              className="text-start text-xs italic text-red-500 my-4"
               style={{ marginTop: "8px" }}
             >
               {" "}
