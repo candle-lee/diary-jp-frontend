@@ -1,4 +1,4 @@
-const InfoIcon = () => {
+const InfoSVGIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,4 +15,4 @@ const InfoIcon = () => {
   );
 };
 
-export default InfoIcon;
+export default InfoSVGIcon;

@@ -4,9 +4,11 @@ import InputField from "../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "flowbite-react";
+import { Button, Checkbox, Label } from "flowbite-react";
 import { useLoginUser } from "../../api/auth/hooks/useLogin";
 import { ButtonSpinner } from "../common/ButtonSpinner";
+import GoogleSVGIcon from "../../assets/icons/GoogleSVGIcon";
+import BackToDashboard from "../common/BackToDashboard";
 
 const SignInForm = () => {
   const { mutate, isLoading } = useLoginUser();
@@ -46,38 +48,32 @@ const SignInForm = () => {
   const handleGoogleSubmit = () => {};
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="bg-white w-[410px] h-[610px]">
+    <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
+      <form
+        className="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <BackToDashboard />
+        <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
+          Sign In
+        </h1>
+        <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
+          Enter your email and password to sign in!
+        </p>
         <div className="">
-          <div className="w-[110px] h-[56px]">
-            <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
-              Sign In
-            </h1>
-          </div>
-          <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
-            Enter your email and password to sign in!
-          </p>
-          <form
-            className="space-y-4 md:space-y-6"
-            onSubmit={handleSubmit(onSubmit)}
+          <Button
+            type="button"
+            color="gray"
+            onClick={() => handleGoogleSubmit()}
+            className="flex items-center justify-center w-full h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
           >
-            <Button
-              type="button"
-              color="gray"
-              onClick={() => handleGoogleSubmit()}
-              className="flex items-center justify-center w-[410px] h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
-            >
-              <img
-                className="w-5 h-5 mr-[9px]"
-                src="https://www.svgrepo.com/show/475656/google-color.svg"
-                loading="lazy"
-                alt="google logo"
-              />
-              <span className="text-[#2B3674] font-medium text-sm tracking-[-0.28px]">
-                Sign in with Google
-              </span>
-            </Button>
+            <GoogleSVGIcon />
+            Sign in with Google
+          </Button>
+          <div className="my-4">
             <HorizontalDivider />
+          </div>
+          <div>
             <InputField
               inputType="email"
               inputName="email"
@@ -94,55 +90,45 @@ const SignInForm = () => {
               register={register}
               error={errors.password?.message}
             />
-            <div className="flex items-center justify-between">
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="remember"
-                    aria-describedby="remember"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="remember"
-                    className="text-[#2B3674] text-sm font-normal leading-5 tracking-[-0.28px]"
-                  >
-                    Keep me logged in
-                  </label>
-                </div>
+          </div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <Checkbox id="remember" />
               </div>
-              <Link
-                to="/forgetpassword"
-                className="text-sm text-[#4318FF] font-medium leading-5 tracking-[-0.28px]"
-              >
-                Forget password?
-              </Link>
+              <div className="ml-3 text-sm">
+                <Label htmlFor="remember">Remember me</Label>
+              </div>
             </div>
-            {isLoading ? (
-              <ButtonSpinner />
-            ) : (
-              <Button
-                type="submit"
-                className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
-              >
-                Sign In
-              </Button>
-            )}
-            <p className="text-sm font-normal text-[#2B3674] leading-[26px] tracking-[-0.28px]">
-              Not registered yet?{" "}
-              <Link
-                to="/signup"
-                className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-              >
-                Create an Account
-              </Link>
-            </p>
-          </form>
+            <Link
+              to="/forgetpassword"
+              className="text-sm text-[#4318FF] font-medium leading-5 tracking-[-0.28px]"
+            >
+              Forget password?
+            </Link>
+          </div>
+          {isLoading ? (
+            <ButtonSpinner />
+          ) : (
+            <Button
+              type="submit"
+              className="w-full h-[54px] text-white bg-[#4318FF] font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+            >
+              Sign In
+            </Button>
+          )}
+          <p className="text-sm font-normal text-[#2B3674] leading-7 tracking-[-0.28px] mt-4">
+            Not registered yet?{" "}
+            <Link
+              to="/signup"
+              className="font-bold text-[#4318FF] leading-7 tracking-[-0.28px]"
+            >
+              Create an Account
+            </Link>
+          </p>
         </div>
-      </div>
-    </section>
+      </form>
+    </div>
   );
 };
 
