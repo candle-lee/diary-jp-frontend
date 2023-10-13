@@ -13,17 +13,17 @@ const InputField = ({
     <div>
       <Label
         htmlFor={inputName}
-        className="block text-sm font-medium text-[#2B3674] mt-[24px] mb-[13px]"
+        className="block text-sm font-medium text-[#2B3674] mb-3"
         value={description}
       />
       <TextInput
         type={inputType}
         id={inputName}
-        className="placeholder-[#A3AED0] w-[410px] h-full flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]"
+        className="placeholder-[#A3AED0] w-full h-full flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]"
         placeholder={placeholderText}
         {...register(inputName)}
       />
-      {<p className="text-start text-xs italic text-red-500 mt-2"> {error}</p>}
+      {<p className="text-start text-xs italic text-red-500 my-4"> {error}</p>}
     </div>
   );
 };
