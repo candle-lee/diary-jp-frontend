@@ -1,16 +1,12 @@
-import BackToDashboard from "../components/common/BackToDashboard";
 import PasscodeForm from "../components/passcode/PasscodeForm";
+import ImageSection from "../layout/ImageSection";
 
 const VerifyUserPage = () => {
   return (
-    <div className="flex justify-between">
-      <div className="ml-[308px] mt-[40px]">
-        <div className="flex items-center">
-          <BackToDashboard />
-        </div>
-        <div className="mt-[100px]">
-          <PasscodeForm />
-        </div>
+    <div className="bg-white dark:bg-gray-900">
+      <div className="grid lg:h-screen lg:grid-cols-2">
+        <PasscodeForm />
+        <ImageSection />
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ButtonSpinner } from "../common/ButtonSpinner";
 import { useSendCodeResetPass } from "../../api/auth/hooks/useSendCodeResetPass";
+import BackToDashboard from "../common/BackToDashboard";
+import { Button, Checkbox, Label } from "flowbite-react";
 
 const ForgetPassVerifyUserForm = () => {
   const { mutate, isLoading } = useSendCodeResetPass();
@@ -35,84 +37,72 @@ const ForgetPassVerifyUserForm = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="bg-white w-[410px] h-[610px]">
+    <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
+      <form
+        className="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <BackToDashboard />
+        <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
+          Please Enter Code
+        </h1>
         <div className="">
-          <div className="w-full h-[56px]">
-            <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
-              Please Enter Code
-            </h1>
-          </div>
-          <form
-            className="space-y-4 md:space-y-6"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <InputField
-              inputType="text"
-              inputName="passcode"
-              description="Your Passcode"
-              placeholderText="123456"
-              register={register}
-              error={errors.passcode?.message}
-            />
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="flex items-center h-5">
-                  <input
-                    id="agree"
-                    aria-describedby="agree"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50"
-                    {...register("isAccepted")}
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="agree"
-                    className="text-[#2B3674] text-sm font-normal leading-5 tracking-[-0.28px]"
+          <InputField
+            inputType="text"
+            inputName="passcode"
+            description="Your Passcode"
+            placeholderText="123456"
+            register={register}
+            error={errors.passcode?.message}
+          />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <div className="flex items-center h-5">
+                <Checkbox id="agree" {...register("isAccepted")} />
+              </div>
+              <div className="ml-3 text-sm">
+                <Label htmlFor="remember">
+                  Agree to UDATA’s{" "}
+                  <a
+                    href="#"
+                    className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
                   >
-                    I accept the UDATA’s{" "}
-                    <a
-                      href="#"
-                      className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-                    >
-                      Terms of Use
-                    </a>{" "}
-                    and{" "}
-                    <a
-                      href="#"
-                      className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-                    >
-                      Privacy Policy
-                    </a>
-                    .
-                  </label>
-                </div>
+                    Terms of Use
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="#"
+                    className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
+                  >
+                    Privacy Policy
+                  </a>
+                  .
+                </Label>
               </div>
             </div>
-            {errors.isAccepted && (
-              <p
-                className="text-start text-xs italic text-red-500"
-                style={{ marginTop: "8px" }}
-              >
-                {" "}
-                {errors.isAccepted?.message}
-              </p>
-            )}
-            {isLoading ? (
-              <ButtonSpinner />
-            ) : (
-              <button
-                type="submit"
-                className="w-[410px] h-[54px] text-white bg-[#4318FF] font-medium rounded-[16px] text-sm px-2.5 py-2 text-center"
-              >
-                Send
-              </button>
-            )}
-          </form>
+          </div>
+          {errors.isAccepted && (
+            <p
+              className="text-start text-xs italic text-red-500 my-4"
+              style={{ marginTop: "8px" }}
+            >
+              {" "}
+              {errors.isAccepted?.message}
+            </p>
+          )}
+          {isLoading ? (
+            <ButtonSpinner />
+          ) : (
+            <Button
+              type="submit"
+              className="w-full h-[54px] text-white bg-[#4318FF] font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+            >
+              Send
+            </Button>
+          )}
         </div>
-      </div>
-    </section>
+      </form>
+    </div>
   );
 };
 
