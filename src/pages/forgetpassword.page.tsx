@@ -1,19 +1,15 @@
-import BackToDashboard from "../components/common/BackToDashboard"
 import ForgetPasswordForm from "../components/forgetpassword/ForgetPasswordForm";
+import ImageSection from "../layout/ImageSection";
 
 const ForgetPasswordPage = () => {
-    return (
-        <div className="flex justify-between">
-            <div className="ml-[308px]">
-                <div className="flex mt-[40px] items-center">
-                   <BackToDashboard />
-                </div>
-                <div className="mt-[201px]">
-                    <ForgetPasswordForm />
-                </div>
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="bg-white dark:bg-gray-900">
+      <div className="grid lg:h-screen lg:grid-cols-2">
+        <ForgetPasswordForm />
+        <ImageSection />
+      </div>
+    </div>
+  );
+};
 
 export default ForgetPasswordPage;
