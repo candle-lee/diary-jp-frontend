@@ -1,6 +1,22 @@
+import { useVideoUpload } from "../../api/video/useVideoUpload";
 import UploadSVGIcon from "../../assets/icons/UploadSVGIcon";
+import { CircleSpinner } from "../common/CircleSpinner";
 
 const DropZone = () => {
+  const { mutate, isLoading } = useVideoUpload();
+  const handleFileChange = (e: any) => {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const formData = {
+        file: file,
+        mediaId: file.name,
+      };
+      mutate(formData);
+    }
+  };
+  if (isLoading) {
+    return <CircleSpinner />;
+  }
   return (
     <div className="flex items-center justify-center w-full">
       <label
@@ -13,7 +29,12 @@ const DropZone = () => {
             Record Your Vlog
           </p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" />
+        <input
+          id="dropzone-file"
+          type="file"
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </label>
     </div>
   );

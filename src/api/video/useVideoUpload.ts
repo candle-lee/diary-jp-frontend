@@ -1,15 +1,14 @@
+import { httpAxios } from "../instance"
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance"
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-export const useForgetPassword = () => {
+export const useVideoUpload = () => {
     const axios = httpAxios();
-    const navigate = useNavigate();
 
-    const forgetPassword = (email: string) => axios.post('/auth/forget-password', {email});
+    const uploadVideo = (formData :any) => axios.post('/media', {...formData});
+
     const {mutate, isLoading} = useMutation({
-        mutationFn: forgetPassword,
+        mutationFn: uploadVideo,
         onSuccess: ({data}) => {
             toast.success(`${data['message']}`, {
                 hideProgressBar: true,
@@ -17,7 +16,6 @@ export const useForgetPassword = () => {
                 type: "success",
                 position: "top-right",
             });
-            navigate('/forgetpassverifyuser')
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
@@ -28,6 +26,5 @@ export const useForgetPassword = () => {
             });
         },
     });
-
     return {mutate, isLoading}
 }
