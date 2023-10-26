@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const useVideoUpload = () => {
     const axios = httpAxios();
 
-    const uploadVideo = (formData :any) => axios.post('/media', {...formData});
+    const uploadVideo = (formData :any) => axios.post('/media', formData);
 
     const {mutate, isLoading} = useMutation({
         mutationFn: uploadVideo,
