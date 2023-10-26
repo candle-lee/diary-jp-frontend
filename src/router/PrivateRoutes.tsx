@@ -27,38 +27,6 @@ const PrivateRoutes = () => {
           <Navigate to="/signin" replace />
         ),
       },
-      {
-        path: "/verify-user",
-        element: isAutherized ? (
-          <VerifyUserPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
-      },
-      {
-        path: "/forgetpassword",
-        element: isAutherized ? (
-          <ForgetPasswordPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
-      },
-      {
-        path: "/forgetpassword-validation",
-        element: isAutherized ? (
-          <ForgetPassVerifyUserPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
-      },
-      {
-        path: "/reset-password",
-        element: isAutherized ? (
-          <ResetPasswordPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
-      },
       { path: "*", element: <Navigate to="/signin" replace /> },
     ],
   };
