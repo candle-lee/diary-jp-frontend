@@ -1,42 +1,78 @@
 import { useCallback, useRef, useState } from "react";
-// Other imports ...
+import Webcam from "react-webcam";
 
 const VideoRecorder = () => {
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
+  const [recordedChunks, setRecordedChunks] = useState([]);
+
+  const handleDataAvailable = useCallback(
+    ({ data }) => {
+      if (data.size > 0) {
+        setRecordedChunks((prev) => prev.concat(data));
+      }
+    },
+    [setRecordedChunks]
+  );
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((stream) => {
-        webcamRef.current.srcObject = stream;
-        mediaRecorderRef.current = new MediaRecorder(stream);
-        // Implement the recording logic
-      })
-      .catch((error) => {
-        // Handle errors
-      });
-  }, [webcamRef, setCapturing]);
+    mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+      mimeType: "video/webm",
+    });
+    mediaRecorderRef.current.addEventListener(
+      "dataavailable",
+      handleDataAvailable
+    );
+    mediaRecorderRef.current.start();
+  }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
   const handleStopCaptureClick = useCallback(() => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
-    // Convert the recorded chunks to a video file
-    // Implement the upload logic
   }, [mediaRecorderRef, setCapturing]);
 
-  // ... UI code ...
+  const handleDownload = useCallback(() => {
+    if (recordedChunks.length) {
+      const blob = new Blob(recordedChunks, {
+        type: "video/webm",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = "react-webcam-stream-capture.webm";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setRecordedChunks([]);
+    }
+  }, [recordedChunks]);
 
+  const videoConstraints = {
+    width: 420,
+    height: 420,
+    facingMode: "user",
+  };
   return (
     <div>
-      <video ref={webcamRef} autoPlay />
-      <button
-        onClick={capturing ? handleStopCaptureClick : handleStartCaptureClick}
-      >
-        {capturing ? "Stop Capture" : "Start Capture"}
-      </button>
+      <Webcam
+        imageSmoothing={true}
+        screenshotFormat="image/webp"
+        audio={true}
+        mirrored={false}
+        ref={webcamRef}
+        videoConstraints={videoConstraints}
+      />
+      {capturing ? (
+        <button onClick={handleStopCaptureClick}>Stop Capture</button>
+      ) : (
+        <button onClick={handleStartCaptureClick}>Start Capture</button>
+      )}
+      {recordedChunks.length > 0 && (
+        <button onClick={handleDownload}>Download</button>
+      )}
     </div>
   );
 };
