@@ -5,7 +5,13 @@ import { CircleSpinner } from "../components/common/CircleSpinner";
 const Layout = () => {
   return (
     <>
-      <Suspense fallback={<CircleSpinner />}>
+      <Suspense
+        fallback={
+          <div className="flex h-screen items-center justify-center">
+            <CircleSpinner />
+          </div>
+        }
+      >
         <Outlet />
       </Suspense>
     </>

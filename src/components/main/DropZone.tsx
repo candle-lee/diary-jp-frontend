@@ -1,6 +1,6 @@
-import { Spinner } from "flowbite-react";
 import { useVideoUpload } from "../../api/video/useVideoUpload";
 import UploadSVGIcon from "../../assets/icons/UploadSVGIcon";
+import { CircleSpinner } from "../common/CircleSpinner";
 
 const DropZone = () => {
   const { mutate, isLoading } = useVideoUpload();
@@ -16,7 +16,7 @@ const DropZone = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
-        <Spinner />
+        <CircleSpinner />
       </div>
     );
   }

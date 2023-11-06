@@ -1,12 +1,11 @@
 import { httpAxios } from "../instance"
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export const useVideoUpload = () => {
     const axios = httpAxios();
-
     const uploadVideo = (formData :any) => axios.post('/media', formData);
-
+    const queryClient = useQueryClient()
     const {mutate, isLoading} = useMutation({
         mutationFn: uploadVideo,
         onSuccess: ({data}) => {
@@ -16,6 +15,7 @@ export const useVideoUpload = () => {
                 type: "success",
                 position: "top-right",
             });
+            queryClient.invalidateQueries({ queryKey: ['getMedias'] })
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
