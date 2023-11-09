@@ -1,9 +1,9 @@
-import VideoRecorder from "../components/videohandling/VideoRecorder";
+import VideoRecording from "../components/videohandling/VideoRecording";
 
 const VideoHandlingPage = () => {
   return (
     <div>
-      <VideoRecorder />
+      <VideoRecording />
     </div>
   );
 };
