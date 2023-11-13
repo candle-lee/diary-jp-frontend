@@ -13,13 +13,15 @@ const VideoRecording: React.FC = () => {
     activeRecordings,
     createRecording,
     openCamera,
+    closeCamera,
     startRecording,
     stopRecording,
+    pauseRecording,
+    resumeRecording,
     download,
   } = useRecordWebcam();
-  let recording : any;
   const initialRecording = async () => {
-    recording = await createRecording();
+    const recording = await createRecording();
     if (!recording) return;
     setRecorder(recording);
     await openCamera(recording.id);
@@ -50,9 +52,10 @@ const VideoRecording: React.FC = () => {
   const handleStartCaptureClick = useCallback(() => {
     setStartind(true);
   }, []);
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <div className="w-full px-10">
+      <div className="w-full">
         {activeRecordings.map(recording => (
           <div key={recording.id}>
             <video className="w-full"  style={{ maxHeight: "90VH" }} ref={recording.webcamRef} autoPlay muted />
@@ -75,7 +78,10 @@ const VideoRecording: React.FC = () => {
         {starting && (
           <div className="flex">
             <Button
-              onClick={handlePauseResumeClick}
+              onClick={async () => {
+                handlePauseResumeClick();
+                pausing ? await resumeRecording(recorder.id) : await pauseRecording(recorder.id);
+              }}
               className="bg-yellow-500 text-white py-2 px-4 rounded"
             >
               {pausing ? "Resume" : "Pause"}
@@ -92,7 +98,12 @@ const VideoRecording: React.FC = () => {
           </div>
         )}
         {stoping && (
-          <div className="flex">
+          <div className="flex gap-4">
+            <Button
+              className="ml-2 bg-red-500 text-white py-2 px-4 rounded"
+            >
+              Preview/Edit
+            </Button>
             <Button
               onClick={async () => {
                 handleSaveClick();
