@@ -1,31 +1,42 @@
 import { Button } from "flowbite-react";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  useRecordWebcam,
-} from "react-record-webcam";
+import { useRecordWebcam } from "react-record-webcam";
+import { useNavigate } from "react-router-dom";
+
+interface Recorder {
+  // Define the properties of your recorder object
+  id: string;
+  webcamRef: React.RefObject<HTMLVideoElement>;
+  previewRef: React.RefObject<HTMLVideoElement>;
+  // Add other properties as needed
+}
 
 const VideoRecording: React.FC = () => {
-  const [recorder, setRecorder] = useState(undefined);
-  const [starting, setStartind] = useState(false);
+  const [recorder, setRecorder] = useState<Recorder | undefined>(undefined);
+  const [starting, setStarting] = useState(false);
   const [pausing, setPausing] = useState(false);
   const [stoping, setStoping] = useState(false);
+  const [preview, setPreview] = useState(false);
+
   const {
     activeRecordings,
     createRecording,
     openCamera,
-    closeCamera,
     startRecording,
     stopRecording,
     pauseRecording,
     resumeRecording,
     download,
   } = useRecordWebcam();
+  const navigate = useNavigate();
+
   const initialRecording = async () => {
     const recording = await createRecording();
     if (!recording) return;
     setRecorder(recording);
     await openCamera(recording.id);
-  }
+  };
+
   useEffect(() => {
     initialRecording();
   }, []);
@@ -35,7 +46,7 @@ const VideoRecording: React.FC = () => {
   }, []);
 
   const handleStopClick = useCallback(() => {
-    setStartind(false);
+    setStarting(false);
     setStoping(true);
   }, []);
 
@@ -46,81 +57,142 @@ const VideoRecording: React.FC = () => {
   const handleNewClick = useCallback(() => {
     console.log("New clicked");
     setStoping(false);
-    setStartind(false);
+    setStarting(false);
+    setPreview(false);
   }, []);
 
   const handleStartCaptureClick = useCallback(() => {
-    setStartind(true);
+    setStarting(true);
   }, []);
 
+  console.log("SS");
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col pt-4 px-10 h-screen bg-slate-800">
       <div className="w-full">
-        {activeRecordings.map(recording => (
-          <div key={recording.id}>
-            <video className="w-full"  style={{ maxHeight: "90VH" }} ref={recording.webcamRef} autoPlay muted />
+        {activeRecordings.map((recording) => (
+          <div className="flex justify-center" key={recording.id}>
+            <video
+              className="aspect-video object-cover"
+              style={{
+                transform: "scaleX(-1)",
+                width: "calc(80% + 2px)",
+                display: `${!preview ? "block" : "none"}`,
+              }}
+              ref={recording.webcamRef}
+              autoPlay
+              muted
+            />
+            <video
+              className="aspect-video object-cover"
+              style={{
+                width: "calc(80% + 2px)",
+                display: `${preview ? "block" : "none"}`,
+              }}
+              ref={recording.previewRef}
+              controls
+            />
           </div>
         ))}
-      </div>
-      <div className="mt-4">
-        {!starting && !stoping && (
-          <Button
-            onClick={async ()=>{
-              handleStartCaptureClick();
-              await startRecording(recorder.id);
-              await new Promise((resolve) => setTimeout(resolve, 3000));
-            }}
-            className="w-full bg-green-500 text-white py-2 px-4 rounded"
-          >
-            Start
-          </Button>
-        )}
+        
         {starting && (
-          <div className="flex">
-            <Button
-              onClick={async () => {
-                handlePauseResumeClick();
-                pausing ? await resumeRecording(recorder.id) : await pauseRecording(recorder.id);
-              }}
-              className="bg-yellow-500 text-white py-2 px-4 rounded"
-            >
-              {pausing ? "Resume" : "Pause"}
-            </Button>
-            <Button
-              onClick={async () => {
-                handleStopClick();
-                await stopRecording(recorder.id);
-              }}
-              className="ml-2 bg-red-500 text-white py-2 px-4 rounded"
-            >
-              Stop
-            </Button>
-          </div>
-        )}
-        {stoping && (
-          <div className="flex gap-4">
-            <Button
-              className="ml-2 bg-red-500 text-white py-2 px-4 rounded"
-            >
-              Preview/Edit
-            </Button>
-            <Button
-              onClick={async () => {
-                handleSaveClick();
-                await download(recorder.id);
-              }}
-              className="bg-blue-500 text-white py-2 px-4 rounded"
-            >
-              Save
-            </Button>
-            <Button
-              onClick={handleNewClick}
-              className="ml-2 bg-indigo-500 text-white py-2 px-4 rounded"
-            >
-              New
-            </Button>
-          </div>
-        )}
+              <div className="absolute top-3 left-2 flex items-center space-x-2">
+                <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-white">Recording...</span>
+              </div>
+            )}
+      </div>
+      <div className="flex flex-col justify-center items-center h-full">
+        <div className="w-full">
+          {!starting && !stoping && !preview && (
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={async () => {
+                  handleStartCaptureClick();
+                  await startRecording(recorder!.id);
+                  await new Promise((resolve) => setTimeout(resolve, 3000));
+                }}
+                className="h-[40px] text-white bg-green-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Start
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/main");
+                }}
+                className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Back
+              </Button>
+            </div>
+          )}
+          {starting && (
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={async () => {
+                  handlePauseResumeClick();
+                  pausing
+                    ? await resumeRecording(recorder!.id)
+                    : await pauseRecording(recorder!.id);
+                }}
+                className="h-[40px] text-white bg-yellow-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                {pausing ? "Resume" : "Pause"}
+              </Button>
+              <Button
+                onClick={async () => {
+                  handleStopClick();
+                  await stopRecording(recorder!.id);
+                }}
+                className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Stop
+              </Button>
+            </div>
+          )}
+          {preview && (
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={async () => {
+                  handleSaveClick();
+                  await download(recorder!.id);
+                }}
+                className="h-[40px] text-white bg-blue-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Save
+              </Button>
+              <Button
+                onClick={handleNewClick}
+                className="h-[40px] text-white bg-indigo-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                New
+              </Button>
+            </div>
+          )}
+          {stoping && (
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => {
+                  setPreview(true);
+                  setStoping(false);
+                  setStarting(false);
+                }}
+                className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Preview/Edit
+              </Button>
+              <Button
+                onClick={async () => {
+                  handleSaveClick();
+                  await download(recorder!.id);
+                }}
+                className="h-[40px] text-white bg-blue-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
+              >
+                Save
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
