@@ -29,3 +29,8 @@ export interface ISignUp {
     password: string;
 }
 
+export interface IRecorder {
+    id: string;
+    webcamRef: React.RefObject<HTMLVideoElement>;
+    previewRef: React.RefObject<HTMLVideoElement>;
+  }

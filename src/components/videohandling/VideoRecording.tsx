@@ -2,17 +2,10 @@ import { Button } from "flowbite-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useRecordWebcam } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
-
-interface Recorder {
-  // Define the properties of your recorder object
-  id: string;
-  webcamRef: React.RefObject<HTMLVideoElement>;
-  previewRef: React.RefObject<HTMLVideoElement>;
-  // Add other properties as needed
-}
+import { IRecorder } from "../../constant/interfaces";
 
 const VideoRecording: React.FC = () => {
-  const [recorder, setRecorder] = useState<Recorder | undefined>(undefined);
+  const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
   const [starting, setStarting] = useState(false);
   const [pausing, setPausing] = useState(false);
   const [stoping, setStoping] = useState(false);
@@ -28,6 +21,7 @@ const VideoRecording: React.FC = () => {
     resumeRecording,
     download,
   } = useRecordWebcam();
+
   const navigate = useNavigate();
 
   const initialRecording = async () => {
@@ -59,6 +53,7 @@ const VideoRecording: React.FC = () => {
     setStoping(false);
     setStarting(false);
     setPreview(false);
+    setPausing(false);
   }, []);
 
   const handleStartCaptureClick = useCallback(() => {
@@ -94,13 +89,13 @@ const VideoRecording: React.FC = () => {
             />
           </div>
         ))}
-        
+
         {starting && (
-              <div className="absolute top-3 left-2 flex items-center space-x-2">
-                <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-white">Recording...</span>
-              </div>
-            )}
+          <div className="absolute top-3 left-2 flex items-center space-x-2">
+            <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+            <span className="text-white">Recording...</span>
+          </div>
+        )}
       </div>
       <div className="flex flex-col justify-center items-center h-full">
         <div className="w-full">
