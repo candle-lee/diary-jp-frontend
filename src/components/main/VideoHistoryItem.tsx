@@ -30,17 +30,12 @@ const VideoHistoryItem = ({ title, url }: { title: string; url: string }) => {
         alt="video_item"
       />
       <div className="">
-        <p className="text-[#2B3674] font-medium text-base leading-4 tracking-[-0.32px] mb-2">
+        {/* <p className="text-[#2B3674] font-medium text-base leading-4 tracking-[-0.32px] mb-2">
           {title}
-        </p>
+        </p> */}
         <p className="text-[#A3AED0] font-medium text-sm leading-5 tracking-[-0.28px]">
-          <Link
-            to="#"
-            className="text-[#4318FF] text-sm font-medium leading-5 tracking-tighter-[-0.28px] underline"
-          >
-            {" "}
-            {url}{" "}
-          </Link>
+          {" "}
+          {url}{" "}
         </p>
       </div>
       <div className="flex gap-6 ml-auto">
