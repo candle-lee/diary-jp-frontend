@@ -8,7 +8,7 @@ import {
   WeeklyEvents,
 } from "../components/pages";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   return (
     <div className="bg-[#F4F7FE]">
       <div className="flex justify-end py-5">

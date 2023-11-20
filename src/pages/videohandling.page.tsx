@@ -1,6 +1,6 @@
 import { VideoRecording } from "../components/pages";
 
-const VideoHandlingPage = () => {
+const VideoHandlingPage: React.FC = () => {
   return (
     <div>
       <VideoRecording />
