@@ -1,13 +1,12 @@
-import InputField from "../common/InputField";
+import InputField from "../../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSendCode } from "../../api/auth/hooks/useSendPasscode";
-import { ButtonSpinner } from "../common/ButtonSpinner";
-import BackToDashboard from "../common/BackToDashboard";
+import { useSendCode } from "../../../api/auth/hooks/useSendPasscode";
+import { ButtonSpinner, BackToDashboard } from "../../common";
 import { Checkbox, Label } from "flowbite-react";
 
-const PasscodeForm = () => {
+const PasscodeForm: React.FC = () => {
   const { mutate, isLoading } = useSendCode();
 
   const validationSchema = z.object({
@@ -30,6 +29,7 @@ const PasscodeForm = () => {
     },
     resolver: zodResolver(validationSchema),
   });
+
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
