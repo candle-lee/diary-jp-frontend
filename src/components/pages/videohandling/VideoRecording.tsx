@@ -2,7 +2,7 @@ import { Button } from "flowbite-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useRecordWebcam } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
-import { IRecorder } from "../../constant/interfaces";
+import { IRecorder } from "../../../constant/interfaces";
 
 const VideoRecording: React.FC = () => {
   const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
@@ -59,8 +59,6 @@ const VideoRecording: React.FC = () => {
   const handleStartCaptureClick = useCallback(() => {
     setStarting(true);
   }, []);
-
-  console.log("SS");
 
   return (
     <div className="flex flex-col pt-4 px-10 h-screen bg-slate-800">
