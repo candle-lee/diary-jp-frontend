@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 // import ArrowDownloadSVGIcon from "../../assets/icons/ArrowDownloadSVGIcon";
-import VideoPlaySVGIcon from "../../assets/icons/VideoPlaySVGIcon";
-import TrushBinSVGIcon from "../../assets/icons/TrashBinSVGIcon";
+import { VideoPlaySVGIcon, TrashBinSVGIcon } from "../../icons";
 // import { useVideoDownload } from "../../api/video/useVideoDownload";
 // import { useState } from "react";
 
-const VideoHistoryItem = ({ title, url }: { title: string; url: string }) => {
+interface IVideoHistoryItem {
+  title: string;
+  url: string;
+}
+
+const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
+  title,
+  url,
+}: IVideoHistoryItem) => {
   // Use your custom hook
   // const [mediaId, setMediaId] = useState<string | null>(null);
   // const { data, error, isLoading } = useVideoDownload(mediaId);
@@ -42,8 +49,10 @@ const VideoHistoryItem = ({ title, url }: { title: string; url: string }) => {
         {/* <div onClick={() => handleDownloadClick()}>
           <ArrowDownloadSVGIcon />
         </div> */}
-        <VideoPlaySVGIcon />
-        <TrushBinSVGIcon />
+        <div>
+          <VideoPlaySVGIcon />
+        </div>
+        <TrashBinSVGIcon />
       </div>
     </div>
   );

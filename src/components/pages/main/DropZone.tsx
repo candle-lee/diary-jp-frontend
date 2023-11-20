@@ -1,8 +1,8 @@
-import { useVideoUpload } from "../../api/video/useVideoUpload";
-import UploadSVGIcon from "../../assets/icons/UploadSVGIcon";
-import { CircleSpinner } from "../common/CircleSpinner";
+import { useVideoUpload } from "../../../api/video/useVideoUpload";
+import { UploadSVGIcon } from "../../icons";
+import { CircleSpinner } from "../../common";
 
-const DropZone = () => {
+const DropZone: React.FC = () => {
   const { mutate, isLoading } = useVideoUpload();
   const handleFileChange = (e: any) => {
     if (e.target.files.length > 0) {

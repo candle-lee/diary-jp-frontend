@@ -1,6 +1,6 @@
-import SearchSVGIcon from "../../assets/icons/SearchSVGIcon";
+import { SearchSVGIcon } from "../../icons";
 
-const SearchInput = () => {
+const SearchInput: React.FC = () => {
   return (
     <form>
       <div className="relative">

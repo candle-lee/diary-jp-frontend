@@ -1,6 +1,6 @@
-import MoreHorizSVGIcon from "../../assets/icons/MoreHorizSVGIcon";
+import { MoreHorizSVGIcon } from "../../icons";
 
-const Recommend = () => {
+const Recommend: React.FC = () => {
   return (
     <div className="w-full h-[554px] bg-[#FFF] rounded-[30px] p-8 shadow-[14px_17px_40px_4px_rgba(112, 144, 176, 0.08)]">
       <div className="flex justify-between">

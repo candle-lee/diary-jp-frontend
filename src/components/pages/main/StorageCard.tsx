@@ -1,6 +1,6 @@
 import StorageProgressBar from "./StorageProgressBar";
 
-const StorageCard = () => {
+const StorageCard: React.FC = () => {
   return (
     <div className="w-full h-[365px] bg-[#FFF] rounded-[20px] pt-[44px] px-5">
       <div className="flex justify-center mb-[14px]">

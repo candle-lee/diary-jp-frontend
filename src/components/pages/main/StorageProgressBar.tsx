@@ -1,4 +1,4 @@
-const StorageProgressBar = () => {
+const StorageProgressBar: React.FC = () => {
   const progressWidth = "55%"; // Set the width as a variable
 
   return (

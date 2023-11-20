@@ -1,8 +1,8 @@
 import VideoHistoryItem from "./VideoHistoryItem";
-import { useGetMedias } from "../../api/video/useVideoList";
-import { CircleSpinner } from "../common/CircleSpinner";
+import { useGetMedias } from "../../../api/video/useVideoList";
+import { CircleSpinner } from "../../common";
 
-const VideoHistory = () => {
+const VideoHistory: React.FC = () => {
   const { medias, error, isLoading } = useGetMedias();
   if (error) {
     return <div> Error </div>;

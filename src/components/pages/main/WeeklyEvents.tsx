@@ -1,6 +1,6 @@
 import WeeklyEventItem from "./WeeklyEventItem";
 
-const WeeklyEvents = () => {
+const WeeklyEvents: React.FC = () => {
   return (
     <div className="w-full h-[554px] bg-[#FFF] rounded-[30px] p-8 shadow-[14px_17px_40px_4px_rgba(112, 144, 176, 0.08)]">
       <p className="text-[#2B3674] font-bold text-2xl leading-8 tracking-tight">

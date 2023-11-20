@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import DropZone from "./DropZone";
 
-const VideoUploadCard = () => {
+const VideoUploadCard: React.FC = () => {
   const navigator = useNavigate();
   return (
     <div className="w-full h-[365px] bg-[#FFF] rounded-[20px] p-7">

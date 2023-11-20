@@ -1,14 +1,12 @@
-import DefaultAvatar from "../common/DefaultAvatar";
-import InfoSVGIcon from "../../assets/icons/InfoSVGIcon";
-import MoonSVGIcon from "../../assets/icons/MoonSVGIcon";
-import RingSVGIcon from "../../assets/icons/RingSVGIcon";
+import DefaultAvatar from "../../common/DefaultAvatar";
+import { InfoSVGIcon, MoonSVGIcon, RingSVGIcon } from "../../icons";
 import SearchInput from "./SearchInput";
 import { Dropdown } from "flowbite-react";
-import { useAppDispatch } from "../../redux/hooks";
-import { useLogout } from "../../api/auth/hooks/useLogout";
-import { setAutherStatus } from "../../redux/slices/auth.slice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { useLogout } from "../../../api/auth/hooks/useLogout";
+import { setAutherStatus } from "../../../redux/slices/auth.slice";
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const dispatch = useAppDispatch();
   const logout = useLogout();
   return (
