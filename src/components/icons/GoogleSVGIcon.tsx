@@ -1,4 +1,4 @@
-const GoogleSVGIcon = () => {
+const GoogleSVGIcon: React.FC = () => {
   return (
     <svg
       aria-hidden

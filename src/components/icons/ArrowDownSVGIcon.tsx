@@ -1,4 +1,4 @@
-const ArrowDownSVGIcon = () => {
+const ArrowDownSVGIcon: React.FC = () => {
   return (
     <svg
       width="24"
