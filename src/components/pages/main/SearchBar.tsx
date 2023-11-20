@@ -3,7 +3,7 @@ import { InfoSVGIcon, MoonSVGIcon, RingSVGIcon } from "../../icons";
 import SearchInput from "./SearchInput";
 import { Dropdown } from "flowbite-react";
 import { useAppDispatch } from "../../../redux/hooks";
-import { useLogout } from "../../../api/auth/hooks/useLogout";
+import { useLogout } from "../../../api/auth";
 import { setAutherStatus } from "../../../redux/slices/auth.slice";
 
 const SearchBar: React.FC = () => {

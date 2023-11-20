@@ -1,23 +1,24 @@
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance";
+import { httpAxios } from "../instance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { ISignUp } from "../../constant/interfaces";
 
-export const useSendCode = () => {
+const useSignUpUser = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
+    const signUpUser = (formData: ISignUp) => axios.post('/user/register', {...formData});
 
-    const sendCode = (passcode: string) => axios.post('/user/verify', {passcode});
     const {mutate, isLoading} = useMutation({
-        mutationFn: sendCode,
-        onSuccess: () => {
-            toast.success(`User verified successfully!`, {
+        mutationFn: signUpUser,
+        onSuccess: ({data}) => {
+            toast.success(`${data['message']}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            navigate('/signin');
+            navigate('/verify-user');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
@@ -31,3 +32,5 @@ export const useSendCode = () => {
 
     return {mutate, isLoading}
 }
+
+export default useSignUpUser;

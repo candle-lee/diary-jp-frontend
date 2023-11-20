@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AutherizedUser } from "../components/common";
-import { useIsAutherized } from "../api/auth/hooks/useIsAutherized";
+import { useIsAutherized } from "../api/auth";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useResetPassPasscode } from "../../../api/auth/hooks/useResetPassPasscode";
+import { useResetPassPasscode } from "../../../api/auth";
 
 export const useForgetPasswordForm = () => {
   const { mutate, isLoading, error } = useResetPassPasscode();

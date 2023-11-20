@@ -1,23 +1,23 @@
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance"
-import { toast } from "react-toastify";
+import { httpAxios } from "../instance";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-export const useForgetPassword = () => {
+const useSendPasscode = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
 
-    const forgetPassword = (email: string) => axios.post('/auth/forget-password', {email});
+    const sendCode = (passcode: string) => axios.post('/user/verify', {passcode});
     const {mutate, isLoading} = useMutation({
-        mutationFn: forgetPassword,
-        onSuccess: ({data}) => {
-            toast.success(`${data['message']}`, {
+        mutationFn: sendCode,
+        onSuccess: () => {
+            toast.success(`User verified successfully!`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
             });
-            navigate('/forgetpassverifyuser')
+            navigate('/signin');
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
@@ -31,3 +31,5 @@ export const useForgetPassword = () => {
 
     return {mutate, isLoading}
 }
+
+export default useSendPasscode;

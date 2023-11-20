@@ -1,16 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance";
-import { useNavigate } from "react-router-dom";
+import { httpAxios } from "../instance"
 import { toast } from "react-toastify";
-import { ISignUp } from "../../../constant/interfaces";
+import { useNavigate } from "react-router-dom";
 
-export const useSignUpUser = () => {
+const useResetPassPasscode = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
-    const signUpUser = (formData: ISignUp) => axios.post('/user/register', {...formData});
-
-    const {mutate, isLoading} = useMutation({
-        mutationFn: signUpUser,
+    const resetPassword = (email: string) => axios.post('/auth/forget-password', {email});
+    const {mutate, isLoading, error} = useMutation({
+        mutationFn: resetPassword,
         onSuccess: ({data}) => {
             toast.success(`${data['message']}`, {
                 hideProgressBar: true,
@@ -18,7 +16,7 @@ export const useSignUpUser = () => {
                 type: "success",
                 position: "top-right",
             });
-            navigate('/verify-user');
+            navigate('/forgetpassword-validation')
         },
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
@@ -30,5 +28,7 @@ export const useSignUpUser = () => {
         },
     });
 
-    return {mutate, isLoading}
+    return {mutate, isLoading, error}
 }
+
+export default useResetPassPasscode;

@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { httpAxios } from "../../instance";
+import { httpAxios } from "../instance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ILogin } from "../../../constant/interfaces";
-import { setTokenToLocalStorage } from "../../../utils/storage";
-import { setAutherStatus } from "../../../redux/slices/auth.slice";
-import { useAppDispatch } from "../../../redux/hooks";
+import { ILogin } from "../../constant/interfaces";
+import { setTokenToLocalStorage } from "../../utils/storage";
+import { setAutherStatus } from "../../redux/slices/auth.slice";
+import { useAppDispatch } from "../../redux/hooks";
 
-export const useLoginUser = () => {
+const useLoginUser = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -39,3 +39,5 @@ export const useLoginUser = () => {
 
     return {mutate, isLoading, error}
 }
+
+export default useLoginUser;

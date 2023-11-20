@@ -1,5 +1,5 @@
-// import { useGetProfile } from "../../api/auth/hooks/useGetProfile"
-import { useLogout } from "../../api/auth/hooks/useLogout";
+// import { useGetProfile } from "../../api/auth"
+import { useLogout } from "../../api/auth";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAutherStatus } from "../../redux/slices/auth.slice";
 

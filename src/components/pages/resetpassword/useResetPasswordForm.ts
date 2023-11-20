@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useResetPassword } from "../../../api/auth/hooks/useResetPassword";
+import { useResetPassword } from "../../../api/auth";
 
 export const useResetPasswordForm = () => {
   const { mutate, isLoading, error } = useResetPassword();

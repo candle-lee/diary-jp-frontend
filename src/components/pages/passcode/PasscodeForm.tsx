@@ -2,12 +2,12 @@ import InputField from "../../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSendCode } from "../../../api/auth/hooks/useSendPasscode";
+import { useSendPasscode } from "../../../api/auth";
 import { ButtonSpinner, BackToDashboard } from "../../common";
 import { Checkbox, Label } from "flowbite-react";
 
 const PasscodeForm: React.FC = () => {
-  const { mutate, isLoading } = useSendCode();
+  const { mutate, isLoading } = useSendPasscode();
 
   const validationSchema = z.object({
     passcode: z.string().min(5, { message: "Passcode is required" }),

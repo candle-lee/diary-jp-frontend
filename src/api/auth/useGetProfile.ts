@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { httpAxios } from "../../instance"
+import { httpAxios } from "../instance"
 
-export const useGetProfile = () => {
+const useGetProfile = () => {
     const axios = httpAxios();
     const getProfile = () => axios.get('/auth/profile');
     const {data} = useQuery({
@@ -14,3 +14,5 @@ export const useGetProfile = () => {
     }
     return user;
 }
+
+export default useGetProfile;

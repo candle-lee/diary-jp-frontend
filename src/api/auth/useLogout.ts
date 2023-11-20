@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
-import { removeTokenFromLocalStorate } from "../../../utils/storage"
+import { removeTokenFromLocalStorate } from "../../utils/storage"
 
-export const useLogout = () => {
+const useLogout = () => {
     return ()=>{
     const isSuccess = removeTokenFromLocalStorate();
     if (isSuccess) {
@@ -20,3 +20,5 @@ export const useLogout = () => {
         });
     }}
 }
+
+export default useLogout;

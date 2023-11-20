@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLoginUser } from "../../../api/auth/hooks/useLogin";
+import { useLoginUser } from "../../../api/auth";
 
 export const useSignInForm = () => {
     const { mutate, isLoading, error } = useLoginUser();

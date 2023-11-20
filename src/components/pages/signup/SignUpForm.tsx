@@ -8,7 +8,7 @@ import {
 } from "../../common";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignUpUser } from "../../../api/auth/hooks/useSignUp";
+import { useSignUpUser } from "../../../api/auth";
 import { Button, Checkbox, Label } from "flowbite-react";
 import { GoogleSVGIcon } from "../../icons";
 

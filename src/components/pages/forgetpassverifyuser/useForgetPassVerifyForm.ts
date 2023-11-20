@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSendCodeResetPass } from "../../../api/auth/hooks/useSendCodeResetPass";
+import { useSendCodeResetPass } from "../../../api/auth";
 
 export const useForgetPassVerifyForm = () => {
   const { mutate, isLoading, error } = useSendCodeResetPass();
