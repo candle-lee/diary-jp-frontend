@@ -1,11 +1,11 @@
-import InputField from "../common/InputField";
+import InputField from "../../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSpinner } from "../common/ButtonSpinner";
-import { useSendResetPassPasscode } from "../../api/auth/hooks/useSendResetPassPasscode";
+import { ButtonSpinner } from "../../common";
+import { useSendResetPassPasscode } from "../../../api/auth/hooks/useSendResetPassPasscode";
 
-const ResetPassPasscodeForm = () => {
+const ResetPassPasscodeForm: React.FC = () => {
   const { mutate, isLoading } = useSendResetPassPasscode();
   const validationSchema = z.object({
     passcode: z.string().min(5, { message: "Passcode is required" }),
