@@ -3,12 +3,11 @@ import { httpAxios } from "../../instance"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 export const useResetPassPasscode = () => {
     const axios = httpAxios();
     const navigate = useNavigate();
     const resetPassword = (email: string) => axios.post('/auth/forget-password', {email});
-    const {mutate, isLoading} = useMutation({
+    const {mutate, isLoading, error} = useMutation({
         mutationFn: resetPassword,
         onSuccess: ({data}) => {
             toast.success(`${data['message']}`, {
@@ -29,5 +28,5 @@ export const useResetPassPasscode = () => {
         },
     });
 
-    return {mutate, isLoading}
+    return {mutate, isLoading, error}
 }

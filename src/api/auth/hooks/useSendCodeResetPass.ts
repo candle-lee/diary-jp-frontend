@@ -8,7 +8,7 @@ export const useSendCodeResetPass = () => {
     const navigate = useNavigate();
 
     const sendCode = (passcode: string) => axios.post('/auth/resetpass-verify', {passcode});
-    const {mutate, isLoading} = useMutation({
+    const {mutate, isLoading, error} = useMutation({
         mutationFn: sendCode,
         onSuccess: () => {
             toast.success(`User verified successfully`, {
@@ -29,5 +29,5 @@ export const useSendCodeResetPass = () => {
         },
     });
 
-    return {mutate, isLoading}
+    return {mutate, isLoading, error};
 }

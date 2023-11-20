@@ -14,7 +14,7 @@ export const useLoginUser = () => {
 
     const loginUser = (formData: ILogin) => axios.post('/auth/login', {...formData});
 
-    const {mutate, isLoading} = useMutation({
+    const {mutate, isLoading, error} = useMutation({
         mutationFn: loginUser,
         onSuccess: ({data}: any) => {
             toast.success(`Credentials are correct!`, {
@@ -37,5 +37,5 @@ export const useLoginUser = () => {
         },
     });
 
-    return {mutate, isLoading}
+    return {mutate, isLoading, error}
 }

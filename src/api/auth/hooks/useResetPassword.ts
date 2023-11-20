@@ -13,7 +13,7 @@ export const useResetPassword = () => {
     const navigate = useNavigate()
 
     const resetPassword = (formData: IResetPassword) => axios.post('/auth/reset-password', {...formData});
-    const {mutate, isLoading} = useMutation({
+    const {mutate, isLoading, error} = useMutation({
         mutationFn: resetPassword,
         onSuccess: () => {
             toast.success(`Password is successfully changed.`, {
@@ -33,5 +33,5 @@ export const useResetPassword = () => {
             });
         },
     });
-    return {mutate, isLoading}
+    return {mutate, isLoading, error}
 }
