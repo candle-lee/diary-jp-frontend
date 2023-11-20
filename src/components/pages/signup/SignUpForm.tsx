@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import HorizontalDivider from "../common/HorizontalDivider";
-import InputField from "../common/InputField";
+import {
+  HorizontalDivider,
+  InputField,
+  ButtonSpinner,
+  BackToDashboard,
+} from "../../common";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignUpUser } from "../../api/auth/hooks/useSignUp";
-("use client");
-
+import { useSignUpUser } from "../../../api/auth/hooks/useSignUp";
 import { Button, Checkbox, Label } from "flowbite-react";
-import { ButtonSpinner } from "../common/ButtonSpinner";
-import BackToDashboard from "../common/BackToDashboard";
-import GoogleSVGIcon from "../../assets/icons/GoogleSVGIcon";
+import { GoogleSVGIcon } from "../../icons";
 
-const SignUpForm = () => {
+const SignUpForm: React.FC = () => {
   const { mutate, isLoading } = useSignUpUser();
 
   const validationSchema = z.object({
