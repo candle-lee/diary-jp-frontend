@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { AutherizedUser } from "../components/common/AuthrizedUser";
+import { AutherizedUser } from "../components/common";
 import { useIsAutherized } from "../api/auth/hooks/useIsAutherized";
 
 const HomePage = () => {

@@ -1,5 +1,5 @@
-import SignInForm from "../components/signin/SignInForm";
-import ImageSection from "../layout/ImageSection";
+import { SignInForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
 const SignInPage = () => {
   return (

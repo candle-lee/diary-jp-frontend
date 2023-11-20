@@ -1,5 +1,5 @@
-import ForgetPasswordForm from "../components/forgetpassword/ForgetPasswordForm";
-import ImageSection from "../layout/ImageSection";
+import { ForgetPasswordForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
 const ForgetPasswordPage = () => {
   return (

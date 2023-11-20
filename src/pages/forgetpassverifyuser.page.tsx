@@ -1,5 +1,5 @@
-import ForgetPassVerifyUserForm from "../components/forgetpassverifyuser/ForgetPassVerifyUserForm";
-import ImageSection from "../layout/ImageSection";
+import { ForgetPassVerifyUserForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
 const ForgetPassVerifyUserPage = () => {
   return (

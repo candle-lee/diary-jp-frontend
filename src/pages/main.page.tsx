@@ -1,10 +1,12 @@
-import AvatarCard from "../components/main/AvatarCard";
-import Recommend from "../components/main/Recommend";
-import SearchBar from "../components/main/SearchBar";
-import StorageCard from "../components/main/StorageCard";
-import VideoHistory from "../components/main/VideoHistory";
-import VideoUploadCard from "../components/main/VideoUploadCard";
-import WeeklyEvents from "../components/main/WeeklyEvents";
+import {
+  AvatarCard,
+  Recommend,
+  SearchBar,
+  StorageCard,
+  VideoHistory,
+  VideoUploadCard,
+  WeeklyEvents,
+} from "../components/pages";
 
 const MainPage = () => {
   return (

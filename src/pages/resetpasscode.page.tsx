@@ -1,7 +1,7 @@
-import BackToDashboard from "../components/common/BackToDashboard";
-import ResetPassPasscodeForm from "../components/resetpasspasscode/ResetPassPasscodeForm";
+import { BackToDashboard } from "../components/common";
+import ResetPassPasscodeForm from "../components/pages/resetpasspasscode/ResetPassPasscodeForm";
 
-const ResetPassPasscodePage = () => {
+const ResetPasscodePage = () => {
   return (
     <div className="flex justify-between">
       <div className="ml-[308px] mt-[40px]">
@@ -16,4 +16,4 @@ const ResetPassPasscodePage = () => {
   );
 };
 
-export default ResetPassPasscodePage;
+export default ResetPasscodePage;

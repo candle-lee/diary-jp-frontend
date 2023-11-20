@@ -1,5 +1,5 @@
-import BackToDashboard from "../components/common/BackToDashboard";
-import PasscodeForm from "../components/passcode/PasscodeForm";
+import { BackToDashboard } from "../components/common";
+import PasscodeForm from "../components/pages/passcode/PasscodeForm";
 
 const SigninPasscodePage = () => {
   return (

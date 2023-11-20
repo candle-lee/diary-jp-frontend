@@ -1,4 +1,4 @@
-import VideoRecording from "../components/videohandling/VideoRecording";
+import { VideoRecording } from "../components/pages";
 
 const VideoHandlingPage = () => {
   return (

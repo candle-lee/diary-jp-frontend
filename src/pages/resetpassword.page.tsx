@@ -1,5 +1,5 @@
-import ResetPasswordForm from "../components/resetpassword/ResetPasswrodForm";
-import ImageSection from "../layout/ImageSection";
+import { ResetPasswordForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
 const ResetPasswordPage = () => {
   return (
