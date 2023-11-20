@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { httpAxios } from "../instance";
 
-export const useFetchVideo = (mediaId: string) => {
+const useFetchVideo = (mediaId: string) => {
     const axios = httpAxios();
 
     const fetchVideo = async (mediaId: string) => {
@@ -13,3 +13,5 @@ export const useFetchVideo = (mediaId: string) => {
     
     return useQuery(['fetchVideo', mediaId], () => fetchVideo(mediaId), {refetchOnWindowFocus: false, enabled: !!mediaId});
 }
+
+export default useFetchVideo;

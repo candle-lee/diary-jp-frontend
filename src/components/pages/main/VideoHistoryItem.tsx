@@ -2,11 +2,11 @@
 "use client";
 
 import { VideoPlaySVGIcon, TrashBinSVGIcon } from "../../icons";
-import { useFetchVideo } from "../../../api/video/useFetchVideo";
+import { useFetchVideo } from "../../../api/video";
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { CircleSpinner } from "../../common";
-// import { useVideoDownload } from "../../api/video/useVideoDownload";
+// import { useVideoDownload } from "../../api/video";
 
 interface IVideoHistoryItem {
   title: string;

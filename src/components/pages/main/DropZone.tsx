@@ -1,4 +1,4 @@
-import { useVideoUpload } from "../../../api/video/useVideoUpload";
+import { useVideoUpload } from "../../../api/video";
 import { UploadSVGIcon } from "../../icons";
 import { CircleSpinner } from "../../common";
 

@@ -1,5 +1,5 @@
 import VideoHistoryItem from "./VideoHistoryItem";
-import { useGetMedias } from "../../../api/video/useVideoList";
+import { useGetMedias } from "../../../api/video";
 import { CircleSpinner } from "../../common";
 
 const VideoHistory: React.FC = () => {
