@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
 // import ArrowDownloadSVGIcon from "../../assets/icons/ArrowDownloadSVGIcon";
+"use client";
+
 import { VideoPlaySVGIcon, TrashBinSVGIcon } from "../../icons";
+import { useFetchVideo } from "../../../api/video/useFetchVideo";
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
+import { CircleSpinner } from "../../common";
 // import { useVideoDownload } from "../../api/video/useVideoDownload";
-// import { useState } from "react";
 
 interface IVideoHistoryItem {
   title: string;
@@ -14,7 +18,7 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
   url,
 }: IVideoHistoryItem) => {
   // Use your custom hook
-  // const [mediaId, setMediaId] = useState<string | null>(null);
+  const [mediaId, setMediaId] = useState<string>("");
   // const { data, error, isLoading } = useVideoDownload(mediaId);
   // if (data) {
   //   const url = window.URL.createObjectURL(data);
@@ -29,6 +33,22 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
   // const handleDownloadClick = () => {
   //   setMediaId(url);
   // };
+  const { data: videoData, isError, isLoading } = useFetchVideo(mediaId);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePlayClick = () => {
+    openModal();
+    setMediaId(url);
+  };
   return (
     <div className="h-[120px] rounded-2xl bg-[#FFF] shadow-[0_18px_40px_0px_rgba(0,0,0,0.3)] p-4 flex items-center gap-5">
       <img
@@ -49,11 +69,42 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
         {/* <div onClick={() => handleDownloadClick()}>
           <ArrowDownloadSVGIcon />
         </div> */}
-        <div>
+        <div onClick={handlePlayClick}>
           <VideoPlaySVGIcon />
         </div>
         <TrashBinSVGIcon />
       </div>
+      <Modal
+        position={"center"}
+        size={"7xl"}
+        show={isModalOpen}
+        onClose={closeModal}
+      >
+        <div className="p-2">
+          {isLoading && (
+            <div className="flex items-center justify-center">
+              <CircleSpinner />
+            </div>
+          )}
+          {isError && <p>Error loading video</p>}
+          {videoData && (
+            <>
+              <video controls className="w-full mb-2" height="800">
+                <source
+                  src={URL.createObjectURL(
+                    new Blob([videoData], { type: "video/mp4" })
+                  )}
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+              <Button className="ml-auto" color="dark" onClick={closeModal}>
+                Close
+              </Button>
+            </>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 };
