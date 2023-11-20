@@ -1,52 +1,24 @@
 import { Link } from "react-router-dom";
-import HorizontalDivider from "../common/HorizontalDivider";
-import InputField from "../common/InputField";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import HorizontalDivider from "../../common/HorizontalDivider";
+import InputField from "../../common/InputField";
+
 import { Button, Checkbox, Label } from "flowbite-react";
-import { useLoginUser } from "../../api/auth/hooks/useLogin";
-import { ButtonSpinner } from "../common/ButtonSpinner";
-import GoogleSVGIcon from "../../assets/icons/GoogleSVGIcon";
-import BackToDashboard from "../common/BackToDashboard";
 
-const SignInForm = () => {
-  const { mutate, isLoading } = useLoginUser();
+import { ButtonSpinner } from "../../common";
+import { GoogleSVGIcon } from "../../icons";
+import BackToDashboard from "../../common/BackToDashboard";
+import { useSignInForm } from "./useSignInForm";
 
-  const validationSchema = z.object({
-    email: z
-      .string()
-      .min(3, { message: "Email is required." })
-      .email({ message: "Must be a valid email." }),
-    password: z.string().min(8, { message: "Password must be required." }),
-  });
-
-  type ValidationSchema = z.infer<typeof validationSchema>;
-
+const SignInForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<ValidationSchema>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    resolver: zodResolver(validationSchema),
-  });
-
-  const onSubmit: SubmitHandler<ValidationSchema> = async (
-    data: ValidationSchema
-  ) => {
-    const formData = {
-      email: data.email,
-      password: data.password,
-    };
-    mutate(formData);
-  };
-
-  const handleGoogleSubmit = () => {};
-
+    handleGoogleSubmit,
+    onSubmit,
+    errors,
+    isLoading,
+    serverError,
+  } = useSignInForm();
   return (
     <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
       <form
@@ -107,6 +79,11 @@ const SignInForm = () => {
               Forget password?
             </Link>
           </div>
+          {serverError && (
+            <p className="text-xs italic text-red-500">
+              Error: {serverError.message}
+            </p>
+          )}
           {isLoading ? (
             <ButtonSpinner />
           ) : (
