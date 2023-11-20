@@ -2,20 +2,22 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { useAppSelector } from "../redux/hooks";
-import VideoHandlingPage from "../pages/videohandling.page";
 
-const MainPage = lazy(() => import("../pages/main.page"));
+const LazyMainPage = lazy(() => import("../pages/main.page"));
+const LazyVideoHandlingPage = lazy(() => import("../pages/videohandling.page"));
+
 const PrivateRoutes = () => {
   const isAutherized = useAppSelector(
     (state) => state.authReducer.isAutherized
   );
+
   return {
     element: <Layout />,
     children: [
       {
         path: "/main",
         element: isAutherized ? (
-          <MainPage />
+          <LazyMainPage />
         ) : (
           <Navigate to="/signin" replace />
         ),
@@ -23,7 +25,7 @@ const PrivateRoutes = () => {
       {
         path: "/video",
         element: isAutherized ? (
-          <VideoHandlingPage />
+          <LazyVideoHandlingPage />
         ) : (
           <Navigate to="/signin" replace />
         ),

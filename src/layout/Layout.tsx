@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { CircleSpinner } from "../components/common/CircleSpinner";
+import { CircleSpinner } from "../components/common";
 
 const Layout = () => {
   return (
