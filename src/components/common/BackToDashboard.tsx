@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import ArrowDownSVGIcon from "../../assets/icons/ArrowDownSVGIcon";
+import { ArrowDownSVGIcon } from "../icons";
 
-const BackToDashboard = () => {
+const BackToDashboard: React.FC = () => {
   return (
     <Link to="/" className="flex items-center">
       <ArrowDownSVGIcon />

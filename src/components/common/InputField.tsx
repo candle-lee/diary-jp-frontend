@@ -1,7 +1,7 @@
 import { Label, TextInput } from "flowbite-react";
 import { IInputItem } from "../../constant/interfaces";
 
-const InputField = ({
+const InputField: React.FC<IInputItem> = ({
   inputType,
   inputName,
   description,

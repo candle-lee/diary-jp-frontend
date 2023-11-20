@@ -1,4 +1,4 @@
-const HorizontalDivider = () => {
+const HorizontalDivider: React.FC = () => {
   return (
     <div className="flex items-center">
       <div className="h-0.5 w-full bg-gray-200 dark:bg-gray-700"></div>
