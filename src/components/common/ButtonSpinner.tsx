@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, Spinner } from "flowbite-react";
 
 const ButtonSpinner: React.FC = () => {

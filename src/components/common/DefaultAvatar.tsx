@@ -1,5 +1,3 @@
-"use client";
-
 import { Avatar } from "flowbite-react";
 
 interface DefaultAvatarProps {

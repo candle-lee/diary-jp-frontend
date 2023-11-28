@@ -1,6 +1,4 @@
 // import ArrowDownloadSVGIcon from "../../assets/icons/ArrowDownloadSVGIcon";
-"use client";
-
 import { VideoPlaySVGIcon, TrashBinSVGIcon } from "../../icons";
 import { useFetchVideo } from "../../../api/video";
 import { Button, Modal } from "flowbite-react";
@@ -14,7 +12,6 @@ interface IVideoHistoryItem {
 }
 
 const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
-  title,
   url,
 }: IVideoHistoryItem) => {
   // Use your custom hook
