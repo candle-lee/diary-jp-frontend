@@ -1,11 +1,6 @@
 import React from "react";
 import { Button, Checkbox, Label } from "flowbite-react";
-import {
-  ButtonSpinner,
-  BackToDashboard,
-  HorizontalDivider,
-} from "../../common";
-import { GoogleSVGIcon } from "../../icons";
+import { ButtonSpinner, BackToDashboard } from "../../common";
 import InputField from "../../common/InputField";
 import { useForgetPasswordForm } from "./useForgetPasswordForm";
 

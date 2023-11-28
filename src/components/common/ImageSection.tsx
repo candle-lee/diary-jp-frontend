@@ -12,8 +12,9 @@ const ImageSection: React.FC = () => {
         >
           <img
             className="mr-2 h-80 w-80"
-            src="/src/assets/img/company_logo.svg"
+            src="https://storage.cloud.google.com/udata-test/img/company_logo.svg"
             alt="logo"
+            loading="eager"
           />
         </Link>
         <div className="flex items-center divide-x divide-primary-500">
