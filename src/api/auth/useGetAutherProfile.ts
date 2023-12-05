@@ -7,6 +7,7 @@ const useGetProfile = () => {
     const {data} = useQuery({
         queryKey: ['getProfile'],
         queryFn: getProfile,
+        suspense: true
     });
     const user = {
         username: data?.data.username,
