@@ -1,6 +1,10 @@
+import { useAppSelector } from "../../../redux/hooks";
 import StorageProgressBar from "./StorageProgressBar";
 
 const StorageCard: React.FC = () => {
+  const totalSize: number = useAppSelector(
+    (state) => state.mediaReducer.totalSize
+  );
   return (
     <div className="w-full h-[365px] bg-[#FFF] rounded-[20px] pt-[44px] px-5">
       <div className="flex justify-center mb-[14px]">
@@ -46,7 +50,7 @@ const StorageCard: React.FC = () => {
         </p>
       </div>
       <div className="mt-[50px]">
-        <StorageProgressBar />
+        <StorageProgressBar totalSize={totalSize} />
       </div>
     </div>
   );
