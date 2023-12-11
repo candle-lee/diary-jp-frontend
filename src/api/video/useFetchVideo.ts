@@ -11,7 +11,7 @@ const useFetchVideo = (mediaId: string) => {
         return response.data;
       };
     
-    return useQuery(['fetchVideo', mediaId], () => fetchVideo(mediaId), {refetchOnWindowFocus: false, enabled: !!mediaId});
+    return useQuery(['fetchVideo', mediaId], () => fetchVideo(mediaId), {suspense: true, refetchOnWindowFocus: false, enabled: !!mediaId});
 }
 
 export default useFetchVideo;

@@ -14,6 +14,7 @@ const useVideoDownload = (mediaId: string | null) => {
     queryKey: ['getMedia', mediaId],
     queryFn: getMedia,
     enabled: !!mediaId,  // Run the query only if mediaId is provided
+    suspense: true
   });
 
   return {
