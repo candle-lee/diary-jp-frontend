@@ -26,7 +26,7 @@ const VideoHistory: React.FC = () => {
         className="space-y-4 overflow-y-auto p-3 rounded-lg"
         style={{ maxHeight: "400px" }}
       >
-        {medias?.map(
+        {medias.map(
           (
             media: { id: number; title: string; url: string },
             index: number
