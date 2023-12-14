@@ -1,7 +1,7 @@
-import PasscodeForm from "../components/passcode/PasscodeForm";
-import ImageSection from "../layout/ImageSection";
+import { PasscodeForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
-const VerifyUserPage = () => {
+const VerifyUserPage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-gray-900">
       <div className="grid lg:h-screen lg:grid-cols-2">

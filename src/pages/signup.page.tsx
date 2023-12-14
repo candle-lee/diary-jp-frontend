@@ -1,7 +1,7 @@
-import SignUpForm from "../components/signup/SignUpForm";
-import ImageSection from "../layout/ImageSection";
+import { SignUpForm } from "../components/pages";
+import { ImageSection } from "../components/common";
 
-const SignInPage = () => {
+const SignUpPage: React.FC = () => {
   return (
     <div className="bg-white dark:bg-gray-900">
       <div className="grid lg:h-screen lg:grid-cols-2">
@@ -12,4 +12,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

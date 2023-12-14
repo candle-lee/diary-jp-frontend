@@ -1,11 +1,11 @@
-"use client";
-
 import { Spinner } from "flowbite-react";
 
-export const CircleSpinner = () => {
+const CircleSpinner: React.FC = () => {
   return (
     <>
       <Spinner aria-label="Center-aligned spinner example" />
     </>
   );
 };
+
+export default CircleSpinner;

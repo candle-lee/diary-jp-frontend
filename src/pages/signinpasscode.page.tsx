@@ -1,7 +1,7 @@
-import BackToDashboard from "../components/common/BackToDashboard";
-import PasscodeForm from "../components/passcode/PasscodeForm";
+import { BackToDashboard } from "../components/common";
+import { PasscodeForm } from "../components/pages";
 
-const SigninPasscodePage = () => {
+const SigninPasscodePage: React.FC = () => {
   return (
     <div className="flex justify-between">
       <div className="ml-[308px] mt-[40px]">

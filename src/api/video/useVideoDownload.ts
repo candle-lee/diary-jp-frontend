@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { httpAxios } from "../instance";
 
 
-export const useVideoDownload = (mediaId: string | null) => {
+const useVideoDownload = (mediaId: string | null) => {
   const axios = httpAxios();
 
   const getMedia = async () => {
@@ -14,6 +14,7 @@ export const useVideoDownload = (mediaId: string | null) => {
     queryKey: ['getMedia', mediaId],
     queryFn: getMedia,
     enabled: !!mediaId,  // Run the query only if mediaId is provided
+    suspense: true
   });
 
   return {
@@ -22,3 +23,5 @@ export const useVideoDownload = (mediaId: string | null) => {
     isLoading,
   };
 };
+
+export default useVideoDownload;

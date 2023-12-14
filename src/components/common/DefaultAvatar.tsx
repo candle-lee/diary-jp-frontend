@@ -1,10 +1,9 @@
-"use client";
-
 import { Avatar } from "flowbite-react";
 
 interface DefaultAvatarProps {
   size: string;
 }
+
 const DefaultAvatar: React.FC<DefaultAvatarProps> = ({
   size,
 }: {

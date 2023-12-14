@@ -2,7 +2,7 @@ import { httpAxios } from "../instance"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export const useVideoUpload = () => {
+const useVideoUpload = () => {
     const axios = httpAxios();
     const uploadVideo = (formData :any) => axios.post('/media', formData);
     const queryClient = useQueryClient()
@@ -28,3 +28,5 @@ export const useVideoUpload = () => {
     });
     return {mutate, isLoading}
 }
+
+export default useVideoUpload;

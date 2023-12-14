@@ -1,0 +1,12 @@
+export { default as ArrowDownloadSVGIcon } from './ArrowDownloadSVGIcon';
+export { default as ArrowDownSVGIcon } from './ArrowDownSVGIcon';
+export { default as GoogleSVGIcon } from './GoogleSVGIcon';
+export { default as InfoSVGIcon } from './InfoSVGIcon';
+export { default as MoonSVGIcon } from './MoonSVGIcon';
+export { default as MoreHorizSVGIcon } from './MoreHorizSVGIcon';
+export { default as PenSVGIcon } from './PenSVGIcon';
+export { default as RingSVGIcon } from './RingSVGIcon';
+export { default as SearchSVGIcon } from './SearchSVGIcon';
+export { default as TrashBinSVGIcon } from './TrashBinSVGIcon';
+export { default as UploadSVGIcon } from './UploadSVGIcon';
+export { default as VideoPlaySVGIcon } from './VideoPlaySVGIcon';
