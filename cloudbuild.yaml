@@ -1,0 +1,29 @@
+steps:
+  # Step 1: Install dependencies
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install"]
+    dir: "diary-frontend" # Replace with the directory path of your diary-frontend application if it's not in the root
+
+  # Step 2: Build the React application
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build"]
+    dir: "diary-frontend" # Replace with your diary-frontend directory if applicable
+
+  # Step 3: Deploy to Google App Engine
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+    dir: "diary-frontend" # Directory containing your app.yaml
+
+# Define the timeout (optional, adjust as needed)
+timeout: "1200s"
+
+# Define the options (optional, choose a machine type as per your need)
+options:
+  machineType: "E2_HIGHCPU_8" # Example machine type
+
+# Define the artifacts to be stored upon successful build (optional)
+artifacts:
+  objects:
+    location: "gs://udata-test/build-artifacts/"
+    paths:
+      - "diary-frontend/dist/**"
