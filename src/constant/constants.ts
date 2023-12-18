@@ -1,1 +1,1 @@
-export const apiUrl = "http://34.84.128.159:3000";
+export const apiUrl = "https://api-dot-udata-storage-402502.an.r.appspot.com";
