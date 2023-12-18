@@ -17,7 +17,7 @@ const DefaultAvatar: React.FC<DefaultAvatarProps> = ({
         size={size}
         color={"light"}
         alt="avatar of Jese"
-        img="/src/assets/avatar/avatar1.png"
+        img="https://storage.cloud.google.com/udata-test/img/avatar1.png"
         rounded
       />
     </div>
