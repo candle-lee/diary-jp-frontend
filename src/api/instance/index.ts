@@ -1,5 +1,4 @@
 import axios from "axios";
-import { apiUrl } from "../../constant/constants";
 
 export const customHeader = {
     Accept: 'application/json',
@@ -7,11 +6,10 @@ export const customHeader = {
 
 export const httpAxios = () => {
     const instance = axios.create({
-        baseURL: apiUrl,
+        baseURL: import.meta.env.VITE_API_URL,
         headers: customHeader,
         withCredentials: true,
     });
-    
     instance.interceptors.request.use((requestConfig) => {
         const updatedConfig = {...requestConfig}
         const token = localStorage.getItem('token');

@@ -1,1 +1,0 @@
-export const apiUrl = "https://api-dot-udata-storage-402502.an.r.appspot.com";
