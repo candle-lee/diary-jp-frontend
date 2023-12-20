@@ -20,6 +20,7 @@ const VideoRecording: React.FC = () => {
     pauseRecording,
     resumeRecording,
     download,
+    closeCamera,
   } = useRecordWebcam();
 
   const navigate = useNavigate();
@@ -34,6 +35,11 @@ const VideoRecording: React.FC = () => {
   useEffect(() => {
     initialRecording();
   }, []);
+
+  window.addEventListener("popstate", () => {
+    console.log("User clicked back button");
+    closeCamera(recorder!.id);
+  });
 
   const handlePauseResumeClick = useCallback(() => {
     setPausing((prevPausing) => !prevPausing);
@@ -110,8 +116,9 @@ const VideoRecording: React.FC = () => {
                 Start
               </Button>
               <Button
-                onClick={() => {
+                onClick={async () => {
                   navigate("/main");
+                  await closeCamera(recorder!.id);
                 }}
                 className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
               >
