@@ -8,6 +8,7 @@ import { ButtonSpinner } from "../../common";
 import { GoogleSVGIcon } from "../../icons";
 import BackToDashboard from "../../common/BackToDashboard";
 import { useSignInForm } from "./useSignInForm";
+import PasswordInputField from "../../common/PasswordInputField";
 
 const SignInForm: React.FC = () => {
   const {
@@ -54,7 +55,7 @@ const SignInForm: React.FC = () => {
               register={register}
               error={errors.email?.message}
             />
-            <InputField
+            <PasswordInputField
               inputType="password"
               inputName="password"
               description="Password"
@@ -63,7 +64,7 @@ const SignInForm: React.FC = () => {
               error={errors.password?.message}
             />
           </div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between my-4">
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <Checkbox id="remember" />
