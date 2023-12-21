@@ -1,6 +1,7 @@
 import { Button, Checkbox, Label } from "flowbite-react";
-import { ButtonSpinner, InputField, BackToDashboard } from "../../common";
+import { ButtonSpinner, BackToDashboard } from "../../common";
 import { useResetPasswordForm } from "./useResetPasswordForm";
+import PasswordInputField from "../../common/PasswordInputField";
 
 const ResetPasswordForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading, serverError } =
@@ -17,7 +18,7 @@ const ResetPasswordForm: React.FC = () => {
           Reset your password
         </h1>
         <div className="">
-          <InputField
+          <PasswordInputField
             inputType="password"
             inputName="password"
             description="New Password"
@@ -25,7 +26,7 @@ const ResetPasswordForm: React.FC = () => {
             register={register}
             error={errors.password?.message}
           />
-          <InputField
+          <PasswordInputField
             inputType="password"
             inputName="confirmPassword"
             description="Confirm New Password"
@@ -33,7 +34,7 @@ const ResetPasswordForm: React.FC = () => {
             register={register}
             error={errors.password1?.message}
           />
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between my-4">
             <div className="flex items-center">
               <div className="flex items-center h-5">
                 <Checkbox id="agree" {...register("isAccepted")} />

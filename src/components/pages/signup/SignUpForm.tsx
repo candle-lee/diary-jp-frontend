@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpUser } from "../../../api/auth";
 import { Button, Checkbox, Label } from "flowbite-react";
 import { GoogleSVGIcon } from "../../icons";
+import PasswordInputField from "../../common/PasswordInputField";
 
 const SignUpForm: React.FC = () => {
   const { mutate, isLoading } = useSignUpUser();
@@ -135,15 +136,15 @@ const SignUpForm: React.FC = () => {
             register={register}
             error={errors.email?.message}
           />
-          <InputField
+          <PasswordInputField
             inputType="password"
             inputName="password"
             description="Password"
-            placeholderText="********"
+            placeholderText="Min. 8 characters"
             register={register}
             error={errors.password?.message}
           />
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between my-4">
             <div className="flex items-center">
               <div className="flex items-center h-5">
                 <Checkbox id="remember" {...register("isAccepted")} />
