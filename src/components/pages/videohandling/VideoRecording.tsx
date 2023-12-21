@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { IRecorder } from "../../../constant/interfaces";
 
 const VideoRecording: React.FC = () => {
-  const [recorder, setRecorder] = useState<IRecorder>();
+  const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
   const [starting, setStarting] = useState(false);
   const [pausing, setPausing] = useState(false);
   const [stoping, setStoping] = useState(false);
   const [preview, setPreview] = useState(false);
 
   const {
+    activeRecordings,
     createRecording,
     openCamera,
     startRecording,
@@ -63,28 +64,30 @@ const VideoRecording: React.FC = () => {
   return (
     <div className="flex flex-col pt-4 px-10 h-screen bg-slate-800">
       <div className="w-full">
-        <div className="flex justify-center" key={recorder?.id}>
-          <video
-            className="aspect-video object-cover"
-            style={{
-              transform: "scaleX(-1)",
-              width: "calc(80% + 2px)",
-              display: `${!preview ? "block" : "none"}`,
-            }}
-            ref={recorder?.webcamRef}
-            autoPlay
-            muted
-          />
-          <video
-            className="aspect-video object-cover"
-            style={{
-              width: "calc(80% + 2px)",
-              display: `${preview ? "block" : "none"}`,
-            }}
-            ref={recorder?.previewRef}
-            controls
-          />
-        </div>
+        {activeRecordings?.map((recording) => (
+          <div className="flex justify-center" key={recording.id}>
+            <video
+              className="aspect-video object-cover"
+              style={{
+                transform: "scaleX(-1)",
+                width: "calc(80% + 2px)",
+                display: `${!preview ? "block" : "none"}`,
+              }}
+              ref={recorder?.webcamRef}
+              autoPlay
+              muted
+            />
+            <video
+              className="aspect-video object-cover"
+              style={{
+                width: "calc(80% + 2px)",
+                display: `${preview ? "block" : "none"}`,
+              }}
+              ref={recording.previewRef}
+              controls
+            />
+          </div>
+        ))}
 
         {starting && (
           <div className="absolute top-3 left-2 flex items-center space-x-2">
