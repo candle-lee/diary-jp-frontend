@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRecordWebcam } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
 import { IRecorder } from "../../../constant/interfaces";
+import { useDeviceInitialization } from "react-record-webcam/dist/devices";
 
 const VideoRecording: React.FC = () => {
   const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
@@ -29,17 +30,14 @@ const VideoRecording: React.FC = () => {
     const recording = await createRecording();
     if (!recording) return;
     setRecorder(recording);
-    await openCamera(recording.id);
+    if (!recording.id) {
+      await openCamera(recording.id);
+    }
   };
 
   useEffect(() => {
     initialRecording();
   }, []);
-
-  window.addEventListener("popstate", () => {
-    console.log("User clicked back button");
-    closeCamera(recorder!.id);
-  });
 
   const handlePauseResumeClick = useCallback(() => {
     setPausing((prevPausing) => !prevPausing);
@@ -69,7 +67,7 @@ const VideoRecording: React.FC = () => {
   return (
     <div className="flex flex-col pt-4 px-10 h-screen bg-slate-800">
       <div className="w-full">
-        {activeRecordings.map((recording) => (
+        {activeRecordings?.map((recording) => (
           <div className="flex justify-center" key={recording.id}>
             <video
               className="aspect-video object-cover"
