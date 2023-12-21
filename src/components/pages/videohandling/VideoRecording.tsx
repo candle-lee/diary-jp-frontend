@@ -110,7 +110,6 @@ const VideoRecording: React.FC = () => {
               <Button
                 onClick={async () => {
                   navigate("/main");
-                  await new Promise((resolve) => setTimeout(resolve, 3000));
                   await closeCamera(recorder!.id);
                 }}
                 className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
