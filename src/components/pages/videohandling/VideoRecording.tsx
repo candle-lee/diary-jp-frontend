@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { IRecorder } from "../../../constant/interfaces";
 
 const VideoRecording: React.FC = () => {
-  const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
+  const [recorder, setRecorder] = useState<IRecorder>();
   const [starting, setStarting] = useState(false);
   const [pausing, setPausing] = useState(false);
   const [stoping, setStoping] = useState(false);
   const [preview, setPreview] = useState(false);
 
   const {
-    activeRecordings,
     createRecording,
     openCamera,
     startRecording,
@@ -64,30 +63,28 @@ const VideoRecording: React.FC = () => {
   return (
     <div className="flex flex-col pt-4 px-10 h-screen bg-slate-800">
       <div className="w-full">
-        {activeRecordings?.map((recording) => (
-          <div className="flex justify-center" key={recording.id}>
-            <video
-              className="aspect-video object-cover"
-              style={{
-                transform: "scaleX(-1)",
-                width: "calc(80% + 2px)",
-                display: `${!preview ? "block" : "none"}`,
-              }}
-              ref={recording.webcamRef}
-              autoPlay
-              muted
-            />
-            <video
-              className="aspect-video object-cover"
-              style={{
-                width: "calc(80% + 2px)",
-                display: `${preview ? "block" : "none"}`,
-              }}
-              ref={recording.previewRef}
-              controls
-            />
-          </div>
-        ))}
+        <div className="flex justify-center" key={recorder?.id}>
+          <video
+            className="aspect-video object-cover"
+            style={{
+              transform: "scaleX(-1)",
+              width: "calc(80% + 2px)",
+              display: `${!preview ? "block" : "none"}`,
+            }}
+            ref={recorder?.webcamRef}
+            autoPlay
+            muted
+          />
+          <video
+            className="aspect-video object-cover"
+            style={{
+              width: "calc(80% + 2px)",
+              display: `${preview ? "block" : "none"}`,
+            }}
+            ref={recorder?.previewRef}
+            controls
+          />
+        </div>
 
         {starting && (
           <div className="absolute top-3 left-2 flex items-center space-x-2">
@@ -113,6 +110,7 @@ const VideoRecording: React.FC = () => {
               <Button
                 onClick={async () => {
                   navigate("/main");
+                  await new Promise((resolve) => setTimeout(resolve, 3000));
                   await closeCamera(recorder!.id);
                 }}
                 className="h-[40px] text-white bg-red-500 font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
