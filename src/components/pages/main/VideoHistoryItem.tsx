@@ -37,7 +37,6 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
   const [isPlayModalOpen, setIsPlayModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  console.log(isLoading);
   if (isLoading) {
     return (
       <div className="flex justify-center">
