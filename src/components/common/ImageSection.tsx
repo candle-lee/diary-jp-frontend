@@ -12,7 +12,7 @@ const ImageSection: React.FC = () => {
         >
           <img
             className="mr-2 h-80 w-80"
-            src="https://storage.cloud.google.com/udata-test/img/company_logo.svg"
+            src="https://storage.googleapis.com/udata-test/img/company_logo.svg"
             alt="logo"
             loading="eager"
           />

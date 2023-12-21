@@ -74,7 +74,7 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
     <div className="h-[120px] rounded-2xl bg-[#FFF] shadow-[0_18px_40px_0px_rgba(0,0,0,0.3)] p-4 flex items-center gap-5">
       <img
         className="rounded-lg"
-        src="/src/assets/img/video-item.png"
+        src="https://storage.googleapis.com/udata-test/img/video-item.png"
         alt="video_item"
       />
       <div className="">
