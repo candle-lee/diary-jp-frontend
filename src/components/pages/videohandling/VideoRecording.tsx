@@ -29,9 +29,7 @@ const VideoRecording: React.FC = () => {
     const recording = await createRecording();
     if (!recording) return;
     setRecorder(recording);
-    if (!recording.id) {
-      await openCamera(recording.id);
-    }
+    await openCamera(recording.id);
   };
 
   useEffect(() => {
