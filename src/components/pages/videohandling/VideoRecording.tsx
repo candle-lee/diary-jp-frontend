@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRecordWebcam } from "react-record-webcam";
 import { useNavigate } from "react-router-dom";
 import { IRecorder } from "../../../constant/interfaces";
-import { useDeviceInitialization } from "react-record-webcam/dist/devices";
 
 const VideoRecording: React.FC = () => {
   const [recorder, setRecorder] = useState<IRecorder | undefined>(undefined);
