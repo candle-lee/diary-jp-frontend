@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const customHeader = {
     Accept: 'application/json',
@@ -25,6 +25,12 @@ export const httpAxios = () => {
           }
         return updatedConfig;
     }, (error) => {
+        return Promise.reject(error);
+    });
+    instance.interceptors.response.use(response => response, (error: AxiosError) => {
+        if (error.response?.status === 401) {
+            window.location.href = '/signin'; 
+        }
         return Promise.reject(error);
     });
     return instance;
