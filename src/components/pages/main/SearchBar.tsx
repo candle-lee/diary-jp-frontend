@@ -5,9 +5,11 @@ import { Dropdown } from "flowbite-react";
 import { useAppDispatch } from "../../../redux/hooks";
 import { useLogout } from "../../../api/auth";
 import { setAutherStatus } from "../../../redux/slices/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const logout = useLogout();
   return (
     <div className="flex justify-around p-[10px] w-[422px] h-[61px] rounded-[30px] bg-[#FFF] shadow-[14px 17px 40px 4px] shadow-[rgba(112, 144, 176, 0.08)] p-[10px]">
@@ -86,6 +88,13 @@ const SearchBar: React.FC = () => {
             </svg>
           </Dropdown.Item>
           <Dropdown.Divider /> */}
+          <Dropdown.Item
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Dashboard
+          </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
               logout();
