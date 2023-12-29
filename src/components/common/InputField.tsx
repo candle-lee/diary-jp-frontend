@@ -26,7 +26,12 @@ const InputField: React.FC<IInputItem> = ({
         placeholder={placeholderText}
         {...register(inputName)}
       />
-      {<p className="text-start text-xs italic text-red-500 my-4"> {error}</p>}
+      <p
+        className="text-start text-xs italic text-red-500 mt-4"
+        style={{ display: error ? "block" : "none" }}
+      >
+        {error}
+      </p>
     </div>
   );
 };
