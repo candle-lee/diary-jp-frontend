@@ -1,4 +1,3 @@
-import { Label } from "flowbite-react";
 import { IInputItem } from "../../constant/interfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
@@ -18,28 +17,35 @@ const PasswordInputField: React.FC<IInputItem> = ({
   };
   return (
     <div className="relative">
-      <Label
+      <label
         htmlFor={inputName}
-        className="block text-sm font-medium text-[#2B3674] mb-3"
-        value={description}
-      />
+        className="block font-sans text-sm font-medium text-[#2B3674] leading-[1.09375rem] tracking-[-0.0175rem] mb-[0.56rem]"
+      >
+        {description}{" "}
+        <span className="text-[#4318FF] text-sm font-medium leading-[1.09375rem] font-sans tracking-[-0.0175rem]">
+          *
+        </span>{" "}
+      </label>
       <div className="flex items-center">
         <input
           type={isPasswordVisible ? "text" : "password"}
           id={inputName}
-          className="w-full bg-gray-50 block border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 dark:placeholder-gray-400 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 focus:border-cyan-500 focus:ring-cyan-500 p-2.5 rounded-lg text-gray-900 text-sm"
+          className="rounded-2xl border border-solid border-[#E0E5F2] w-full py-3 px-6 placeholder:text-sm placeholder:font-sans placeholder:font-normal placeholder:leading-[1.09375rem] placeholder:text-[#A3AED0] placeholder:tracking-[-0.0175rem]"
           placeholder={placeholderText}
           {...register(inputName)}
         />
         <FontAwesomeIcon
           icon={isPasswordVisible ? faEyeSlash : faEye}
-          className="text-[#A3AED0] cursor-pointer absolute right-3"
+          className="text-[#A3AED0] cursor-pointer absolute right-5"
           onClick={togglePasswordVisibility}
         />
       </div>
-      {error && (
-        <p className="text-start text-xs italic text-red-500 my-4">{error}</p>
-      )}
+      <p
+        className="text-start text-xs italic text-red-500 mt-4"
+        style={{ display: error ? "block" : "none" }}
+      >
+        {error}
+      </p>
     </div>
   );
 };
