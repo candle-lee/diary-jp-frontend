@@ -1,4 +1,3 @@
-import { Label, TextInput } from "flowbite-react";
 import { IInputItem } from "../../constant/interfaces";
 
 const InputField: React.FC<IInputItem> = ({
@@ -11,15 +10,19 @@ const InputField: React.FC<IInputItem> = ({
 }: IInputItem) => {
   return (
     <div>
-      <Label
+      <label
         htmlFor={inputName}
-        className="block text-sm font-medium text-[#2B3674] mb-3"
-        value={description}
-      />
-      <TextInput
+        className="block font-sans text-sm font-medium text-[#2B3674] leading-[1.09375rem] tracking-[-0.0175rem] mb-[0.56rem]"
+      >
+        {description}{" "}
+        <span className="text-[#4318FF] text-sm font-medium leading-[1.09375rem] font-sans tracking-[-0.0175rem]">
+          *
+        </span>{" "}
+      </label>
+      <input
         type={inputType}
         id={inputName}
-        className="placeholder-[#A3AED0] w-full h-full flex-shrink-0 rounded-[16px] border border-secondary-grey-500 border-[#E0E5F2]"
+        className="rounded-2xl border border-solid border-[#E0E5F2] w-full py-3 px-6 placeholder:text-sm placeholder:font-sans placeholder:font-normal placeholder:leading-[1.09375rem] placeholder:text-[#A3AED0] placeholder:tracking-[-0.0175rem]"
         placeholder={placeholderText}
         {...register(inputName)}
       />
