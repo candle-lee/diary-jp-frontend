@@ -38,7 +38,9 @@ export const useSignInForm = () => {
       mutate(formData);
     };
   
-    const handleGoogleSubmit = () => {};
+    const handleGoogleSubmit = () => {
+      alert("google signin");
+    };
 
     return { register, handleSubmit, handleGoogleSubmit, onSubmit, errors, isLoading, serverError: error };
 

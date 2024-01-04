@@ -5,20 +5,35 @@ import InputField from "../../common/InputField";
 import { Button, Checkbox, Label } from "flowbite-react";
 
 import { ButtonSpinner } from "../../common";
-import { GoogleSVGIcon } from "../../icons";
+// import { GoogleSVGIcon } from "../../icons";
 import { useSignInForm } from "./useSignInForm";
 import PasswordInputField from "../../common/PasswordInputField";
+import GoogleLoginButton from "./GoogleLoginButton";
+import axios, { AxiosError } from "axios";
 
 const SignInForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    handleGoogleSubmit,
+    // handleGoogleSubmit,
     onSubmit,
     errors,
     isLoading,
     serverError,
   } = useSignInForm();
+
+  const handleLoginSuccess = async (googleData: any) => {
+    // Send token to backend for verification
+    console.log(googleData);
+    const res = await axios.post("http://localhost:8080/auth/google", {
+      token: googleData.tokenId,
+    });
+    // Handle login success, e.g., store the received JWT token
+  };
+
+  const handleLoginFailure = (error: any) => {
+    console.error("Google Sign In Failure:", error);
+  };
   return (
     <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
       <form
@@ -35,7 +50,7 @@ const SignInForm: React.FC = () => {
           Enter your email and password to sign in!
         </p>
         <div className="">
-          <Button
+          {/* <Button
             type="button"
             color="gray"
             onClick={() => handleGoogleSubmit()}
@@ -45,7 +60,11 @@ const SignInForm: React.FC = () => {
             <span className="text-[#2B3674] text-sm font-medium leading-5 tracking-[-0.0175rem]">
               Sign in with Google
             </span>
-          </Button>
+          </Button> */}
+          <GoogleLoginButton
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+          />
           <div className="my-[1.625rem]">
             <HorizontalDivider />
           </div>

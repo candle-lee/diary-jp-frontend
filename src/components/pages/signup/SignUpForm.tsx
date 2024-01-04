@@ -115,7 +115,7 @@ const SignUpForm: React.FC = () => {
             className="flex items-center justify-center w-full h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
           >
             <GoogleSVGIcon />
-            Sign in with Google
+            Sign up with Google
           </Button>
           <div className="my-4">
             <HorizontalDivider />
