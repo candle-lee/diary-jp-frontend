@@ -58,11 +58,11 @@ const SignInForm: React.FC = () => {
               <input
                 type="checkbox"
                 id="remember"
-                className="focus:ring-transparent focus: border-none bg-[#FFF] rounded-sm cursor-pointer checked:bg-[#1D37C6]"
+                className="focus:ring-transparent focus:ring-offset-0 bg-[#FFF] rounded-sm cursor-pointer checked:bg-[#1D37C6]"
               />
               <label
                 htmlFor="remember"
-                className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] tracking-[-0.0175rem]"
+                className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
               >
                 Keep me logged in
               </label>
