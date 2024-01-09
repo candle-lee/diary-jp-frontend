@@ -9,20 +9,17 @@ const InputField: React.FC<IInputItem> = ({
   error,
 }: IInputItem) => {
   return (
-    <div>
+    <div className="flex flex-col gap-[0.44rem]">
       <label
         htmlFor={inputName}
-        className="block font-sans text-sm font-medium text-[#2B3674] leading-[1.09375rem] tracking-[-0.0175rem] mb-[0.56rem]"
+        className="block text-white font-sans text-xs font-normal leading-3"
       >
-        {description}{" "}
-        <span className="text-[#4318FF] text-sm font-medium leading-[1.09375rem] font-sans tracking-[-0.0175rem]">
-          *
-        </span>{" "}
+        {description} *
       </label>
       <input
         type={inputType}
         id={inputName}
-        className="rounded-2xl border border-solid border-[#E0E5F2] w-full py-3 px-6 placeholder:text-sm placeholder:font-sans placeholder:font-normal placeholder:leading-[1.09375rem] placeholder:text-[#A3AED0] placeholder:tracking-[-0.0175rem]"
+        className="bg-black text-white rounded-xl border border-solid border-white border-opacity-15 w-full p-4 placeholder:font-sans placeholder:text-sm placeholder:font-normal placeholder:leading-[1.09375rem] placeholder:text-white placeholder:text-opacity-60 placeholder:tracking-[-0.0175rem]"
         placeholder={placeholderText}
         {...register(inputName)}
       />
