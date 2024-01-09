@@ -12,6 +12,9 @@ const Layout = () => {
           </div>
         }
       >
+        <div className="text-[#FFF] text-base font-normal leading-4 p-2 border-b border-white border-opacity-15 bg-[#000]">
+          U-DATA
+        </div>
         <Outlet />
       </Suspense>
     </>
