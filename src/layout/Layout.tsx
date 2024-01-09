@@ -13,7 +13,7 @@ const Layout = () => {
         }
       >
         <div className="flex items-center bg-[#000] lg:h-16 md:h-8 sm:h-8 border-b border-white border-opacity-15">
-          <p className="text-[#FFF] font-sans lg:text-2xl md:text-base sm:text-base font-normal lg:leading-6 p-2">
+          <p className="text-[#FFF] font-sans lg:text-2xl md:text-base sm:text-base font-normal lg:leading-6 md:leading-4 sm:leading-4 p-2">
             U-DATA
           </p>
         </div>
