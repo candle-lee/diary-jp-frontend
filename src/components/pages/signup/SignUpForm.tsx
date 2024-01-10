@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
-  HorizontalDivider,
-  InputField,
-  ButtonSpinner,
-  BackToDashboard,
-} from "../../common";
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from "react-google-login";
+import { InputField, ButtonSpinner } from "../../common";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUpUser } from "../../../api/auth";
-import { Button, Checkbox, Label } from "flowbite-react";
-import { GoogleSVGIcon } from "../../icons";
 import PasswordInputField from "../../common/PasswordInputField";
 
 const SignUpForm: React.FC = () => {
@@ -92,112 +90,137 @@ const SignUpForm: React.FC = () => {
     mutate(formData);
   };
 
-  const handleGoogleSubmit = () => {};
+  const clientId =
+    import.meta.env.VITE_OAUTH_CLIENT_ID ||
+    "276543592210-9u0egpv7hhdq8s4cbqtp38apf3ujkbv5.apps.googleusercontent.com";
+  const handleLoginSuccess = async (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    if ("tokenId" in response) {
+      try {
+        const res = await fetch("http://localhost:3000/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: response.tokenId }),
+        });
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    }
+  };
 
+  const handleLoginFailure = (error: any) => {
+    console.error("Google Sign In was unsuccessful. Try again later", error);
+  };
   return (
-    <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
+    <div className="flex items-center justify-center sm:px-0 lg:py-0">
       <form
-        className="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
+        className="w-full max-w-md xl:max-w-xl"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <BackToDashboard />
-        <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
-          Sign Up
-        </h1>
-        <p className="text-secondary-grey-600 text-[#A3AED0] font-normal text-base leading-4 tracking-[-0.32px] mb-9">
-          Enter your email and password to sign up!
-        </p>
+        <div className="flex flex-col gap-6 mb-12">
+          <h1 className="text-white font-sans text-5xl font-normal leading-[3rem]">
+            Sign up
+          </h1>
+          <p className="text-white text-opacity-60 font-sans text-base font-normal leading-5">
+            Enter your name, email and password to sign up!
+          </p>
+        </div>
         <div className="">
-          <Button
-            color="gray"
-            type="button"
-            onClick={() => handleGoogleSubmit()}
-            className="flex items-center justify-center w-full h-[50px] flex-shrink-0 rounded-2xl bg-secondary-grey-300 bg-[#F4F7FE]"
-          >
-            <GoogleSVGIcon />
-            Sign up with Google
-          </Button>
-          <div className="my-4">
-            <HorizontalDivider />
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign up with Google"
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+            cookiePolicy={"single_host_origin"}
+            className="w-full flex justify-center h-[2.5rem] google-auth-button"
+          />
+          <div className="my-6">
+            <p className=" text-white font-sans text-xs font-normal leading-3">
+              Or sign up with your credentials
+            </p>
           </div>
-          <InputField
-            inputType="text"
-            inputName="fullname"
-            description="Full Name"
-            placeholderText="e.g. Bonnie Green"
-            register={register}
-            error={errors.fullname?.message}
-          />
-          <InputField
-            inputType="email"
-            inputName="email"
-            description="Email"
-            placeholderText="e.g. root@root.com"
-            register={register}
-            error={errors.email?.message}
-          />
-          <PasswordInputField
-            inputType="password"
-            inputName="password"
-            description="Password"
-            placeholderText="Min. 8 characters"
-            register={register}
-            error={errors.password?.message}
-          />
-          <div className="flex items-center justify-between my-4">
-            <div className="flex items-center">
-              <div className="flex items-center h-5">
-                <Checkbox id="remember" {...register("isAccepted")} />
-              </div>
-              <div className="ml-3 text-sm">
-                <Label htmlFor="remember">
-                  Agree to UDATA’s{" "}
-                  <a
-                    href="#"
-                    className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-                  >
-                    Terms of Use
-                  </a>{" "}
-                  and{" "}
-                  <a
-                    href="#"
-                    className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-                  >
-                    Privacy Policy
-                  </a>
-                  .
-                </Label>
-              </div>
+          <div className="flex flex-col gap-[1.12rem]">
+            <InputField
+              inputType="text"
+              inputName="fullname"
+              description="Full Name"
+              placeholderText="e.g. Bonnie Green"
+              register={register}
+              error={errors.fullname?.message}
+            />
+            <InputField
+              inputType="email"
+              inputName="email"
+              description="Email"
+              placeholderText="Email"
+              register={register}
+              error={errors.email?.message}
+            />
+            <PasswordInputField
+              inputType="password"
+              inputName="password"
+              description="Password"
+              placeholderText="Min. 8 characters"
+              register={register}
+              error={errors.password?.message}
+            />
+            <div className="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                id="remember"
+                className="focus:ring-transparent focus:ring-offset-0 bg-[#FFF] rounded-sm cursor-pointer checked:bg-[#1D37C6]"
+                {...register("isAccepted")}
+              />
+              <label
+                htmlFor="remember"
+                className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
+              >
+                Agree to UDATA’s{" "}
+                <a href="#" className="text-white font-bold">
+                  Terms of Use
+                </a>{" "}
+                and{" "}
+                <a href="#" className="text-white font-bold">
+                  Privacy Policy
+                </a>
+              </label>
+            </div>
+            {errors.isAccepted && (
+              <p
+                className="text-start text-xs italic text-red-500 my-4"
+                style={{ marginTop: "8px" }}
+              >
+                {" "}
+                {errors.isAccepted?.message}
+              </p>
+            )}
+            {isLoading ? (
+              <ButtonSpinner />
+            ) : (
+              <button
+                type="submit"
+                className="w-full h-[2.5rem] py-1 px-3 rounded-xl bg-[#1D37C6] text-white font-sans text-sm font-normal leading-[1.09375rem] tracking-[-0.0175rem]"
+              >
+                Sign Up
+              </button>
+            )}
+            <div className="flex gap-2">
+              <p className="text-white text-opacity-50 font-sans text-sm font-normal leading-[1.09375rem] tracking-[-0.0175rem]">
+                Already have an account?
+              </p>
+              <Link
+                to="/signin"
+                className="text-white font-sans text-sm font-medium leading-[1.09375rem] tracking-[-0.0175rem]"
+              >
+                Sign in here.
+              </Link>
             </div>
           </div>
-          {errors.isAccepted && (
-            <p
-              className="text-start text-xs italic text-red-500 my-4"
-              style={{ marginTop: "8px" }}
-            >
-              {" "}
-              {errors.isAccepted?.message}
-            </p>
-          )}
-          {isLoading ? (
-            <ButtonSpinner />
-          ) : (
-            <Button
-              type="submit"
-              className="w-full h-[54px] text-white bg-[#4318FF] font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
-            >
-              Sign Up
-            </Button>
-          )}
-          <p className="text-sm font-normal text-[#2B3674] leading-7 tracking-[-0.28px] mt-4">
-            Already have an account?{" "}
-            <Link
-              to="/signin"
-              className="font-bold text-[#4318FF] leading-[26px] tracking-[-0.28px]"
-            >
-              Sign in here.
-            </Link>
-          </p>
         </div>
       </form>
     </div>
