@@ -4,7 +4,7 @@ import { CircleSpinner } from "../components/common";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col lg:h-screen w-full">
       <Suspense
         fallback={
           <div className="flex h-full items-center justify-center">
