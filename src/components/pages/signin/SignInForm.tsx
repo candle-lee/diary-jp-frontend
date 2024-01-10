@@ -13,8 +13,10 @@ const SignInForm: React.FC = () => {
   const clientId =
     import.meta.env.VITE_OAUTH_CLIENT_ID ||
     "276543592210-9u0egpv7hhdq8s4cbqtp38apf3ujkbv5.apps.googleusercontent.com";
+
   const { register, handleSubmit, onSubmit, errors, isLoading } =
     useSignInForm();
+
   const handleLoginSuccess = async (
     response: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
