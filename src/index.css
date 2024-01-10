@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.google-auth-button {
+    border-radius: 0.75rem !important;
+    border: none !important;
+    background-color: #F4F7FE !important;
+}
+
+.google-auth-button div {
+    background-color: transparent !important;
+}
+
+.google-auth-button span {
+    color: #2B3674 !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    line-height: 1.25rem !important;
+    letter-spacing: -0.0175rem !important;
+}

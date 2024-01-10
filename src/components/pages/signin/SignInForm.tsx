@@ -3,11 +3,42 @@ import InputField from "../../common/InputField";
 import { ButtonSpinner } from "../../common";
 import { useSignInForm } from "./useSignInForm";
 import PasswordInputField from "../../common/PasswordInputField";
-import { GoogleSVGIcon } from "../../icons";
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from "react-google-login";
 
 const SignInForm: React.FC = () => {
+  const clientId =
+    import.meta.env.VITE_OAUTH_CLIENT_ID ||
+    "276543592210-9u0egpv7hhdq8s4cbqtp38apf3ujkbv5.apps.googleusercontent.com";
   const { register, handleSubmit, onSubmit, errors, isLoading } =
     useSignInForm();
+  const handleLoginSuccess = async (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    if ("tokenId" in response) {
+      try {
+        const res = await fetch("http://localhost:3000/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: response.tokenId }),
+        });
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    }
+  };
+
+  const handleLoginFailure = (error: any) => {
+    console.error("Google Sign In was unsuccessful. Try again later", error);
+  };
+
   return (
     <div className="flex items-center justify-center sm:px-0 lg:py-0">
       <form
@@ -23,15 +54,14 @@ const SignInForm: React.FC = () => {
           </p>
         </div>
         <div className="">
-          <button
-            type="button"
-            className="flex gap-2 items-center justify-center w-full h-[2.5rem] flex-shrink-0 rounded-xl bg-[#F4F7FE] border-0 p-0"
-          >
-            <GoogleSVGIcon />
-            <span className="text-[#2B3674] text-sm font-medium leading-5 tracking-[-0.0175rem]">
-              Sign in with Google
-            </span>
-          </button>
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign in with Google"
+            onSuccess={handleLoginSuccess}
+            onFailure={handleLoginFailure}
+            cookiePolicy={"single_host_origin"}
+            className="w-full flex justify-center h-[2.5rem] google-auth-button"
+          />
           <div className="my-6">
             <p className=" text-white font-sans text-xs font-normal leading-3">
               Or sign in with your email
