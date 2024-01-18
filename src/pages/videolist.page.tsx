@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { VideoCard } from "../components/pages/videolist";
+import AddIcon from "../components/icons/AddIcon";
 
 const VideoListPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,6 +22,9 @@ const VideoListPage: React.FC = () => {
               <p className="text-[#FFF] text-xs lg:text-base font-normal leading-[125%] tracking-[-0.015rem] lg:tracking-[-0.02rem]">
                 126.3GB / 200GB
               </p>
+            </div>
+            <div className="lg:hidden">
+              <AddIcon />
             </div>
             <div className="hidden lg:flex">
               <button
