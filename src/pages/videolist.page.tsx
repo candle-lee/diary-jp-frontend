@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { VideoCard } from "../components/pages/videolist";
 
 const VideoListPage: React.FC = () => {
+  const navigate = useNavigate();
+  const videoId = 123;
   return (
     <div className="bg-[#000] flex justify-center h-full">
       <div className="w-full max-w-3xl px-6">
@@ -30,11 +33,18 @@ const VideoListPage: React.FC = () => {
           </div>
           <div className="flex gap-6 mt-12 lg:mt-14">
             <div className="flex flex-col gap-[0.38rem] lg:gap-2 w-full">
-              <VideoCard />
-              <VideoCard />
-              <VideoCard />
-              <VideoCard />
-              <VideoCard />
+              <div onClick={() => navigate(`/video-list/${videoId}`)}>
+                <VideoCard />
+              </div>
+              <div>
+                <VideoCard />
+              </div>
+              <div>
+                <VideoCard />
+              </div>
+              <div>
+                <VideoCard />
+              </div>
             </div>
           </div>
         </div>
