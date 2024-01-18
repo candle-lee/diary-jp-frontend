@@ -5,6 +5,7 @@ import { useAppSelector } from "../redux/hooks";
 
 const LazyMainPage = lazy(() => import("../pages/main.page"));
 const LazyVideoHandlingPage = lazy(() => import("../pages/videohandling.page"));
+const LazyVideoListPage = lazy(() => import("../pages/videolist.page"));
 
 const PrivateRoutes = () => {
   const isAutherized = useAppSelector(
@@ -26,6 +27,14 @@ const PrivateRoutes = () => {
         path: "/video",
         element: isAutherized ? (
           <LazyVideoHandlingPage />
+        ) : (
+          <Navigate to="/signin" replace />
+        ),
+      },
+      {
+        path: "/video-list",
+        element: isAutherized ? (
+          <LazyVideoListPage />
         ) : (
           <Navigate to="/signin" replace />
         ),
