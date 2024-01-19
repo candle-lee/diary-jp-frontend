@@ -1,9 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import VideoPlayer from "../components/common/VideoPlayer";
 import SeeMoreIcon from "../components/icons/SeeMoreIcon";
+import { useState } from "react";
+import { useClickAway } from "@uidotdev/usehooks";
 
 const VideoDetailPage: React.FC = () => {
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const ref = useClickAway(() => {
+    setIsDropdownOpen(false);
+  });
+
   return (
     <div className="bg-[#000] flex justify-center h-full">
       <div className="w-full max-w-3xl px-6">
@@ -19,7 +26,43 @@ const VideoDetailPage: React.FC = () => {
               <p className="text-[#FFF] text-4xl font-bold leading-[125%]">
                 Movie Title
               </p>
-              <SeeMoreIcon />
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen((prev) => !prev)}
+                  className="focus:outline-none w-4 h-4"
+                >
+                  <SeeMoreIcon />
+                </button>
+                {isDropdownOpen && (
+                  <div
+                    className="absolute right-0 z-10 mt-2  origin-top-right rounded-lg bg-black bg-opacity-80 ring-1 ring-black ring-opacity-5 focus:outline-none border border-solid border-white border-opacity-25"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="menu-button"
+                    ref={ref}
+                  >
+                    <div className="py-1" role="none">
+                      <a
+                        href="#"
+                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm"
+                        role="menuitem"
+                        id="menu-item-0"
+                      >
+                        Record new video
+                      </a>
+                      <a
+                        href="#"
+                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm"
+                        role="menuitem"
+                        id="menu-item-1"
+                      >
+                        Upload from your library
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <p className="text-[#FFF] text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
               Jan 1st, 2024

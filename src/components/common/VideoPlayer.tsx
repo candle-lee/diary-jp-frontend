@@ -24,9 +24,9 @@ const VideoPlayer: React.FC = () => {
             <path
               d="M1.5 6L156.5 6"
               stroke="white"
-              stroke-opacity="0.5"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeOpacity="0.5"
+              strokeWidth="2"
+              strokeLinecap="round"
             />
             <circle
               cx="23.5574"
@@ -35,7 +35,7 @@ const VideoPlayer: React.FC = () => {
               transform="rotate(-90 23.5574 6)"
               fill="white"
               stroke="black"
-              stroke-width="2"
+              strokeWidth="2"
             />
           </svg>
         </div>
