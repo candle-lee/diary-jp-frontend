@@ -13,31 +13,12 @@ const VideoPlayer: React.FC = () => {
         <div>
           <VideoPlayIcon />
         </div>
-        <div className="">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="158"
-            height="12"
-            viewBox="0 0 158 12"
-            fill="none"
-          >
-            <path
-              d="M1.5 6L156.5 6"
-              stroke="white"
-              strokeOpacity="0.5"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <circle
-              cx="23.5574"
-              cy="6"
-              r="5"
-              transform="rotate(-90 23.5574 6)"
-              fill="white"
-              stroke="black"
-              strokeWidth="2"
-            />
-          </svg>
+        <div className="w-full flex items-center">
+          <input
+            type="range"
+            className="transparent h-[2px] w-full cursor-pointer appearance-none border-transparent bg-white bg-opacity-50 video-range"
+            id="videoRange"
+          />
         </div>
         <div className="flex gap-1 text-white text-xs leading-[125%] tracking-[-0.015rem]">
           <div className="flex gap-[0.12rem]">
