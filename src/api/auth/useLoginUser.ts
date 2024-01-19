@@ -25,7 +25,7 @@ const useLoginUser = () => {
             });
             setTokenToLocalStorage(data);
             dispatch(setAutherStatus(true));
-            navigate('/main');
+            navigate('/video-list');
         },
         onError: (error: any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
