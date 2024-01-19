@@ -7,7 +7,7 @@ import { useClickAway } from "@uidotdev/usehooks";
 const VideoDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const ref = useClickAway(() => {
+  const ref = useClickAway<HTMLDivElement>(() => {
     setIsDropdownOpen(false);
   });
 
