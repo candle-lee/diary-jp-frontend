@@ -135,13 +135,13 @@ const SignUpForm: React.FC = () => {
             )}
             <div className="flex gap-2">
               <p className="text-white text-opacity-50 font-sans text-sm font-normal leading-[1.09375rem] tracking-[-0.0175rem]">
-                Already have an account?
+                Already registered?
               </p>
               <Link
                 to="/signin"
                 className="text-white font-sans text-sm font-medium leading-[1.09375rem] tracking-[-0.0175rem]"
               >
-                Sign in here.
+                Sign in with your account.
               </Link>
             </div>
           </div>

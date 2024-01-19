@@ -38,7 +38,7 @@ const PasswordInputField: React.FC<IInputItem> = ({
         />
       </div>
       <p
-        className="text-start text-xs italic text-red-500 mt-4"
+        className="text-start text-xs font-normal leading-[124%] text-[#ED2B2B] mt-2"
         style={{ display: error ? "block" : "none" }}
       >
         {error}
