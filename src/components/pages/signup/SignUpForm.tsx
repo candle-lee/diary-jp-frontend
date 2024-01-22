@@ -70,14 +70,6 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="flex flex-col gap-[1.12rem]">
             <InputField
-              inputType="text"
-              inputName="fullname"
-              description="Full Name"
-              placeholderText="e.g. Bonnie Green"
-              register={register}
-              error={errors.fullname?.message}
-            />
-            <InputField
               inputType="email"
               inputName="email"
               description="Email"

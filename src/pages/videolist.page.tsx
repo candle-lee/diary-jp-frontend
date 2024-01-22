@@ -50,6 +50,18 @@ const VideoListPage: React.FC = () => {
                 <VideoCard />
               </div>
             </div>
+            <div className="text-white text-base font-medium leading-[100%]">
+              2024
+            </div>
+            <div className="absolute">
+              <div className="relative right-0 top-10 w-full flex items-center rotate-90">
+                <input
+                  type="range"
+                  className="transparent h-[2px] w-full cursor-pointer appearance-none border-transparent bg-white bg-opacity-50 video-range"
+                  id="videoRange"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
