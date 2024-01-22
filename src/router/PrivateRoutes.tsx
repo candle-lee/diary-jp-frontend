@@ -25,7 +25,7 @@ const PrivateRoutes = () => {
         ),
       },
       {
-        path: "/video",
+        path: "/video-recording",
         element: isAutherized ? (
           <LazyVideoHandlingPage />
         ) : (

@@ -27,12 +27,12 @@ const VideoListPage: React.FC = () => {
               <AddIcon />
             </div>
             <div className="hidden lg:flex">
-              <button
-                type="button"
+              <a
+                href="/video-recording"
                 className="flex h-10 py-1 px-3 items-center bg-[#FFF] rounded-xl"
               >
                 Add your data
-              </button>
+              </a>
             </div>
           </div>
           <div className="flex gap-6 mt-12 lg:mt-14">
@@ -50,7 +50,7 @@ const VideoListPage: React.FC = () => {
                 <VideoCard />
               </div>
             </div>
-            <div className="flex flex-col gap-44">
+            <div className="flex flex-col gap-20 lg:gap-44">
               <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
                 2024
               </div>
@@ -67,8 +67,8 @@ const VideoListPage: React.FC = () => {
                 2020
               </div>
             </div>
-            <div className="absolute w-[49.5rem]">
-              <div className="relative right-[-19rem] top-[24.7rem] w-full flex items-center rotate-90">
+            <div className="absolute w-[25rem] lg:w-[49.5rem]">
+              <div className="relative top-[12.5rem] right-[-31.4rem] lg:right-[-19rem] lg:top-[24.7rem] w-full flex items-center rotate-90">
                 <input
                   type="range"
                   className="transparent h-[2px] w-full cursor-pointer appearance-none border-transparent bg-white bg-opacity-50 video-range"
