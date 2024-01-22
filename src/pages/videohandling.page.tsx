@@ -2,7 +2,7 @@ import { VideoRecording } from "../components/pages";
 
 const VideoHandlingPage: React.FC = () => {
   return (
-    <div>
+    <div className="bg-[#000] justify-center h-full">
       <VideoRecording />
     </div>
   );
