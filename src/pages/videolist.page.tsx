@@ -50,11 +50,25 @@ const VideoListPage: React.FC = () => {
                 <VideoCard />
               </div>
             </div>
-            <div className="text-white text-base font-medium leading-[100%]">
-              2024
+            <div className="flex flex-col gap-44">
+              <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
+                2024
+              </div>
+              <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
+                2023
+              </div>
+              <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
+                2022
+              </div>
+              <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
+                2021
+              </div>
+              <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
+                2020
+              </div>
             </div>
-            <div className="absolute">
-              <div className="relative right-0 top-10 w-full flex items-center rotate-90">
+            <div className="absolute w-[49.5rem]">
+              <div className="relative right-[-19rem] top-[24.7rem] w-full flex items-center rotate-90">
                 <input
                   type="range"
                   className="transparent h-[2px] w-full cursor-pointer appearance-none border-transparent bg-white bg-opacity-50 video-range"
