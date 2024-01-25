@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { CircleSpinner } from "../components/common";
+import Header from "../components/Header";
 
 const Layout = () => {
   return (
@@ -13,11 +14,7 @@ const Layout = () => {
         }
       >
         <div className="flex flex-col flex-grow">
-          <div className="sticky top-0 flex items-center bg-[#000] lg:h-16 h-8 border-b border-white border-opacity-15">
-            <p className="text-[#FFF] font-sans lg:text-2xl md:text-base sm:text-base font-normal lg:leading-6 md:leading-4 sm:leading-4 p-2">
-              U-DATA
-            </p>
-          </div>
+          <Header />
           <Outlet />
         </div>
       </Suspense>
