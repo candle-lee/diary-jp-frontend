@@ -3,10 +3,13 @@ import RecordingCounter from "./RecordingCounter";
 import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import InRecordingIcon from "../../icons/InRecordingIcon";
 import CrossIcon from "../../icons/CrossIcon";
+import { useNavigate } from "react-router-dom";
 
 const VideoRecording: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -54,6 +57,7 @@ const VideoRecording: React.FC = () => {
               </button>
               <button
                 type="button"
+                onClick={() => navigate("/video-list")}
                 className="border border-solid border-white py-1 px-3 bg-white text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
               >
                 Done

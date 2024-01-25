@@ -43,22 +43,21 @@ const VideoDetailPage: React.FC = () => {
                     ref={ref}
                   >
                     <div className="py-1" role="none">
-                      <a
-                        href="#"
-                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm"
+                      <li
+                        onClick={() => navigate("/video-recording")}
+                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm cursor-pointer"
                         role="menuitem"
                         id="menu-item-0"
                       >
                         Record new video
-                      </a>
-                      <a
-                        href="#"
-                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm"
+                      </li>
+                      <li
+                        className="text-[white] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm cursor-pointer"
                         role="menuitem"
                         id="menu-item-1"
                       >
                         Upload from your library
-                      </a>
+                      </li>
                     </div>
                   </div>
                 )}
