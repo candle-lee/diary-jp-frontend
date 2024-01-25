@@ -6,6 +6,7 @@ const Header: React.FC = () => {
   const isAuth: boolean = useAppSelector(
     (state) => state.authReducer.isAutherized
   );
+  console.log(isAuth);
   return (
     <div className="sticky top-0 flex justify-between items-center bg-[#000] border-b border-white border-opacity-15 p-2 lg:px-4 lg:py-2">
       <div className="py-2">
