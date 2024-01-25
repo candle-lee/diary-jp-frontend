@@ -26,18 +26,20 @@ const VideoRecording: React.FC = () => {
     <>
       <div className="flex flex-col h-full">
         <div className="relative">
-          {isStarted ? (
+          {isStarted && (
             <div className="absolute inset-x-0 top-4 flex justify-center">
               <RecordingCounter isStopped={isStarted && !isRecording} />
             </div>
-          ) : (
-            <div
-              className="absolute right-[0.63rem] top-[0.63rem] cursor-pointer lg:right-4 lg:top-4"
-              onClick={toggleDialog}
-            >
-              <CrossIcon />
-            </div>
           )}
+          {isRecording ||
+            (isStarted && (
+              <div
+                className="absolute right-[0.63rem] top-[0.63rem] cursor-pointer lg:right-4 lg:top-4"
+                onClick={toggleDialog}
+              >
+                <CrossIcon />
+              </div>
+            ))}
         </div>
         <div className="mt-auto flex justify-between items-center">
           <div
