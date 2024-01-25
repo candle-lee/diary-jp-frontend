@@ -70,6 +70,14 @@ const SignUpForm: React.FC = () => {
           </div>
           <div className="flex flex-col gap-[1.12rem]">
             <InputField
+              inputType="username"
+              inputName="username"
+              description="User Name"
+              placeholderText="User Name"
+              register={register}
+              error={errors.username?.message}
+            />
+            <InputField
               inputType="email"
               inputName="email"
               description="Email"
@@ -85,36 +93,39 @@ const SignUpForm: React.FC = () => {
               register={register}
               error={errors.password?.message}
             />
-            <div className="flex gap-2 items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                className="focus:ring-transparent focus:ring-offset-0 bg-[#FFF] rounded-sm cursor-pointer checked:bg-[#1D37C6]"
-                {...register("isAccepted")}
-              />
-              <label
-                htmlFor="remember"
-                className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
-              >
-                Agree to UDATA’s{" "}
-                <a href="#" className="text-white font-bold">
-                  Terms of Use
-                </a>{" "}
-                and{" "}
-                <a href="#" className="text-white font-bold">
-                  Privacy Policy
-                </a>
-              </label>
+            <div>
+              <div className="flex gap-2 items-center">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  className="focus:ring-transparent focus:ring-offset-0 bg-[#FFF] rounded-sm cursor-pointer checked:bg-[#1D37C6]"
+                  {...register("isAccepted")}
+                />
+                <label
+                  htmlFor="remember"
+                  className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
+                >
+                  Agree to UDATA’s{" "}
+                  <a href="#" className="text-white font-bold">
+                    Terms of Use
+                  </a>{" "}
+                  and{" "}
+                  <a href="#" className="text-white font-bold">
+                    Privacy Policy
+                  </a>
+                </label>
+              </div>
+              {errors.isAccepted && (
+                <p
+                  className="text-start text-xs font-normal leading-[124%] text-[#ED2B2B] mt-2"
+                  style={{ marginTop: "8px" }}
+                >
+                  {" "}
+                  {errors.isAccepted?.message}
+                </p>
+              )}
             </div>
-            {errors.isAccepted && (
-              <p
-                className="text-start text-xs italic text-red-500 my-4"
-                style={{ marginTop: "8px" }}
-              >
-                {" "}
-                {errors.isAccepted?.message}
-              </p>
-            )}
+
             {isLoading ? (
               <ButtonSpinner />
             ) : (

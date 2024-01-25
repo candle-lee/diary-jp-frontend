@@ -7,7 +7,7 @@ export const useSignUpForm = () => {
     const { mutate, isLoading } = useSignUpUser();
 
     const validationSchema = z.object({
-        fullname: z.string().min(3, { message: "FullName is required" }),
+        username: z.string().min(3, { message: "UserName is required" }),
         email: z
           .string()
           .min(3, { message: "Email is required" })
@@ -63,7 +63,7 @@ export const useSignUpForm = () => {
         formState: { errors },
       } = useForm<ValidationSchema>({
         defaultValues: {
-          fullname: "",
+          username: "",
           email: "",
           isAccepted: undefined,
           password: "",
@@ -75,7 +75,7 @@ export const useSignUpForm = () => {
         data: ValidationSchema
       ) => {
         const formData = {
-          username: data.fullname,
+          username: data.username,
           email: data.email,
           password: data.password,
         };

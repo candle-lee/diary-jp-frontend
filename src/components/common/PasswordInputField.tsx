@@ -21,7 +21,7 @@ const PasswordInputField: React.FC<IInputItem> = ({
         htmlFor={inputName}
         className="block text-white font-sans text-xs font-normal leading-3"
       >
-        {description} *
+        {description} <span className="text-[#ED2B2B]">*</span>
       </label>
       <div className="flex items-center">
         <input
