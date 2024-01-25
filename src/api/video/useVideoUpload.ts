@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const useVideoUpload = () => {
     const axios = httpAxios();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const uploadVideo = (formData :any) => axios.post('/media', formData);
     const queryClient = useQueryClient()
     const {mutate, isLoading} = useMutation({
@@ -18,6 +19,7 @@ const useVideoUpload = () => {
             });
             queryClient.invalidateQueries({ queryKey: ['getMedias'] })
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,

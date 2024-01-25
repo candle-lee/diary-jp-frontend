@@ -16,7 +16,7 @@ const useLoginUser = () => {
 
     const {mutate, isLoading, error} = useMutation({
         mutationFn: loginUser,
-        onSuccess: ({data}: any) => {
+        onSuccess: ({data}) => {
             toast.success(`Credentials are correct!`, {
                 hideProgressBar: true,
                 autoClose: 5000,
@@ -28,6 +28,7 @@ const useLoginUser = () => {
             dispatch(setAutherStatus(true));
             navigate('/video-list');
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error: any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,

@@ -21,6 +21,7 @@ const useSignUpUser = () => {
             });
             navigate('/verify-user');
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,

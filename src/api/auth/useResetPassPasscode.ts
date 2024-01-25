@@ -19,6 +19,7 @@ const useResetPassPasscode = () => {
             });
             navigate('/forgetpassword-validation')
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,
