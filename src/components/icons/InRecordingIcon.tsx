@@ -9,7 +9,7 @@ const InRecordingIcon: React.FC = () => {
         fill="none"
       >
         <circle cx="32" cy="32" r="28" fill="white" />
-        <circle cx="32" cy="32" r="31" stroke="white" stroke-width="2" />
+        <circle cx="32" cy="32" r="31" stroke="white" strokeWidth="2" />
       </svg>
     </>
   );

@@ -6,6 +6,7 @@ import CrossIcon from "../../icons/CrossIcon";
 import { useNavigate } from "react-router-dom";
 
 const VideoRecording: React.FC = () => {
+  const [isStarted, setIsStarted] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -15,6 +16,9 @@ const VideoRecording: React.FC = () => {
     setIsDialogOpen(!isDialogOpen);
   };
   const startRecording = () => {
+    if (!isStarted) {
+      setIsStarted(true);
+    }
     setIsRecording(!isRecording);
   };
 
@@ -22,9 +26,9 @@ const VideoRecording: React.FC = () => {
     <>
       <div className="flex flex-col h-full">
         <div className="relative">
-          {isRecording ? (
+          {isStarted ? (
             <div className="absolute inset-x-0 top-4 flex justify-center">
-              <RecordingCounter />
+              <RecordingCounter isStopped={isStarted && !isRecording} />
             </div>
           ) : (
             <div
@@ -35,10 +39,25 @@ const VideoRecording: React.FC = () => {
             </div>
           )}
         </div>
-        <div className="flex justify-center items-end mt-auto py-6">
-          <button type="button" onClick={startRecording}>
-            {isRecording ? <StartRecordingIcon /> : <InRecordingIcon />}
-          </button>
+        <div className="mt-auto flex justify-between items-center">
+          <div
+            className="flex justify-center items-end py-6"
+            style={{ flex: 2 }}
+          >
+            <button type="button" onClick={startRecording}>
+              {isRecording ? <StartRecordingIcon /> : <InRecordingIcon />}
+            </button>
+          </div>
+          {isStarted && !isRecording && (
+            <div className="absolute right-[1.31rem]">
+              <button
+                type="button"
+                className="bg-[#FFF] rounded-2xl py-1 px-3 text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem]"
+              >
+                Done
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {isDialogOpen && (

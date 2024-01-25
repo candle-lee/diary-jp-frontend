@@ -11,7 +11,7 @@ const StartRecordingIcon: React.FC = () => {
         fill="none"
       >
         <rect x="20" y="20" width="24" height="24" rx="8" fill="#ED2B2B" />
-        <circle cx="32" cy="32" r="31" stroke="white" stroke-width="2" />
+        <circle cx="32" cy="32" r="31" stroke="white" strokeWidth="2" />
       </svg>
     </>
   );
