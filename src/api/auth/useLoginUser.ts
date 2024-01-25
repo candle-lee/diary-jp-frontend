@@ -22,6 +22,7 @@ const useLoginUser = () => {
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
+                className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur",
             });
             setTokenToLocalStorage(data);
             dispatch(setAutherStatus(true));
@@ -33,6 +34,7 @@ const useLoginUser = () => {
                 autoClose: 5000,
                 type: "error",
                 position: "top-right",
+                className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur",
             });
         },
     });
