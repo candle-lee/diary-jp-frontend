@@ -3,6 +3,11 @@ import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { useAppSelector } from "../redux/hooks";
 
+const LazyVerifyUserPage = lazy(() => import("../pages/verifyuser.page"));
+const LazyForgetPassVerifyUserPage = lazy(
+  () => import("../pages/forgetpassverifyuser.page")
+);
+const LazyResetPasswordPage = lazy(() => import("../pages/resetpassword.page"));
 const LazyMainPage = lazy(() => import("../pages/main.page"));
 const LazyVideoHandlingPage = lazy(() => import("../pages/videohandling.page"));
 const LazyVideoListPage = lazy(() => import("../pages/videolist.page"));
@@ -16,6 +21,30 @@ const PrivateRoutes = () => {
   return {
     element: <Layout />,
     children: [
+      {
+        path: "/verify-user",
+        element: isAutherized ? (
+          <LazyVerifyUserPage />
+        ) : (
+          <Navigate to="/signin" replace />
+        ),
+      },
+      {
+        path: "/forgetpassword-validation",
+        element: isAutherized ? (
+          <LazyForgetPassVerifyUserPage />
+        ) : (
+          <Navigate to="/signin" replace />
+        ),
+      },
+      {
+        path: "/reset-password",
+        element: isAutherized ? (
+          <LazyResetPasswordPage />
+        ) : (
+          <Navigate to="/signin" replace />
+        ),
+      },
       {
         path: "/main",
         element: isAutherized ? (
