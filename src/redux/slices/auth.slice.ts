@@ -28,7 +28,9 @@ export const authSlice = createSlice({
   reducers: {
     setAutherStatus: (state:IAuthState, {payload}: PayloadAction<boolean>) => {
       state.isAutherized = payload;
-      localStorage.removeItem('token');
+      if (!state.isAutherized) {
+        localStorage.removeItem('token');
+      }
     },
     setAuthenticatedUser: (state: IAuthState, { payload }: PayloadAction<IAuther>) => {
       state.auth.username = payload.username
