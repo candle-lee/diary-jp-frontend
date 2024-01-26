@@ -1,5 +1,4 @@
 export { default as AutherizedUser } from './AutherizedUser';
-export { default as BackToDashboard } from './BackToDashboard';
 export { default as ButtonSpinner } from './ButtonSpinner';
 export { default as CircleSpinner } from './CircleSpinner';
 export { default as DefaultAvatar } from './DefaultAvatar';

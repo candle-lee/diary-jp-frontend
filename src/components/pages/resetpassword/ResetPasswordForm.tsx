@@ -1,5 +1,5 @@
 import { Button, Checkbox, Label } from "flowbite-react";
-import { ButtonSpinner, BackToDashboard } from "../../common";
+import { ButtonSpinner } from "../../common";
 import { useResetPasswordForm } from "./useResetPasswordForm";
 import PasswordInputField from "../../common/PasswordInputField";
 
@@ -13,7 +13,6 @@ const ResetPasswordForm: React.FC = () => {
         className="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <BackToDashboard />
         <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
           Reset your password
         </h1>
