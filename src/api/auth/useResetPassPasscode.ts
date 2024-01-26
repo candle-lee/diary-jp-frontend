@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { setIsCookieStatus } from "../../redux/slices/auth.slice";
 import { hasPasscodeCookie } from "../../utils/cookie/checkCookie";
+import Cookies from 'js-cookie';
 
 const useResetPassPasscode = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const useResetPassPasscode = () => {
                 className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur"
             });
             dispatch(setIsCookieStatus(hasPasscodeCookie()));
+            console.log(Cookies.get('passcode'));
             navigate('/forgetpassword-validation')
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

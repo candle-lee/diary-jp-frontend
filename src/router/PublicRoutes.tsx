@@ -8,7 +8,10 @@ const LazySignUpPage = lazy(() => import("../pages/signup.page"));
 const LazyForgetPasswordPage = lazy(
   () => import("../pages/forgetpassword.page")
 );
-
+const LazyForgetPassVerifyUserPage = lazy(
+  () => import("../pages/forgetpassverifyuser.page")
+);
+const LazyResetPasswordPage = lazy(() => import("../pages/resetpassword.page"));
 const PublicRoutes = () => {
   return {
     element: <Layout />,
@@ -16,6 +19,14 @@ const PublicRoutes = () => {
       { path: "/", element: <LazyHomePage /> },
       { path: "/signin", element: <LazySignInPage /> },
       { path: "/signup", element: <LazySignUpPage /> },
+      {
+        path: "/forgetpassword-validation",
+        element: <LazyForgetPassVerifyUserPage />,
+      },
+      {
+        path: "/reset-password",
+        element: <LazyResetPasswordPage />,
+      },
       {
         path: "/forgetpassword",
         element: <LazyForgetPasswordPage />,
