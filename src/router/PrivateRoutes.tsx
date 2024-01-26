@@ -2,7 +2,6 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { useAppSelector } from "../redux/hooks";
-import { hasPasscodeCookie } from "../utils/cookie/checkCookie";
 
 const LazyVerifyUserPage = lazy(() => import("../pages/verifyuser.page"));
 const LazyForgetPassVerifyUserPage = lazy(
