@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { useAppSelector } from "../redux/hooks";
+import { hasPasscodeCookie } from "../utils/cookie/checkCookie";
 
 const LazyVerifyUserPage = lazy(() => import("../pages/verifyuser.page"));
 const LazyForgetPassVerifyUserPage = lazy(
@@ -17,6 +18,7 @@ const PrivateRoutes = () => {
   const isAutherized = useAppSelector(
     (state) => state.authReducer.isAutherized
   );
+  const isCookie = useAppSelector((state) => state.authReducer.isCookie);
 
   return {
     element: <Layout />,
@@ -31,7 +33,7 @@ const PrivateRoutes = () => {
       },
       {
         path: "/forgetpassword-validation",
-        element: isAutherized ? (
+        element: isCookie ? (
           <LazyForgetPassVerifyUserPage />
         ) : (
           <Navigate to="/signin" replace />
@@ -39,7 +41,7 @@ const PrivateRoutes = () => {
       },
       {
         path: "/reset-password",
-        element: isAutherized ? (
+        element: isCookie ? (
           <LazyResetPasswordPage />
         ) : (
           <Navigate to="/signin" replace />

@@ -8,9 +8,6 @@ export const useForgetPasswordForm = () => {
 
   const validationSchema = z.object({
     email: z.string().min(1, "Email is required").email("Must be a valid email"),
-    isAccepted: z.literal(true, {
-        errorMap: () => ({ message: "You must accept Terms and Conditions" }),
-      })
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -18,7 +15,6 @@ export const useForgetPasswordForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<ValidationSchema>({
     defaultValues: {
       email: "",
-      isAccepted: undefined,
     },
     resolver: zodResolver(validationSchema),
   });
