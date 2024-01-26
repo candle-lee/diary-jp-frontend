@@ -19,3 +19,23 @@
     line-height: 1.25rem !important;
     letter-spacing: -0.0175rem !important;
 }
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Removes default styling */
+    appearance: none;
+    width: 10px; /* Size of the thumb */
+    height: 10px; /* Size of the thumb */
+    background: #ffffff; /* Thumb color */
+    cursor: pointer; /* Cursor type */
+    border-radius: 50%; /* Makes it circular */
+}
+
+input[type='range']::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+}

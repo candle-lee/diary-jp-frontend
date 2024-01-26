@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { loadStateFromLocalStorage } from '../../utils/storage';
+import { hasPasscodeCookie } from '../../utils/cookie/checkCookie';
 
 export interface IAuther {
   username: string;
@@ -11,6 +12,7 @@ export interface IAuthState {
     auth: IAuther;
     access_token: string;
     isAutherized: boolean;
+    isCookie: boolean;
 }
 
 const initialState: IAuthState = {
@@ -20,6 +22,7 @@ const initialState: IAuthState = {
     },
     access_token: loadStateFromLocalStorage() ?? '',
     isAutherized: loadStateFromLocalStorage() ? true : false,
+    isCookie: hasPasscodeCookie(),
 }
 
 export const authSlice = createSlice({
@@ -28,10 +31,16 @@ export const authSlice = createSlice({
   reducers: {
     setAutherStatus: (state:IAuthState, {payload}: PayloadAction<boolean>) => {
       state.isAutherized = payload;
+      if (!state.isAutherized) {
+        localStorage.removeItem('token');
+      }
     },
     setAuthenticatedUser: (state: IAuthState, { payload }: PayloadAction<IAuther>) => {
       state.auth.username = payload.username
       state.auth.email = payload.email
+    },
+    setIsCookieStatus: (state:IAuthState, {payload}: PayloadAction<boolean>) => {
+      state.isCookie = payload;
     },
     resetState: (state: IAuthState) => {
       state.access_token = ''
@@ -42,6 +51,6 @@ export const authSlice = createSlice({
   },
 })
 
-export const { setAuthenticatedUser, resetState, setAutherStatus } = authSlice.actions
+export const { setAuthenticatedUser, resetState, setAutherStatus, setIsCookieStatus } = authSlice.actions
 export const authReducer = authSlice.reducer
 export const selectAuthenticatedUser = (state: RootState) => state.authReducer

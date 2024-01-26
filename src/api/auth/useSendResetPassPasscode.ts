@@ -16,15 +16,18 @@ const useSendResetPassPasscode= () => {
                 autoClose: 5000,
                 type: "success",
                 position: "top-right",
+                className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur"
             });
             navigate('/reset-password');
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error:any) => {
             toast.error(`Error: ${error?.response?.data?.message}`, {
                 hideProgressBar: true,
                 autoClose: 5000,
                 type: "error",
                 position: "top-right",
+                className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur"
             });
         },
     });
