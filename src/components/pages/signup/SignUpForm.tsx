@@ -62,7 +62,7 @@ const SignUpForm: React.FC = () => {
                 />
                 <label
                   htmlFor="remember"
-                  className="text-white text-opacity-60 font-sans text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
+                  className="text-white text-opacity-60 font-sans text-xs lg:text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
                 >
                   Agree to UDATA’s{" "}
                   <a href="#" className="text-white font-bold">
