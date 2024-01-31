@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputField, ButtonSpinner } from "../../common";
 import PasswordInputField from "../../common/PasswordInputField";
 import { useSignUpForm } from "./useSignUpForm";
@@ -6,7 +6,7 @@ import { useSignUpForm } from "./useSignUpForm";
 const SignUpForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading } =
     useSignUpForm();
-
+  const navigate = useNavigate();
   return (
     <div className="flex items-center justify-center sm:px-0 lg:py-0">
       <form
@@ -65,11 +65,10 @@ const SignUpForm: React.FC = () => {
                   className="text-white text-opacity-60 font-sans text-xs lg:text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
                 >
                   Agree to UDATA’s{" "}
-                  <a href="#" className="text-white font-bold">
-                    Terms of Use
-                  </a>{" "}
-                  and{" "}
-                  <a href="#" className="text-white font-bold">
+                  <a
+                    onClick={() => navigate("/privacy-policy")}
+                    className="text-white font-bold"
+                  >
                     Privacy Policy
                   </a>
                 </label>
