@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { AutherizedUser } from "../components/common";
-import { useIsAutherized } from "../api/auth";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const isAutherized = useIsAutherized();
   return (
     <>
       <nav className="bg-white border-gray-200">
