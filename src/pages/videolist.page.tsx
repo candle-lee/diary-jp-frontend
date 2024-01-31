@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { VideoCard } from "../components/pages/videolist";
+// import { useNavigate } from "react-router-dom";
+// import { VideoCard } from "../components/pages/videolist";
 import AddIcon from "../components/icons/AddIcon";
 
 const VideoListPage: React.FC = () => {
-  const navigate = useNavigate();
-  const videoId = 123;
+  // const navigate = useNavigate();
+  // const videoId = 123;
   return (
     <div className="bg-[#000] flex justify-center h-full">
       <div className="w-full max-w-3xl px-6">
@@ -35,7 +35,20 @@ const VideoListPage: React.FC = () => {
               </a>
             </div>
           </div>
-          <div className="flex gap-6 mt-12 lg:mt-14">
+          <div className="border border-solid border-white border-opacity-15 flex justify-center items-center rounded-xl py-[2.25rem] mt-12 lg:py-14 lg:mt-14">
+            <div className="flex flex-col gap-4 items-center">
+              <p className="text-white text-sm font-medium lg:text-2xl lg:font-normal leading-[125%]">
+                You haven't upload any video yet.
+              </p>
+              <a
+                href="/video-recording"
+                className="h-10 py-1 px-3 text-sm bg-[#FFF] rounded-xl max-w-32 flex justify-center items-center"
+              >
+                Add your data
+              </a>
+            </div>
+          </div>
+          {/* <div className="flex gap-6 mt-12 lg:mt-14">
             <div className="flex flex-col gap-[0.38rem] lg:gap-2 w-full">
               <div onClick={() => navigate(`/video-list/${videoId}`)}>
                 <VideoCard />
@@ -76,7 +89,7 @@ const VideoListPage: React.FC = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
