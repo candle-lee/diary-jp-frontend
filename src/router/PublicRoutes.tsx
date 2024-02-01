@@ -5,6 +5,7 @@ import Layout from "../layout/Layout";
 const LazyHomePage = lazy(() => import("../pages/home.page"));
 const LazySignInPage = lazy(() => import("../pages/signin.page"));
 const LazySignUpPage = lazy(() => import("../pages/signup.page"));
+const LazyPrivacypolicyPage = lazy(() => import("../pages/privacypolicy.page"));
 const LazyForgetPasswordPage = lazy(
   () => import("../pages/forgetpassword.page")
 );
@@ -19,6 +20,7 @@ const PublicRoutes = () => {
       { path: "/", element: <LazyHomePage /> },
       { path: "/signin", element: <LazySignInPage /> },
       { path: "/signup", element: <LazySignUpPage /> },
+      { path: "/privacy-policy", element: <LazyPrivacypolicyPage /> },
       {
         path: "/forgetpassword-validation",
         element: <LazyForgetPassVerifyUserPage />,
