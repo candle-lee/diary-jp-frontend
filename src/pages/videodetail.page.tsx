@@ -9,6 +9,7 @@ const VideoDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isTitleEdit, setIsTitleEdit] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const ref = useClickAway<HTMLDivElement>(() => {
     setIsDropdownOpen(false);
   });
@@ -67,6 +68,10 @@ const VideoDetailPage: React.FC = () => {
                           className="text-[#ED2B2B] whitespace-nowrap text-opacity-75 font-normal leading-[125%] tracking-[-0.0175rem] block px-4 py-2 text-sm cursor-pointer"
                           role="menuitem"
                           id="menu-item-1"
+                          onClick={() => {
+                            setIsDialogOpen(true);
+                            setIsDropdownOpen(false);
+                          }}
                         >
                           Delete
                         </li>
@@ -130,6 +135,30 @@ const VideoDetailPage: React.FC = () => {
           </p>
         </div>
       </div>
+      {isDialogOpen && (
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="bg-black bg-opacity-80 border border-solid border-white border-opacity-25 rounded-lg p-4 flex flex-col gap-4 max-w-60">
+            <div className="text-white text-opacity-60 text-sm font-normal leading-[125%] tracking-[-0.0175rem]">
+              Are you really want to delete the video?{" "}
+            </div>
+            <div className="flex gap-4 justify-between">
+              <button
+                type="button"
+                className="border border-solid border-white py-1 px-3 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
+                onClick={() => setIsDialogOpen(false)}
+              >
+                Cancle
+              </button>
+              <button
+                type="button"
+                className="border border-solid border-white py-1 px-3 bg-white text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
+              >
+                Yes, I delete it.
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
