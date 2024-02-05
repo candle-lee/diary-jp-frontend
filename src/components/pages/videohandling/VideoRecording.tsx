@@ -1,31 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecordingCounter from "./RecordingCounter";
-import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import InRecordingIcon from "../../icons/InRecordingIcon";
+import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import CrossIcon from "../../icons/CrossIcon";
 import { useNavigate } from "react-router-dom";
+import { useRecordWebcam, CAMERA_STATUS, FileType } from "react-record-webcam";
+
+interface IVideoOption {
+  filename: string;
+  fileType: FileType;
+  width: number;
+  height: number;
+}
+
+const OPTIONS: IVideoOption = {
+  filename: "test-filename",
+  fileType: "mp4",
+  width: 1920,
+  height: 1080,
+};
 
 const VideoRecording: React.FC = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  const recordWebcam = useRecordWebcam(OPTIONS);
   const navigate = useNavigate();
+  const getRecordingFileHooks = async () => {
+    const blob = await recordWebcam.getRecording();
+    console.log({ blob });
+  };
+  useEffect(() => {
+    recordWebcam.open();
+  }, []);
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
   };
-  const startRecording = () => {
+  const handleRecordingStart = () => {
     if (!isStarted) {
       setIsStarted(true);
     }
     setIsRecording(!isRecording);
+    recordWebcam.start;
+  };
+
+  const handleRecordingStop = () => {
+    setIsRecording(!isRecording);
+    recordWebcam.stop();
   };
 
   return (
     <>
       <div className="flex flex-col h-full">
-        <div className="relative">
+        <div className="relative h-full">
+          <video
+            className="aspect-video object-cover h-full mx-auto"
+            ref={recordWebcam.webcamRef}
+            style={{
+              display: `${
+                recordWebcam.status === CAMERA_STATUS.OPEN ||
+                recordWebcam.status === CAMERA_STATUS.RECORDING
+                  ? "block"
+                  : "none"
+              }`,
+            }}
+            autoPlay
+            muted
+          />
           {isStarted && (
             <div className="absolute inset-x-0 top-4 flex justify-center">
               <RecordingCounter isStopped={isStarted && !isRecording} />
@@ -46,14 +88,21 @@ const VideoRecording: React.FC = () => {
             className="flex justify-center items-end py-6"
             style={{ flex: 2 }}
           >
-            <button type="button" onClick={startRecording}>
-              {isRecording ? <StartRecordingIcon /> : <InRecordingIcon />}
-            </button>
+            {isRecording ? (
+              <button className="z-50" onClick={() => handleRecordingStop()}>
+                <InRecordingIcon />
+              </button>
+            ) : (
+              <button className="z-50" onClick={() => handleRecordingStart()}>
+                <StartRecordingIcon />
+              </button>
+            )}
           </div>
           {isStarted && !isRecording && (
             <div className="absolute right-[1.31rem]">
               <button
                 type="button"
+                onClick={getRecordingFileHooks}
                 className="bg-[#FFF] rounded-2xl py-1 px-3 text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem]"
               >
                 Done

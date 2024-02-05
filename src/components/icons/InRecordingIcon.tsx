@@ -1,3 +1,5 @@
+import React from "react";
+
 const InRecordingIcon: React.FC = () => {
   return (
     <>
@@ -8,7 +10,7 @@ const InRecordingIcon: React.FC = () => {
         viewBox="0 0 64 64"
         fill="none"
       >
-        <circle cx="32" cy="32" r="28" fill="white" />
+        <rect x="20" y="20" width="24" height="24" rx="8" fill="#ED2B2B" />
         <circle cx="32" cy="32" r="31" stroke="white" strokeWidth="2" />
       </svg>
     </>
