@@ -11,7 +11,7 @@ const BackButton = () => {
       onClick={goBack}
       className="text-[#FFF] text-xs font-medium leading-[125%] tracking-[-0.0175rem]"
     >
-      Back to page
+      Back
     </button>
   );
 };

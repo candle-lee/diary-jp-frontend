@@ -54,9 +54,9 @@ const RecordingCounter = ({ isStopped }: { isStopped: boolean }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-8 sm:gap-16">
       <div
-        className={`flex justify-center gap-[0.12rem] bg-[${
-          !isStopped ? "#ED2B2B" : "#000"
-        }] rounded-2xl py-[0.12rem] px-[0.5rem]`}
+        className={`flex justify-center gap-[0.12rem] ${
+          !isStopped ? "bg-red-600" : "bg-[#000]"
+        } rounded-2xl py-[0.12rem] px-[0.5rem]`}
       >
         {timeUnits.map((unit, index, arr) => (
           <span
