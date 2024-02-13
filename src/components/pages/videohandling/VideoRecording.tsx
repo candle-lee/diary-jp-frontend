@@ -50,6 +50,11 @@ const VideoRecording: React.FC = () => {
     recordWebcam.stop();
   };
 
+  const handleRecordingFinish = () => {
+    navigate("/video-list");
+    recordWebcam.stop();
+  };
+
   return (
     <>
       <div className="flex flex-col h-full">
@@ -127,7 +132,7 @@ const VideoRecording: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/video-list")}
+                onClick={() => handleRecordingFinish()}
                 className="border border-solid border-white py-1 px-3 bg-white text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
               >
                 Done
