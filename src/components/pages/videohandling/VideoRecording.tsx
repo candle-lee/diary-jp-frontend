@@ -42,7 +42,7 @@ const VideoRecording: React.FC = () => {
     try {
       const blob = await recordWebcam.getRecording();
       const formData = new FormData();
-      formData.append("file", blob, "recorded_video.mp4");
+      formData.append("file", blob, Date.now().toString());
       mutate(formData);
     } catch (error) {
       console.error("Error getting recording:", error);
