@@ -40,7 +40,7 @@ const VideoRecording: React.FC = () => {
 
   const getRecordingFileHooks = async () => {
     try {
-      const blob = await recordWebcam.getRecording();
+      const blob = (await recordWebcam.getRecording()) as unknown as Blob;
       const formData = new FormData();
       formData.append("file", blob, Date.now().toString());
       mutate(formData);

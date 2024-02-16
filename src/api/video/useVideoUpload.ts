@@ -1,5 +1,5 @@
 import { httpAxios } from "../instance"
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -8,7 +8,6 @@ const useVideoUpload = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const uploadVideo = (formData :any) => axios.post('/media', formData);
     const navigate = useNavigate();
-    const queryClient = useQueryClient()
     const {mutate, isLoading} = useMutation({
         mutationFn: uploadVideo,
         onSuccess: ({data}) => {
