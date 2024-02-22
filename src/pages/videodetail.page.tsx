@@ -6,6 +6,7 @@ import { useClickAway } from "@uidotdev/usehooks";
 import { TitleEdit } from "../components/pages/videodetail";
 import { useVideoInfo } from "../api/video/useVideoInfo";
 import { CircleSpinner } from "../components/common";
+import { converToDateTime } from "../utils";
 
 type VideoParams = {
   videoId: string | undefined;
@@ -99,7 +100,7 @@ const VideoDetailPage: React.FC = () => {
                 </div>
               </div>
               <p className="text-[#FFF] text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
-                { new Date(parseInt(data.url, 10)).toUTCString() }
+                { converToDateTime(data.url) }
               </p>
               <p className="text-white text-opacity-50 text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
                 {data.size}

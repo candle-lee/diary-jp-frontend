@@ -47,4 +47,10 @@ export interface IMedia {
 
 export interface IMediaState {
     totalSize: number;
+    media: IMedia | null;
+}
+
+export interface IUpdateTitle {
+    title: string;
+    url: string | undefined;
 }

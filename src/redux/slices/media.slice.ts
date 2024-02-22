@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IMediaState } from '../../constant/interfaces';
+import { IMedia, IMediaState } from '../../constant/interfaces';
 
 const initialState: IMediaState = {
-    totalSize: 0
+    totalSize: 0,
+    media: null
 }
 
 export const mediaSlice = createSlice({
@@ -12,8 +13,12 @@ export const mediaSlice = createSlice({
         setSize(state: IMediaState, { payload }: PayloadAction<number>) {
             state.totalSize = payload;
         },
+        setMedia(state: IMediaState, { payload }: PayloadAction<IMedia>) {
+            state.media = payload;
+        }
     },
 })
 
-export const { setSize } = mediaSlice.actions
-export const mediaReducer = mediaSlice.reducer
+export const { setSize } = mediaSlice.actions;
+export const { setMedia } = mediaSlice.actions;
+export const mediaReducer = mediaSlice.reducer;

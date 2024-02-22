@@ -1,13 +1,11 @@
 import { IMedia } from "../../../constant/interfaces";
+import { converToDateTime } from "../../../utils";
 
 interface VideoCardProps {
   media: IMedia;
 }
 
 const VideoCard: React.FC<VideoCardProps> = ({media}) => {
-  const timestamp = parseInt(media.url, 10);
-
-  const date = new Date(timestamp);
   return (
     <div className="flex items-center bg-[url('/src/assets/img/card-background.png')] h-24 lg:h-48 bg-cover border border-solid border-white border-opacity-15 flex-shrink-0 rounded-xl bg-center  bg-no-repeat cursor-pointer">
       <div className="flex flex-col gap-[0.19rem] pl-5">
@@ -15,7 +13,7 @@ const VideoCard: React.FC<VideoCardProps> = ({media}) => {
           {media.title}
         </p>
         <p className="text-[#FFF] text-xs font-normal leading-[100%]">
-          { date.toUTCString() }
+          { converToDateTime(media.url) }
         </p>
       </div>
     </div>

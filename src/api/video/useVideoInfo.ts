@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpAxios } from '../instance';
+import { useAppDispatch } from '../../redux/hooks';
+import { setMedia } from '../../redux/slices/media.slice';
 
 export const useVideoInfo = (mediaId: string | undefined) => {
-    console.log(mediaId);
   const axios = httpAxios();
 
   // Correctly defined fetch function inside the hook
@@ -20,6 +21,9 @@ export const useVideoInfo = (mediaId: string | undefined) => {
     suspense: true, // Enables the use of Suspense
   });
 
+  const dispatch = useAppDispatch();
+  dispatch(setMedia(data));
+  
   return {
     data,
     error: error, // Optional chaining in case error is undefined
