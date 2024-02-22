@@ -8,7 +8,6 @@ import { useAppSelector } from "../redux/hooks";
 const VideoListPage: React.FC = () => {
   const navigate = useNavigate();
   const {medias, isLoading, error} = useGetMedias();
-  console.log(medias);
   const totalSize = useAppSelector(state => state.mediaReducer.totalSize);
   if (isLoading) {
     return <CircleSpinner />;

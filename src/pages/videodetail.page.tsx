@@ -1,9 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import VideoPlayer from "../components/common/VideoPlayer";
 import SeeMoreIcon from "../components/icons/SeeMoreIcon";
 import { useState } from "react";
 import { useClickAway } from "@uidotdev/usehooks";
 import { TitleEdit } from "../components/pages/videodetail";
+import { useVideoInfo } from "../api/video/useVideoInfo";
+import { CircleSpinner } from "../components/common";
+
+type VideoParams = {
+  videoId: string | undefined;
+};
 
 const VideoDetailPage: React.FC = () => {
   const navigate = useNavigate();
@@ -13,6 +19,18 @@ const VideoDetailPage: React.FC = () => {
   const ref = useClickAway<HTMLDivElement>(() => {
     setIsDropdownOpen(false);
   });
+
+  const { videoId } = useParams<VideoParams>();
+  const { data, error, isLoading } = useVideoInfo(videoId);
+
+  if (isLoading) {
+    return <CircleSpinner />;
+  }
+
+  if(error) {
+    console.log(error);
+    return;
+  }
 
   return (
     <div className="bg-[#000] flex justify-center h-full">
@@ -34,7 +52,7 @@ const VideoDetailPage: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center">
                 <p className="text-[#FFF] text-4xl font-bold leading-[125%]">
-                  Movie Title
+                  {data.title}
                 </p>
                 <div className="relative">
                   <button
@@ -81,10 +99,10 @@ const VideoDetailPage: React.FC = () => {
                 </div>
               </div>
               <p className="text-[#FFF] text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
-                Jan 1st, 2024
+                { new Date(parseInt(data.url, 10)).toUTCString() }
               </p>
               <p className="text-white text-opacity-50 text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
-                504MB
+                {data.size}
               </p>
             </div>
           </div>
