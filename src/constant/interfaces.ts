@@ -38,3 +38,11 @@ export interface IRecorder {
 export interface IMediaState {
     totalSize: number
 }
+
+export interface IMedia {
+    id: number;
+    title: string;
+    url: string;
+    size: number;
+    userId: number;
+}

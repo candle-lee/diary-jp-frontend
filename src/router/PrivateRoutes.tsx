@@ -13,7 +13,6 @@ const PrivateRoutes = () => {
   const isAutherized = useAppSelector(
     (state) => state.authReducer.isAutherized
   );
-
   return {
     element: <Layout />,
     children: [

@@ -7,7 +7,7 @@ import { PrivateRoutes, PublicRoutes } from "./router";
 function App() {
   const client = new QueryClient();
   const router = createBrowserRouter([PrivateRoutes(), PublicRoutes()]);
-
+  
   return (
     <>
       <QueryClientProvider client={client}>

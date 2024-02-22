@@ -28,6 +28,7 @@ const VideoRecording: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
   const navigate = useNavigate();
+
   useEffect(() => {
     recordWebcam.open();
   }, []);
