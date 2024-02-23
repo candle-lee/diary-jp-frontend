@@ -1,10 +1,10 @@
-// import { useGetProfile } from "../../api/auth"
+// import { useGetAuthProfile } from "../../api/auth"
 import { useLogout } from "../../api/auth";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAutherStatus } from "../../redux/slices/auth.slice";
 
 const AutherizedUser: React.FC = () => {
-  // const user = useGetProfile();
+  // const user = useGetAuthProfile();
   const dispatch = useAppDispatch();
   const logout = useLogout();
   const handleLogout = () => {

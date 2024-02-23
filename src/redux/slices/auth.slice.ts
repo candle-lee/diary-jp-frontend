@@ -21,7 +21,7 @@ const initialState: IAuthState = {
       email: '',
     },
     access_token: loadStateFromLocalStorage() ?? '',
-    isAutherized: loadStateFromLocalStorage() ? true : false,
+    isAutherized: false,
     isCookie: hasPasscodeCookie(),
 }
 
@@ -36,8 +36,9 @@ export const authSlice = createSlice({
       }
     },
     setAuthenticatedUser: (state: IAuthState, { payload }: PayloadAction<IAuther>) => {
-      state.auth.username = payload.username
-      state.auth.email = payload.email
+      state.auth.username = payload.username;
+      state.auth.email = payload.email;
+      state.isAutherized = true;
     },
     setIsCookieStatus: (state:IAuthState, {payload}: PayloadAction<boolean>) => {
       state.isCookie = payload;

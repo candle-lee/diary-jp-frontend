@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { httpAxios } from "../instance"
+import { useAppDispatch } from "../../redux/hooks";
+import { setAuthenticatedUser } from "../../redux/slices/auth.slice";
 
-const useGetProfile = () => {
+const useGetAuthProfile = () => {
+    const dispatch = useAppDispatch();
     const axios = httpAxios();
     const getProfile = () => axios.get('/auth/profile');
     const {data} = useQuery({
@@ -12,8 +15,8 @@ const useGetProfile = () => {
     const user = {
         username: data?.data.username,
         email: data?.data.email,
-    }
-    return user;
+    };
+    dispatch(setAuthenticatedUser(user));
 }
 
-export default useGetProfile;
+export default useGetAuthProfile;

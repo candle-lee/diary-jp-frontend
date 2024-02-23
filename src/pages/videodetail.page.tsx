@@ -7,12 +7,14 @@ import { TitleEdit } from "../components/pages/videodetail";
 import { useVideoInfo } from "../api/video/useVideoInfo";
 import { CircleSpinner } from "../components/common";
 import { converToDateTime } from "../utils";
+import { useGetAuthProfile } from "../api/auth";
 
 type VideoParams = {
   videoId: string | undefined;
 };
 
 const VideoDetailPage: React.FC = () => {
+  useGetAuthProfile();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isTitleEdit, setIsTitleEdit] = useState(false);

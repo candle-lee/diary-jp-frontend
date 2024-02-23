@@ -4,8 +4,10 @@ import AddIcon from "../components/icons/AddIcon";
 import { useGetMedias } from "../api/video";
 import { CircleSpinner } from "../components/common";
 import { useAppSelector } from "../redux/hooks";
+import { useGetAuthProfile } from "../api/auth";
 
 const VideoListPage: React.FC = () => {
+  useGetAuthProfile()
   const navigate = useNavigate();
   const {medias, isLoading, error} = useGetMedias();
   const totalSize = useAppSelector(state => state.mediaReducer.totalSize);

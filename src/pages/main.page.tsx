@@ -1,3 +1,4 @@
+import { useGetAuthProfile } from "../api/auth";
 import {
   AvatarCard,
   Recommend,
@@ -9,6 +10,7 @@ import {
 } from "../components/pages";
 
 const MainPage: React.FC = () => {
+  useGetAuthProfile();
   return (
     <div className="bg-[#F4F7FE]">
       <div className="flex justify-end py-5">

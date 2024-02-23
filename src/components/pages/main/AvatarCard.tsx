@@ -1,9 +1,9 @@
-import { useGetProfile } from "../../../api/auth";
+import { useGetAuthProfile } from "../../../api/auth";
 import { DefaultAvatar } from "../../common";
 import QuantityBox from "./QuantityBox";
 
 const AvatarCard: React.FC = () => {
-  const data = useGetProfile();
+  const data = useGetAuthProfile();
   return (
     <div className="w-full h-[365px] flex-shrink-0 rounded-[20px] bg-[#FFF] px-[17px] pt-[18px]">
       <div className="bg-[url('/src/assets/img/avatar-background.png')] bg-cover bg-gray-50 w-full h-[131px] flex-shrink-0 rounded-2xl bg-center  bg-no-repeat flex justify-center">
