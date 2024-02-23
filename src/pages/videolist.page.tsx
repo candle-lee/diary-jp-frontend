@@ -1,10 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { VideoCard } from "../components/pages/videolist";
 import AddIcon from "../components/icons/AddIcon";
+import { useGetMedias } from "../api/video";
+import { CircleSpinner } from "../components/common";
+import { useAppSelector } from "../redux/hooks";
+import { useGetAuthProfile } from "../api/auth";
 
 const VideoListPage: React.FC = () => {
+  useGetAuthProfile()
   const navigate = useNavigate();
-  const videoId = 123;
+  const {medias, isLoading, error} = useGetMedias();
+  const totalSize = useAppSelector(state => state.mediaReducer.totalSize);
+  const auth = useAppSelector(state => state.authReducer.auth);
+  if (isLoading) {
+    return <CircleSpinner />;
+  }
+  if (error) {
+    console.log(error);
+    return;
+  }
   return (
     <div className="bg-[#000] flex justify-center h-full">
       <div className="w-full max-w-3xl px-6">
@@ -16,23 +30,23 @@ const VideoListPage: React.FC = () => {
                   Hello,&nbsp;
                 </p>
                 <p className="text-[#FFF] lg:text-7xl text-5xl font-normal leading-[100%]">
-                  Kota
+                  {auth.username}
                 </p>
               </div>
               <p className="text-[#FFF] text-xs lg:text-base font-normal leading-[125%] tracking-[-0.015rem] lg:tracking-[-0.02rem]">
-                126.3GB / 200GB
+                 {totalSize} / 200GB
               </p>
             </div>
-            <div className="lg:hidden">
+            <div className="lg:hidden cursor-pointer" onClick={() => navigate('/video-recording')}>
               <AddIcon />
             </div>
             <div className="hidden lg:flex">
-              <a
-                href="/video-recording"
-                className="flex h-10 py-1 px-3 items-center bg-[#FFF] rounded-xl"
+              <div
+                onClick={() => navigate('/video-recording')}
+                className="flex h-10 py-1 px-3 items-center bg-[#FFF] rounded-xl cursor-pointer"
               >
                 Add your data
-              </a>
+              </div>
             </div>
           </div>
           {/* <div className="border border-solid border-white border-opacity-15 flex justify-center items-center rounded-xl py-[2.25rem] mt-12 lg:py-14 lg:mt-14">
@@ -50,20 +64,15 @@ const VideoListPage: React.FC = () => {
           </div> */}
           <div className="flex gap-6 mt-12 lg:mt-14">
             <div className="flex flex-col gap-[0.38rem] lg:gap-2 w-full">
-              <div onClick={() => navigate(`/video-list/${videoId}`)}>
-                <VideoCard />
-              </div>
-              <div>
-                <VideoCard />
-              </div>
-              <div>
-                <VideoCard />
-              </div>
-              <div>
-                <VideoCard />
-              </div>
+              {
+                medias.map(media => (
+                  <div onClick={() => navigate(`/video-list/${media.url}`)} key={media.url}>
+                    <VideoCard media={media} />
+                  </div>
+                ))
+              }
             </div>
-            <div className="flex flex-col gap-20 lg:gap-44">
+            {/* <div className="flex flex-col gap-20 lg:gap-44">
               <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
                 2024
               </div>
@@ -88,7 +97,7 @@ const VideoListPage: React.FC = () => {
                   id="videoRange"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

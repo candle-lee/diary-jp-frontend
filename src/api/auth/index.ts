@@ -1,5 +1,5 @@
 export { default as useForgetPassword } from './useForgetPassword';
-export { default as useGetProfile } from './useGetAutherProfile';
+export { default as useGetAuthProfile } from './useGetAutherProfile';
 export { default as useIsAutherized } from './useIsAutherized';
 export { default as useLoginUser } from './useLoginUser';
 export { default as useLogout } from './useLogout';

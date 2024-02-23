@@ -1,15 +1,15 @@
 import { httpAxios } from "../instance"
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { IUpdateTitle } from "../../constant/interfaces";
 
-const useVideoUpload = () => {
+const useUpdateTitle = () => {
     const axios = httpAxios();
+    const queryClient = useQueryClient();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const uploadVideo = (formData :any) => axios.post('/media', formData);
-    const navigate = useNavigate();
+    const updateTitle = (formData : IUpdateTitle) => axios.post('/media/update-title', formData);
     const {mutate, isLoading} = useMutation({
-        mutationFn: uploadVideo,
+        mutationFn: updateTitle,
         onSuccess: ({data}) => {
             toast.success(`${data['message']}`, {
                 hideProgressBar: true,
@@ -18,8 +18,7 @@ const useVideoUpload = () => {
                 position: "top-right",
                 className: "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur"
             });
-            // queryClient.invalidateQueries({ queryKey: ['getMedias'] });
-            navigate("/video-list");
+            queryClient.invalidateQueries({ queryKey: ['videoInfo', data['updatedMedia'].url] });
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onError: (error:any) => {
@@ -35,4 +34,4 @@ const useVideoUpload = () => {
     return {mutate, isLoading}
 }
 
-export default useVideoUpload;
+export default useUpdateTitle;

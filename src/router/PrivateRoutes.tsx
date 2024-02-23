@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout";
-import { useAppSelector } from "../redux/hooks";
 
 const LazyVerifyUserPage = lazy(() => import("../pages/verifyuser.page"));
 const LazyMainPage = lazy(() => import("../pages/main.page"));
@@ -10,52 +9,29 @@ const LazyVideoListPage = lazy(() => import("../pages/videolist.page"));
 const LazyVideoDetailPage = lazy(() => import("../pages/videodetail.page"));
 
 const PrivateRoutes = () => {
-  const isAutherized = useAppSelector(
-    (state) => state.authReducer.isAutherized
-  );
 
   return {
     element: <Layout />,
     children: [
       {
         path: "/verify-user",
-        element: isAutherized ? (
-          <LazyVerifyUserPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
+        element: <LazyVerifyUserPage />
       },
       {
         path: "/main",
-        element: isAutherized ? (
-          <LazyMainPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
+        element: <LazyMainPage />
       },
       {
         path: "/video-recording",
-        element: isAutherized ? (
-          <LazyVideoHandlingPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
+        element: <LazyVideoHandlingPage />
       },
       {
         path: "/video-list",
-        element: isAutherized ? (
-          <LazyVideoListPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
+        element: <LazyVideoListPage />
       },
       {
         path: "/video-list/:videoId",
-        element: isAutherized ? (
-          <LazyVideoDetailPage />
-        ) : (
-          <Navigate to="/signin" replace />
-        ),
+        element: <LazyVideoDetailPage />
       },
       { path: "*", element: <Navigate to="/signin" replace /> },
     ],

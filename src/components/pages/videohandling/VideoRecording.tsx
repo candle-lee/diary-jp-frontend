@@ -5,6 +5,8 @@ import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import CrossIcon from "../../icons/CrossIcon";
 import { useNavigate } from "react-router-dom";
 import { useRecordWebcam, CAMERA_STATUS, FileType } from "react-record-webcam";
+import { useVideoUpload } from "../../../api/video";
+import { CircleSpinner } from "../../common";
 
 interface IVideoOption {
   filename: string;
@@ -26,13 +28,27 @@ const VideoRecording: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const recordWebcam = useRecordWebcam(OPTIONS);
   const navigate = useNavigate();
-  const getRecordingFileHooks = async () => {
-    const blob = await recordWebcam.getRecording();
-    console.log({ blob });
-  };
+
   useEffect(() => {
     recordWebcam.open();
   }, []);
+
+  const { mutate, isLoading } = useVideoUpload();
+
+  if (isLoading) {
+    return <CircleSpinner />;
+  }
+
+  const getRecordingFileHooks = async () => {
+    try {
+      const blob = (await recordWebcam.getRecording()) as unknown as Blob;
+      const formData = new FormData();
+      formData.append("file", blob, Date.now().toString());
+      mutate(formData);
+    } catch (error) {
+      console.error("Error getting recording:", error);
+    }
+  };
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
@@ -42,7 +58,7 @@ const VideoRecording: React.FC = () => {
       setIsStarted(true);
     }
     setIsRecording(!isRecording);
-    recordWebcam.start;
+    recordWebcam.start();
   };
 
   const handleRecordingStop = () => {
@@ -72,6 +88,16 @@ const VideoRecording: React.FC = () => {
             }}
             autoPlay
             muted
+          />
+          <video
+            className="aspect-video object-cover h-full mx-auto"
+            ref={recordWebcam.previewRef}
+            style={{
+              display: `${
+                recordWebcam.status === CAMERA_STATUS.PREVIEW ? "block" : "none"
+              }`,
+            }}
+            controls
           />
           {isStarted && (
             <div className="absolute inset-x-0 top-4 flex justify-center">

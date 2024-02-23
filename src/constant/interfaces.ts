@@ -14,7 +14,9 @@ export interface IInputItem {
     inputName: string;
     description: string;
     placeholderText: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error?: any;
 }
 
@@ -35,6 +37,20 @@ export interface IRecorder {
     previewRef: React.RefObject<HTMLVideoElement>;
 }
 
+export interface IMedia {
+    id: number;
+    title: string;
+    url: string;
+    size: number;
+    userId: number;
+}
+
 export interface IMediaState {
-    totalSize: number
+    totalSize: number;
+    media: IMedia | null;
+}
+
+export interface IUpdateTitle {
+    title: string;
+    url: string | undefined;
 }
