@@ -11,6 +11,7 @@ const VideoListPage: React.FC = () => {
   const navigate = useNavigate();
   const {medias, isLoading, error} = useGetMedias();
   const totalSize = useAppSelector(state => state.mediaReducer.totalSize);
+  const auth = useAppSelector(state => state.authReducer.auth);
   if (isLoading) {
     return <CircleSpinner />;
   }
@@ -29,23 +30,23 @@ const VideoListPage: React.FC = () => {
                   Hello,&nbsp;
                 </p>
                 <p className="text-[#FFF] lg:text-7xl text-5xl font-normal leading-[100%]">
-                  Kota
+                  {auth.username}
                 </p>
               </div>
               <p className="text-[#FFF] text-xs lg:text-base font-normal leading-[125%] tracking-[-0.015rem] lg:tracking-[-0.02rem]">
                  {totalSize} / 200GB
               </p>
             </div>
-            <div className="lg:hidden">
+            <div className="lg:hidden cursor-pointer" onClick={() => navigate('/video-recording')}>
               <AddIcon />
             </div>
             <div className="hidden lg:flex">
-              <a
-                href="/video-recording"
-                className="flex h-10 py-1 px-3 items-center bg-[#FFF] rounded-xl"
+              <div
+                onClick={() => navigate('/video-recording')}
+                className="flex h-10 py-1 px-3 items-center bg-[#FFF] rounded-xl cursor-pointer"
               >
                 Add your data
-              </a>
+              </div>
             </div>
           </div>
           {/* <div className="border border-solid border-white border-opacity-15 flex justify-center items-center rounded-xl py-[2.25rem] mt-12 lg:py-14 lg:mt-14">
