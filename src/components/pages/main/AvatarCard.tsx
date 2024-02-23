@@ -1,9 +1,7 @@
-import { useGetAuthProfile } from "../../../api/auth";
 import { DefaultAvatar } from "../../common";
 import QuantityBox from "./QuantityBox";
 
 const AvatarCard: React.FC = () => {
-  const data = useGetAuthProfile();
   return (
     <div className="w-full h-[365px] flex-shrink-0 rounded-[20px] bg-[#FFF] px-[17px] pt-[18px]">
       <div className="bg-[url('/src/assets/img/avatar-background.png')] bg-cover bg-gray-50 w-full h-[131px] flex-shrink-0 rounded-2xl bg-center  bg-no-repeat flex justify-center">
@@ -13,7 +11,7 @@ const AvatarCard: React.FC = () => {
       </div>
       <div>
         <div className="text-center text-[#2B3674] font-bold font-dm-sans text-xl leading-[32px] tracking-[-0.4px] mt-[56px]">
-          {data.username}
+          "Username"
         </div>
         <div className="text-center text-[#A3AED0] font-bold text-[14px] leading-6 tracking-[-0.28px] ">
           How was your day today?
