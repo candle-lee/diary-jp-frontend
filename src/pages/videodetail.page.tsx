@@ -8,10 +8,7 @@ import { useVideoInfo } from "../api/video/useVideoInfo";
 import { CircleSpinner } from "../components/common";
 import { converToDateTime } from "../utils";
 import { useGetAuthProfile } from "../api/auth";
-
-type VideoParams = {
-  videoId: string | undefined;
-};
+import { VideoParams } from "../constant/interfaces";
 
 const VideoDetailPage: React.FC = () => {
   useGetAuthProfile();
