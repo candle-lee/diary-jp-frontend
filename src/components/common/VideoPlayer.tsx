@@ -1,15 +1,17 @@
-import VideoPlayIcon from "../icons/VideoPlayIcon";
+import { useParams } from "react-router-dom";
+import { VideoParams } from "../../constant/interfaces";
 
 const VideoPlayer: React.FC = () => {
+  const { videoId } = useParams<VideoParams>();
   return (
     <div className="flex flex-col gap-6">
-      <video className="h-full w-full rounded-lg border border-solid border-white border-opacity-15">
+      <video className="h-full w-full rounded-lg border border-solid border-white border-opacity-15" controls>
         <source
-          src="https://docs.material-tailwind.com/demo.mp4"
+          src={`https://storage.cloud.google.com/udata-test/media/${videoId}`}
           type="video/mp4"
         />
       </video>
-      <div className="flex justify-between gap-[0.62rem] w-full items-center">
+      {/* <div className="flex justify-between gap-[0.62rem] w-full items-center">
         <div>
           <VideoPlayIcon />
         </div>
@@ -37,7 +39,7 @@ const VideoPlayer: React.FC = () => {
             <p>13</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

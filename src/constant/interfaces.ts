@@ -54,3 +54,7 @@ export interface IUpdateTitle {
     title: string;
     url: string | undefined;
 }
+
+export type VideoParams = {
+  videoId: string | undefined;
+};

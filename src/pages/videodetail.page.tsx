@@ -8,10 +8,8 @@ import { useVideoInfo } from "../api/video/useVideoInfo";
 import { CircleSpinner } from "../components/common";
 import { converToDateTime } from "../utils";
 import { useGetAuthProfile } from "../api/auth";
-
-type VideoParams = {
-  videoId: string | undefined;
-};
+import { VideoParams } from "../constant/interfaces";
+import useVideoDelete from "../api/video/useVideoDelete";
 
 const VideoDetailPage: React.FC = () => {
   useGetAuthProfile();
@@ -26,7 +24,9 @@ const VideoDetailPage: React.FC = () => {
   const { videoId } = useParams<VideoParams>();
   const { data, error, isLoading } = useVideoInfo(videoId);
 
-  if (isLoading) {
+  const {mutate, isLoading: deleteLoading} = useVideoDelete();
+
+  if (isLoading || deleteLoading) {
     return <CircleSpinner />;
   }
 
@@ -172,6 +172,7 @@ const VideoDetailPage: React.FC = () => {
               </button>
               <button
                 type="button"
+                onClick={() => mutate(videoId)}
                 className="border border-solid border-white py-1 px-3 bg-white text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
               >
                 Yes, I delete it.
