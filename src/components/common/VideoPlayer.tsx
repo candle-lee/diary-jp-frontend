@@ -1,13 +1,21 @@
 import { useParams } from "react-router-dom";
 import { VideoParams } from "../../constant/interfaces";
+import { useFetchVideo } from "../../api/video";
 
 const VideoPlayer: React.FC = () => {
   const { videoId } = useParams<VideoParams>();
+  const {data: videoBlob, isLoading, error} = useFetchVideo(videoId);
+
+    // Create a URL from the video blob
+  const videoUrl = videoBlob ? URL.createObjectURL(videoBlob) : undefined;
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading video</div>;  
   return (
     <div className="flex flex-col gap-6">
       <video className="h-full w-full rounded-lg border border-solid border-white border-opacity-15" controls>
         <source
-          src={`https://storage.cloud.google.com/udata-test/media/${videoId}`}
+          src={videoUrl}
           type="video/mp4"
         />
       </video>
