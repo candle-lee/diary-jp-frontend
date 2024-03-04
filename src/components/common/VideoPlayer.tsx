@@ -6,11 +6,11 @@ const VideoPlayer: React.FC = () => {
   const { videoId } = useParams<VideoParams>();
   const {data: videoBlob, isLoading, error} = useFetchVideo(videoId);
 
-    // Create a URL from the video blob
+  // Create a URL from the video blob
   const videoUrl = videoBlob ? URL.createObjectURL(videoBlob) : undefined;
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading video</div>;  
+  if (error) return <div>Error loading video</div>;
   return (
     <div className="flex flex-col gap-6">
       <video className="h-full w-full rounded-lg border border-solid border-white border-opacity-15" controls>
