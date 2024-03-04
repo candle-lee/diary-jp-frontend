@@ -32,7 +32,7 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
   // const handleDownloadClick = () => {
   //   setMediaId(url);
   // };
-  const { data: videoData, isError } = useFetchVideo(mediaId);
+  const { data: videoData } = useFetchVideo(mediaId);
 
   const [isPlayModalOpen, setIsPlayModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -104,7 +104,6 @@ const VideoHistoryItem: React.FC<IVideoHistoryItem> = ({
         onClose={closePlayModal}
       >
         <div className="p-2">
-          {isError && <p>Error loading video</p>}
           {videoData && (
             <>
               <video controls className="w-full mb-2" height="800">
