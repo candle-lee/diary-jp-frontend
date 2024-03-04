@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-ol {
+    list-style-type: none; /* Remove default numbering */
+    counter-reset: item; /* Create a new instance of the counter */
+}
+
+.custom-ol li {
+    counter-increment: item; /* Increment the counter */
+}
+
+.custom-ol li::before {
+    content: "(" counter(item) ") "; /* Format the counter */
+}
+
 .google-auth-button {
     border-radius: 0.75rem !important;
     border: none !important;
