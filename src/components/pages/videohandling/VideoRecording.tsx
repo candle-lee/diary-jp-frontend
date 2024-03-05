@@ -4,16 +4,10 @@ import InRecordingIcon from "../../icons/InRecordingIcon";
 import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import CrossIcon from "../../icons/CrossIcon";
 import { useNavigate } from "react-router-dom";
-import { useRecordWebcam, CAMERA_STATUS, FileType } from "react-record-webcam";
+import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
 import { useVideoUpload } from "../../../api/video";
 import { CircleSpinner } from "../../common";
-
-interface IVideoOption {
-  filename: string;
-  fileType: FileType;
-  width: number;
-  height: number;
-}
+import { IVideoOption } from "../../../constant/interfaces";
 
 const OPTIONS: IVideoOption = {
   filename: "test-filename",

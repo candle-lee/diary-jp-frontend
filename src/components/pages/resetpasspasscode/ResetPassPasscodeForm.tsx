@@ -2,7 +2,7 @@ import InputField from "../../common/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSpinner } from "../../common";
+import { BackButton, ButtonSpinner } from "../../common";
 import { useSendResetPassPasscode } from "../../../api/auth";
 
 const ResetPassPasscodeForm: React.FC = () => {
@@ -34,8 +34,11 @@ const ResetPassPasscodeForm: React.FC = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900">
-      <div className="bg-white w-[410px] h-[610px]">
+    <div className="flex flex-col gap-[1.12rem]">
+      <div>
+        <BackButton />
+      </div>
+      <div className="flex items-center justify-center sm:px-0 lg:py-0">
         <div className="">
           <div className="w-full h-[56px]">
             <h1 className="text-3xl font-bold leading-[36px] tracking-tight text-[#2B3674] dark:text-white">
@@ -111,7 +114,7 @@ const ResetPassPasscodeForm: React.FC = () => {
           </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

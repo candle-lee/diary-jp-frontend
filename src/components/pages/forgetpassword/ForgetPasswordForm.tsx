@@ -1,8 +1,6 @@
 import React from "react";
-import { ButtonSpinner } from "../../common";
-import InputField from "../../common/InputField";
-import { useForgetPasswordForm } from "./useForgetPasswordForm";
-import BackButton from "../../common/BackButton";
+import { ButtonSpinner, InputField, BackButton  } from "../../common";
+import useForgetPasswordForm from "./useForgetPasswordForm";
 
 const ForgetPasswordForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading } =
@@ -10,6 +8,9 @@ const ForgetPasswordForm: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-[1.12rem]">
+      <div>
+        <BackButton />
+      </div>
       <div className="flex items-center justify-center sm:px-0 lg:py-0">
         <form
           className="w-full max-w-md xl:max-w-xl"
@@ -46,9 +47,6 @@ const ForgetPasswordForm: React.FC = () => {
             </div>
           </div>
         </form>
-      </div>
-      <div>
-        <BackButton />
       </div>
     </div>
   );

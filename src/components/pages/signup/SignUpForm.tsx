@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { InputField, ButtonSpinner } from "../../common";
 import PasswordInputField from "../../common/PasswordInputField";
-import { useSignUpForm } from "./useSignUpForm";
+import useSignUpForm from "./useSignUpForm";
 
 const SignUpForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading } =
@@ -83,7 +83,6 @@ const SignUpForm: React.FC = () => {
                 </p>
               )}
             </div>
-
             {isLoading ? (
               <ButtonSpinner />
             ) : (

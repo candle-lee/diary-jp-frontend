@@ -3,11 +3,7 @@ import useUpdateTitle from "../../../api/video/useUpdateTitle";
 import { useAppSelector } from "../../../redux/hooks";
 import { converToDateTime } from "../../../utils";
 import { CircleSpinner } from "../../common";
-import { IUpdateTitle } from '../../../constant/interfaces';
-
-interface TitleEditProps {
-  setIsTitleEdit: (value: boolean) => void;
-}
+import { IUpdateTitle, TitleEditProps } from '../../../constant/interfaces';
 
 const TitleEdit: React.FC<TitleEditProps> = ({ setIsTitleEdit }) => {
   const media = useAppSelector(state => state.mediaReducer.media);

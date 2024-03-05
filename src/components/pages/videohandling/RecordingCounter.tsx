@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-
-interface CountUpTime {
-  hours: string;
-  minutes: string;
-  seconds: string;
-}
+import { CountUpTime } from "../../../constant/interfaces";
 
 type CountUpTimeKey = keyof CountUpTime;
 

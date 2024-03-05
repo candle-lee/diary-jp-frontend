@@ -6,7 +6,7 @@ import { useClickAway } from "@uidotdev/usehooks";
 import { TitleEdit } from "../components/pages/videodetail";
 import { useVideoInfo } from "../api/video/useVideoInfo";
 import { CircleSpinner } from "../components/common";
-import { converToDateTime } from "../utils";
+import { converToDateTime, convertBytes } from "../utils";
 import { useGetAuthProfile } from "../api/auth";
 import { VideoParams } from "../constant/interfaces";
 import useVideoDelete from "../api/video/useVideoDelete";
@@ -105,7 +105,7 @@ const VideoDetailPage: React.FC = () => {
                 { converToDateTime(data.url) }
               </p>
               <p className="text-white text-opacity-50 text-xs font-normal leading-[100%] lg:text-sm lg:leading-[125%] lg:tracking-[-0.0175rem]">
-                {data.size}
+                {convertBytes(data.size)}
               </p>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useGetMedias } from "../api/video";
 import { CircleSpinner } from "../components/common";
 import { useAppSelector } from "../redux/hooks";
 import { useGetAuthProfile } from "../api/auth";
+import { convertBytes } from "../utils";
 
 const VideoListPage: React.FC = () => {
   useGetAuthProfile()
@@ -34,7 +35,7 @@ const VideoListPage: React.FC = () => {
                 </p>
               </div>
               <p className="text-[#FFF] text-xs lg:text-base font-normal leading-[125%] tracking-[-0.015rem] lg:tracking-[-0.02rem]">
-                 {totalSize} / 200GB
+                 {convertBytes(totalSize)} / 200GB
               </p>
             </div>
             <div className="lg:hidden cursor-pointer" onClick={() => navigate('/video-recording')}>
