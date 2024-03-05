@@ -83,7 +83,6 @@ const SignUpForm: React.FC = () => {
                 </p>
               )}
             </div>
-
             {isLoading ? (
               <ButtonSpinner />
             ) : (

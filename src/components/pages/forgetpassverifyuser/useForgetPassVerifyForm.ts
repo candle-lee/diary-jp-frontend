@@ -10,9 +10,6 @@ const useForgetPassVerifyForm = () => {
     passcode: z
       .string()
       .min(5, { message: "Enter at least 5 characters for the passcode." }),
-    isAccepted: z.literal(true, {
-      errorMap: () => ({ message: "You must accept Terms and Conditions" }),
-    }),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
@@ -24,7 +21,6 @@ const useForgetPassVerifyForm = () => {
   } = useForm<ValidationSchema>({
     defaultValues: {
       passcode: "",
-      isAccepted: undefined,
     },
     resolver: zodResolver(validationSchema),
   });

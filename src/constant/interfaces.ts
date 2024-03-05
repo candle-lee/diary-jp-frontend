@@ -80,3 +80,8 @@ export interface TitleEditProps {
 export interface VideoCardProps {
   media: IMedia;
 }
+
+export interface IResetPassword {
+  password: string;
+  password1: string;
+}

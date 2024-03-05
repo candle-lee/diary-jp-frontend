@@ -1,66 +1,50 @@
 import React from "react";
-import { ButtonSpinner, InputField } from "../../common";
-import { Button, Checkbox, Label } from "flowbite-react";
+import { BackButton, ButtonSpinner, InputField } from "../../common";
 import useForgetPassVerifyForm  from "./useForgetPassVerifyForm";
 
 const ForgetPassVerifyUserForm: React.FC = () => {
-  const { register, handleSubmit, onSubmit, errors, isLoading, serverError } =
+  const { register, handleSubmit, onSubmit, errors, isLoading } =
     useForgetPassVerifyForm();
-
+    
   return (
-    <div className="flex items-center justify-center px-4 py-6 sm:px-0 lg:py-0">
-      <form
-        className="w-full max-w-md space-y-4 md:space-y-6 xl:max-w-xl"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h1 className="text-3xl font-bold leading-9 tracking-tight text-[#2B3674] dark:text-white">
-          Please Enter Code
-        </h1>
-        <InputField
-          inputType="text"
-          inputName="passcode"
-          description="Your Passcode"
-          placeholderText="123456"
-          register={register}
-          error={errors.passcode?.message}
-        />
-        <div className="flex items-center mb-4">
-          <Checkbox id="agree" {...register("isAccepted")} />
-          <Label htmlFor="agree" className="ml-3">
-            Agree to UDATA’s
-            <a href="/terms-of-use" className="font-bold text-[#4318FF]">
-              {" "}
-              Terms of Use{" "}
-            </a>
-            and
-            <a href="/privacy-policy" className="font-bold text-[#4318FF]">
-              {" "}
-              Privacy Policy{" "}
-            </a>
-            .
-          </Label>
-        </div>
-        {errors.isAccepted && (
-          <p className="text-start text-xs italic text-red-500 my-4">
-            {errors.isAccepted.message}
-          </p>
-        )}
-        {serverError && (
-          <p className="text-start text-xs italic text-red-500 my-4">
-            Error: {serverError.message}
-          </p>
-        )}
-        {isLoading ? (
-          <ButtonSpinner />
-        ) : (
-          <Button
-            type="submit"
-            className="w-full h-[54px] text-white bg-[#4318FF] font-medium rounded-2xl text-sm px-2.5 py-2 text-center"
-          >
-            Send
-          </Button>
-        )}
-      </form>
+    <div className="flex flex-col gap-[1.12rem]">
+      <div>
+        <BackButton />
+      </div>
+      <div className="flex items-center justify-center sm:px-0 lg:py-0">
+        <form
+          className="w-full max-w-md xl:max-w-xl"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-4">
+              <h1 className="text-white text-2xl font-normal leading-[125%]">
+                Please Enter Code
+              </h1>
+            </div>
+            <div className="flex flex-col gap-[1.12rem]">
+              <InputField
+                inputType="text"
+                inputName="passcode"
+                description="Your Passcode"
+                placeholderText="123456"
+                register={register}
+                error={errors.passcode?.message}
+              />
+              {isLoading ? (
+                  <ButtonSpinner />
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-full h-[2.5rem] py-1 px-3 rounded-xl bg-[#1D37C6] text-white font-sans text-sm font-normal leading-[1.09375rem] tracking-[-0.0175rem]"
+                  >
+                    Send
+                  </button>
+                )}
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
