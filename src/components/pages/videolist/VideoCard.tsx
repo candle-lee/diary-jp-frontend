@@ -1,9 +1,5 @@
-import { IMedia } from "../../../constant/interfaces";
+import { VideoCardProps } from "../../../constant/interfaces";
 import { converToDateTime } from "../../../utils";
-
-interface VideoCardProps {
-  media: IMedia;
-}
 
 const VideoCard: React.FC<VideoCardProps> = ({media}) => {
   return (

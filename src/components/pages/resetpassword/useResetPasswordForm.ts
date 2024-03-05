@@ -3,7 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useResetPassword } from "../../../api/auth";
 
-export const useResetPasswordForm = () => {
+const useResetPasswordForm = () => {
   const { mutate, isLoading, error } = useResetPassword();
 
   const validationSchema = z.object({
@@ -57,7 +57,11 @@ export const useResetPasswordForm = () => {
 
   type ValidationSchema = z.infer<typeof validationSchema>;
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ValidationSchema>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ValidationSchema>({
     defaultValues: {
       password: "",
       password1: "",
@@ -65,13 +69,24 @@ export const useResetPasswordForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = async (data: ValidationSchema) => {
+  const onSubmit: SubmitHandler<ValidationSchema> = async (
+    data: ValidationSchema
+  ) => {
     const formData = {
-        password: data.password,
-        password1: data.password1,
-      };
-      mutate(formData);
+      password: data.password,
+      password1: data.password1,
+    };
+    mutate(formData);
   };
 
-  return { register, handleSubmit, onSubmit, errors, isLoading, serverError: error };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    isLoading,
+    serverError: error,
+  };
 };
+
+export default useResetPasswordForm;

@@ -3,19 +3,25 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSendCodeResetPass } from "../../../api/auth";
 
-export const useForgetPassVerifyForm = () => {
+const useForgetPassVerifyForm = () => {
   const { mutate, isLoading, error } = useSendCodeResetPass();
 
   const validationSchema = z.object({
-    passcode: z.string().min(5, { message: "Enter at least 5 characters for the passcode." }),
+    passcode: z
+      .string()
+      .min(5, { message: "Enter at least 5 characters for the passcode." }),
     isAccepted: z.literal(true, {
-        errorMap: () => ({ message: "You must accept Terms and Conditions" }),
-      })
-    });
+      errorMap: () => ({ message: "You must accept Terms and Conditions" }),
+    }),
+  });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ValidationSchema>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ValidationSchema>({
     defaultValues: {
       passcode: "",
       isAccepted: undefined,
@@ -23,9 +29,20 @@ export const useForgetPassVerifyForm = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<ValidationSchema> = async (data: ValidationSchema) => {
+  const onSubmit: SubmitHandler<ValidationSchema> = async (
+    data: ValidationSchema
+  ) => {
     mutate(data.passcode);
   };
 
-  return { register, handleSubmit, onSubmit, errors, isLoading, serverError: error };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    isLoading,
+    serverError: error,
+  };
 };
+
+export default useForgetPassVerifyForm;

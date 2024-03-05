@@ -3,16 +3,23 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useResetPassPasscode } from "../../../api/auth";
 
-export const useForgetPasswordForm = () => {
+const useForgetPasswordForm = () => {
   const { mutate, isLoading, error } = useResetPassPasscode();
 
   const validationSchema = z.object({
-    email: z.string().min(1, "Email is required").email("Must be a valid email"),
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .email("Must be a valid email"),
   });
 
   type ValidationSchema = z.infer<typeof validationSchema>;
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ValidationSchema>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ValidationSchema>({
     defaultValues: {
       email: "",
     },
@@ -25,5 +32,14 @@ export const useForgetPasswordForm = () => {
     mutate(data.email);
   };
 
-  return { register, handleSubmit, onSubmit, errors, isLoading, serverError: error };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    isLoading,
+    serverError: error,
+  };
 };
+
+export default useForgetPasswordForm;
