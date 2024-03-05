@@ -1,2 +1,2 @@
 export { default as ForgetPassVerifyUserForm } from "./ForgetPassVerifyUserForm";
-export { default as useForgetPassVerifyFOrm } from "./useForgetPassVerifyForm";
+export { default as useForgetPassVerifyForm } from "./useForgetPassVerifyForm";

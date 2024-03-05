@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonSpinner } from "../../common";
 import InputField from "../../common/InputField";
-import { useForgetPasswordForm } from "./useForgetPasswordForm";
+import useForgetPasswordForm from "./useForgetPasswordForm";
 import BackButton from "../../common/BackButton";
 
 const ForgetPasswordForm: React.FC = () => {

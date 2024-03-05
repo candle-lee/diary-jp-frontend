@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonSpinner, InputField } from "../../common";
 import { Button, Checkbox, Label } from "flowbite-react";
-import { useForgetPassVerifyForm } from "./useForgetPassVerifyForm";
+import useForgetPassVerifyForm  from "./useForgetPassVerifyForm";
 
 const ForgetPassVerifyUserForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading, serverError } =

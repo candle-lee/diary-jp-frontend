@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import InputField from "../../common/InputField";
 import { ButtonSpinner } from "../../common";
-import { useSignInForm } from "./useSignInForm";
+import useSignInForm  from "./useSignInForm";
 import PasswordInputField from "../../common/PasswordInputField";
 
 const SignInForm: React.FC = () => {

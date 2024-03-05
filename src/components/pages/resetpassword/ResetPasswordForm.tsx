@@ -1,6 +1,6 @@
 import { Button, Checkbox, Label } from "flowbite-react";
 import { ButtonSpinner } from "../../common";
-import { useResetPasswordForm } from "./useResetPasswordForm";
+import useResetPasswordForm  from "./useResetPasswordForm";
 import PasswordInputField from "../../common/PasswordInputField";
 
 const ResetPasswordForm: React.FC = () => {
