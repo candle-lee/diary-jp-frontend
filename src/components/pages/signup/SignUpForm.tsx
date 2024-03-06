@@ -98,7 +98,7 @@ const SignUpForm: React.FC = () => {
                 Already registered?
               </p>
               <Link
-                to="/signin"
+                to="/verifyuser"
                 className="text-white font-sans text-sm font-medium leading-[1.09375rem] tracking-[-0.0175rem]"
               >
                 Sign in with your account.
