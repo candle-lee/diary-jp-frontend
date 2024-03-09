@@ -1,5 +1,3 @@
-import React from "react";
-
 const InRecordingIcon: React.FC = () => {
   return (
     <>
