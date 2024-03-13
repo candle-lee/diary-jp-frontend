@@ -1,4 +1,3 @@
-import { FileType } from "react-record-webcam";
 export interface ILoginRequest {
   username: string;
   email: string;
@@ -64,13 +63,6 @@ export interface CountUpTime {
   hours: string;
   minutes: string;
   seconds: string;
-}
-
-export interface IVideoOption {
-  filename: string;
-  fileType: FileType;
-  width: number;
-  height: number;
 }
 
 export interface TitleEditProps {

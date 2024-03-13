@@ -4,28 +4,25 @@ import InRecordingIcon from "../../icons/InRecordingIcon";
 import StartRecordingIcon from "../../icons/StartRecordingIcon";
 import CrossIcon from "../../icons/CrossIcon";
 import { useNavigate } from "react-router-dom";
-import { useRecordWebcam, CAMERA_STATUS } from "react-record-webcam";
+import { useRecordWebcam } from "react-record-webcam";
 import { useVideoUpload } from "../../../api/video";
 import { CircleSpinner } from "../../common";
-import { IVideoOption } from "../../../constant/interfaces";
-
-const OPTIONS: IVideoOption = {
-  filename: "test-filename",
-  fileType: "mp4",
-  width: 1920,
-  height: 1080,
-};
 
 const VideoRecording: React.FC = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const recordWebcam = useRecordWebcam(OPTIONS);
+  const { activeRecordings, createRecording, openCamera, closeCamera, startRecording, stopRecording, pauseRecording, resumeRecording } = useRecordWebcam();
   const navigate = useNavigate();
 
   useEffect(() => {
-    recordWebcam.open();
+    openWebCam();
   }, []);
+
+  const openWebCam = async () => {
+    const recording = await createRecording();
+    if (recording) await openCamera(recording.id);
+  };
 
   const { mutate, isLoading } = useVideoUpload();
 
@@ -35,10 +32,11 @@ const VideoRecording: React.FC = () => {
 
   const getRecordingFileHooks = async () => {
     try {
-      const blob = (await recordWebcam.getRecording()) as unknown as Blob;
+      const recorded = await stopRecording(activeRecordings[0].id);
       const formData = new FormData();
-      formData.append("file", blob, Date.now().toString());
+      recorded && formData.append('file', recorded.blob as Blob, 'recorded.webm');
       mutate(formData);
+      navigate("/video-list");
     } catch (error) {
       console.error("Error getting recording:", error);
     }
@@ -50,92 +48,66 @@ const VideoRecording: React.FC = () => {
   const handleRecordingStart = () => {
     if (!isStarted) {
       setIsStarted(true);
+      startRecording(activeRecordings[0].id);
     }
     setIsRecording(!isRecording);
-    recordWebcam.start();
+    resumeRecording(activeRecordings[0].id);
   };
 
-  const handleRecordingStop = () => {
+  const handleRecordingPause = () => {
+    console.log(activeRecordings[0].status);
     setIsRecording(!isRecording);
-    recordWebcam.stop();
-  };
-
-  const handleRecordingFinish = () => {
-    navigate("/video-list");
-    recordWebcam.stop();
+    pauseRecording(activeRecordings[0].id);
   };
 
   return (
     <>
-      <div className="flex flex-col h-full">
-        <div className="relative h-full">
-          <video
-            className="aspect-video object-cover h-full mx-auto"
-            ref={recordWebcam.webcamRef}
-            style={{
-              display: `${
-                recordWebcam.status === CAMERA_STATUS.OPEN ||
-                recordWebcam.status === CAMERA_STATUS.RECORDING
-                  ? "block"
-                  : "none"
-              }`,
-            }}
-            autoPlay
-            muted
-          />
-          <video
-            className="aspect-video object-cover h-full mx-auto"
-            ref={recordWebcam.previewRef}
-            style={{
-              display: `${
-                recordWebcam.status === CAMERA_STATUS.PREVIEW ? "block" : "none"
-              }`,
-            }}
-            controls
-          />
-          {isStarted && (
-            <div className="absolute inset-x-0 top-4 flex justify-center">
-              <RecordingCounter isStopped={isStarted && !isRecording} />
+        {activeRecordings.map((recording) => (
+      <div className="flex flex-col h-full" key={recording.id}>
+            <div className="relative h-full">
+              <video className="aspect-video object-cover h-full mx-auto" ref={recording.webcamRef} autoPlay muted />
+              {isStarted && (
+                <div className="absolute inset-x-0 top-4 flex justify-center">
+                  <RecordingCounter isStopped={isStarted && !isRecording} />
+                </div>
+              )}
+              {!isRecording &&
+                (
+                  <div
+                    className="absolute right-[0.63rem] top-[0.63rem] cursor-pointer lg:right-4 lg:top-4"
+                    onClick={toggleDialog}
+                  >
+                    <CrossIcon />
+                  </div>
+                )
+              }
             </div>
-          )}
-          {isRecording ||
-            (isStarted && (
-              <div
-                className="absolute right-[0.63rem] top-[0.63rem] cursor-pointer lg:right-4 lg:top-4"
-                onClick={toggleDialog}
-              >
-                <CrossIcon />
+            <div className="mt-auto flex justify-between items-center">
+              <div className="flex justify-center items-end py-6" style={{ flex: 2 }}>
+                {isRecording ? (
+                  <button className="z-50" onClick={() => handleRecordingPause()}>
+                    <InRecordingIcon />
+                  </button>
+                ) : (
+                  <button className="z-50" onClick={() => handleRecordingStart()}>
+                    <StartRecordingIcon />
+                  </button>
+                )}
               </div>
-            ))}
-        </div>
-        <div className="mt-auto flex justify-between items-center">
-          <div
-            className="flex justify-center items-end py-6"
-            style={{ flex: 2 }}
-          >
-            {isRecording ? (
-              <button className="z-50" onClick={() => handleRecordingStop()}>
-                <InRecordingIcon />
-              </button>
-            ) : (
-              <button className="z-50" onClick={() => handleRecordingStart()}>
-                <StartRecordingIcon />
-              </button>
-            )}
-          </div>
-          {isStarted && !isRecording && (
-            <div className="absolute right-[1.31rem]">
-              <button
-                type="button"
-                onClick={getRecordingFileHooks}
-                className="bg-[#FFF] rounded-2xl py-1 px-3 text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem]"
-              >
-                Done
-              </button>
+              {isStarted && !isRecording && (
+                <div className="absolute right-[1.31rem]">
+                  <button
+                    type="button"
+                    onClick={() => getRecordingFileHooks()}
+                    className="bg-[#FFF] rounded-2xl py-1 px-3 text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem]"
+                  >
+                    Upload
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
       </div>
+        ))}
       {isDialogOpen && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="bg-black bg-opacity-80 border border-solid border-white border-opacity-25 rounded-lg p-4 flex flex-col gap-4 max-w-60">
@@ -152,7 +124,10 @@ const VideoRecording: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => handleRecordingFinish()}
+                onClick={() => {
+                  navigate('/video-list');
+                  closeCamera(activeRecordings[0].id);
+                }}
                 className="border border-solid border-white py-1 px-3 bg-white text-black text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-2xl"
               >
                 Done
