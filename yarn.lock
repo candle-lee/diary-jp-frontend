@@ -2149,12 +2149,10 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-record-webcam@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/react-record-webcam/-/react-record-webcam-0.0.14.tgz#9d8cb4b0f6c11673a5a10417fffcbb6366d0267b"
-  integrity sha512-SUowthW0Ig3KV9qowaTcC9gmq+paALY72Xp8KG2RMJ2igQ4Cblyvt6C2U2AL8J8Sbjlmj8mG7RcKSzZ1EhFAMA==
-  dependencies:
-    recordrtc "5.6.2"
+react-record-webcam@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-record-webcam/-/react-record-webcam-1.1.2.tgz#536a3e2a01c6182d26dd884df6c3345717069cb9"
+  integrity sha512-PfaG+ZQaDiYtPUUhP4QCPuSA31L8I91FzlZ1vvZU+Di6IS0xDwRFWztoO0JXVMBh+qo4QF3HSxHZXX/Kixz/fg==
 
 react-redux@^8.1.2:
   version "8.1.3"
@@ -2215,11 +2213,6 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
-
-recordrtc@5.6.2:
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/recordrtc/-/recordrtc-5.6.2.tgz#48fc214b35084973ccce82c6251198b5742bc327"
-  integrity sha512-1QNKKNtl7+KcwD1lyOgP3ZlbiJ1d0HtXnypUy7yq49xEERxk31PHvE9RCciDrulPCY7WJ+oz0R9hpNxgsIurGQ==
 
 redux-thunk@^2.4.2:
   version "2.4.2"
