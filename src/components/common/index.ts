@@ -1,4 +1,3 @@
-export { default as AutherizedUser } from "./AutherizedUser";
 export { default as BackButton } from "./BackButton";
 export { default as ButtonSpinner } from "./ButtonSpinner";
 export { default as CircleSpinner } from "./CircleSpinner";

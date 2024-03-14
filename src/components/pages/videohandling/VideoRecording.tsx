@@ -34,7 +34,8 @@ const VideoRecording: React.FC = () => {
     try {
       const recorded = await stopRecording(activeRecordings[0].id);
       const formData = new FormData();
-      recorded && formData.append('file', recorded.blob as Blob, 'recorded.webm');
+      console.log("blob", recorded?.blob);
+      formData.append('file', recorded?.blob as unknown as Blob, Date.now().toString());
       mutate(formData);
       navigate("/video-list");
     } catch (error) {
@@ -55,7 +56,6 @@ const VideoRecording: React.FC = () => {
   };
 
   const handleRecordingPause = () => {
-    console.log(activeRecordings[0].status);
     setIsRecording(!isRecording);
     pauseRecording(activeRecordings[0].id);
   };
