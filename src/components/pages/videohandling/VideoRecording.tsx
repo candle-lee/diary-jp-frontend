@@ -32,6 +32,7 @@ const VideoRecording: React.FC = () => {
 
   const getRecordingFileHooks = async () => {
     try {
+      closeCamera(activeRecordings[0].id);
       const recorded = await stopRecording(activeRecordings[0].id);
       const formData = new FormData();
       formData.append('file', recorded?.blobChunks[0] as Blob, Date.now().toString());

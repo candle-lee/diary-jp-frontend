@@ -10,7 +10,6 @@ const Header: React.FC = () => {
   );
   const handleSignOut = () => {
     dispatch(setAutherStatus(false));
-    navigate('/');
   }
   return (
     <div className="sticky top-0 flex justify-between items-center bg-[#000] border-b border-white border-opacity-15 p-2 lg:px-4 lg:py-2">
@@ -21,13 +20,13 @@ const Header: React.FC = () => {
       </div>
       {isAuth && (
         <div>
-          <button
-            type="button"
+          <a
+            href="/"
             className="text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] py-1 px-3 border border-solid border-white rounded-2xl"
             onClick={() => handleSignOut()}
           >
             Sign out
-          </button>
+          </a>
         </div>
       )}
     </div>
