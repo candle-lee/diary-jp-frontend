@@ -27,17 +27,15 @@ const VideoRecording: React.FC = () => {
   const { mutate, isLoading } = useVideoUpload();
 
   if (isLoading) {
-    return <CircleSpinner />;
+    return <CircleSpinner />
   }
 
   const getRecordingFileHooks = async () => {
     try {
       const recorded = await stopRecording(activeRecordings[0].id);
       const formData = new FormData();
-      console.log("blob", recorded?.blob);
-      formData.append('file', recorded?.blob as unknown as Blob, Date.now().toString());
+      formData.append('file', recorded?.blobChunks[0] as Blob, Date.now().toString());
       mutate(formData);
-      navigate("/video-list");
     } catch (error) {
       console.error("Error getting recording:", error);
     }
