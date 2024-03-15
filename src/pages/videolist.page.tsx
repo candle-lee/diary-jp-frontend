@@ -72,6 +72,15 @@ const VideoListPage: React.FC = () => {
                   </div>
                 ))
               }
+              {
+                medias.length === 0 && (
+                  <div className="border border-white border-opacity-15 rounded-xl py-9 flex justify-center lg:py-16">
+                    <p className="text-white text-sm font-medium leading-[125%] tracking-[-0.0175rem] lg:text-2xl lg:font-normal">
+                      You haven’t upload any video yet.
+                    </p>
+                  </div>
+                )
+              }
             </div>
             {/* <div className="flex flex-col gap-20 lg:gap-44">
               <div className="text-white text-base font-medium leading-[100%] bg-black z-10">
