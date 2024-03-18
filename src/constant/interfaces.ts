@@ -75,5 +75,5 @@ export interface VideoCardProps {
 
 export interface IResetPassword {
   password: string;
-  password1: string;
+  email: string | null;
 }

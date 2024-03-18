@@ -7,9 +7,8 @@ import { IResetPassword } from "../../constant/interfaces";
 const useResetPassword = () => {
   const axios = httpAxios();
   const navigate = useNavigate();
-
-  const resetPassword = (formData: IResetPassword) =>
-    axios.post("/auth/reset-password", { ...formData });
+  const resetPassword = ({ password, email }: IResetPassword) =>
+    axios.post("/auth/reset-password", { password, email });
   const { mutate, isLoading, error } = useMutation({
     mutationFn: resetPassword,
     onSuccess: () => {
@@ -21,6 +20,7 @@ const useResetPassword = () => {
         className:
           "p-4 text-[#FFF] text-sm font-normal leading-[125%] tracking-[-0.0175rem] rounded-lg border border-solid border-white border-opacity-40 bg-white bg-opacity-10 backdrop-blur",
       });
+      localStorage.removeItem("email");
       navigate("/signin");
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

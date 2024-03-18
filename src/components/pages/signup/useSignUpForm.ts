@@ -79,6 +79,7 @@ const useSignUpForm = () => {
       email: data.email,
       password: data.password,
     };
+    localStorage.setItem("email", data.email);
     mutate(formData);
   };
 

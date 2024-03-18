@@ -42,9 +42,10 @@ const useResetPasswordForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
+    const email = localStorage.getItem("email");
     const formData = {
       password: data.password,
-      password1: data.password1,
+      email: email,
     };
     mutate(formData);
   };
