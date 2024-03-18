@@ -29,6 +29,7 @@ const useForgetPasswordForm = () => {
   const onSubmit: SubmitHandler<ValidationSchema> = async (
     data: ValidationSchema
   ) => {
+    localStorage.setItem("email", data.email);
     mutate(data.email);
   };
 
