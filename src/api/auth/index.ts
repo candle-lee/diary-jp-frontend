@@ -10,3 +10,4 @@ export { default as useSendResetPassPasscode } from "./useSendResetPassPasscode"
 export { default as useSignUpUser } from "./useSignUpUser";
 export { default as useSendPasscode } from "./useSendPasscode";
 export { default as useGoogleSignin } from "./useGoogleSignin";
+export { default as useGoogleSignup } from "./useGoogleSignup";
