@@ -5,3 +5,4 @@ export { default as SeeMoreIcon } from "./SeeMoreIcon";
 export { default as StartRecordingIcon } from "./StartRecordingIcon";
 export { default as VideoPlayIcon } from "./VideoPlayIcon";
 export { default as CaptionIcon } from "./CaptionIcon";
+export { default as GmailIcon } from "./GmailIcon";
