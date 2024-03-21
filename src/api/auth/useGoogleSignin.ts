@@ -12,12 +12,13 @@ const useGoogleSignin = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const googleLogin = (data: any) => axios.post("/auth/google-login", { data });
+  const googleLogin = (data: any) =>
+    axios.post("/user/google-register", { data });
 
   const { mutate, isLoading, error } = useMutation({
     mutationFn: googleLogin,
     onSuccess: ({ data }) => {
-      toast.success(`Credentials are correct!`, {
+      toast.success(`Success!`, {
         hideProgressBar: true,
         autoClose: 5000,
         type: "success",
