@@ -1,12 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from "react-router-dom";
 import { InputField, ButtonSpinner } from "../../common";
 import PasswordInputField from "../../common/PasswordInputField";
 import useSignUpForm from "./useSignUpForm";
+import { GmailIcon } from "../../icons";
+import { useGoogleLogin } from "@react-oauth/google";
+import { fetchGoogleUserInfo } from "../../../utils";
+import {useGoogleSignup} from "../../../api/auth";
 
 const SignUpForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading } =
     useSignUpForm();
+  const { mutate: googleSignUpMutate } = useGoogleSignup();
+
   const navigate = useNavigate();
+
+  const handleLoginSuccess = async (tokenResponse: any) => {
+    const token = tokenResponse?.access_token;
+    const data = await fetchGoogleUserInfo(token);
+    googleSignUpMutate(data);
+  };
+
+  const handleLoginFailure = (response: any) => {
+    console.error('Failed to login with Google:', response);
+  };
+  const googleRegister = useGoogleLogin({
+    onSuccess: handleLoginSuccess,
+    onError: handleLoginFailure,
+  });
   return (
     <div className="flex items-center justify-center sm:px-0 lg:py-0">
       <form
@@ -22,6 +43,12 @@ const SignUpForm: React.FC = () => {
           </p>
         </div>
         <div className="">
+          <button type="button" onClick={() => googleRegister()} className="bg-[#F4F7FE] rounded-xl w-full h-10 flex gap-[0.56rem] items-center justify-center">
+            <GmailIcon />
+            <p className="text-[#2B3674] text-sm font-medium leading-[142.857%] tracking-[-0.0175rem]">
+              Sign up with Google
+            </p>
+          </button>
           <div className="my-6">
             <p className=" text-white font-sans text-xs font-normal leading-3">
               Or sign up with your credentials
