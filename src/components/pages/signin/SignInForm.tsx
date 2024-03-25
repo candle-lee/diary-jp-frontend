@@ -1,13 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import InputField from "../../common/InputField";
 import { ButtonSpinner } from "../../common";
 import useSignInForm  from "./useSignInForm";
 import PasswordInputField from "../../common/PasswordInputField";
+import { useGoogleLogin } from '@react-oauth/google';
+import { GmailIcon } from "../../icons";
+import {useGoogleSignin} from "../../../api/auth";
+import { fetchGoogleUserInfo } from "../../../utils";
 
 const SignInForm: React.FC = () => {
   const { register, handleSubmit, onSubmit, errors, isLoading } =
     useSignInForm();
+    
+    const { mutate: googleSignInMutate } = useGoogleSignin();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleLoginSuccess = async (tokenResponse: any) => {
+      const token = tokenResponse?.access_token;
+      const data = await fetchGoogleUserInfo(token);
+      googleSignInMutate(data);
+    };
+  
+    const handleLoginFailure = (response: any) => {
+      console.error('Failed to login with Google:', response);
+    };
+  
+    const googleLogin = useGoogleLogin({
+      onSuccess: handleLoginSuccess,
+      onError: handleLoginFailure,
+    });
   return (
     <div className="flex items-center justify-center sm:px-0 lg:py-0">
       <form
@@ -23,6 +45,12 @@ const SignInForm: React.FC = () => {
           </p>
         </div>
         <div className="">
+          <button type="button" onClick={() => googleLogin()} className="bg-[#F4F7FE] rounded-xl w-full h-10 flex gap-[0.56rem] items-center justify-center">
+            <GmailIcon />
+            <p className="text-[#2B3674] text-sm font-medium leading-[142.857%] tracking-[-0.0175rem]">
+              Sign in with Google
+            </p>
+          </button>
           <div className="my-6">
             <p className=" text-white font-sans text-xs font-normal leading-3">
               Or sign in with your email

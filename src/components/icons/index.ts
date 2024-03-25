@@ -6,3 +6,4 @@ export { default as StartRecordingIcon } from "./StartRecordingIcon";
 export { default as VideoPlayIcon } from "./VideoPlayIcon";
 export { default as CaptionShowIcon } from "./CaptionShowIcon";
 export { default as CaptionHideIcon } from "./CaptionHideIcon";
+export { default as GmailIcon } from "./GmailIcon";
