@@ -8,9 +8,7 @@ const ResetPasswordForm: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-[1.12rem]">
-        <div>
-          <BackButton />
-        </div>
+        <BackButton label={'Back to page'} />
       <div className="flex items-center justify-center sm:px-0 lg:py-0">
         <form
           className="w-full max-w-md xl:max-w-xl"

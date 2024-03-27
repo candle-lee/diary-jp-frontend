@@ -6,7 +6,7 @@ const PrivacyPolicy: React.FC = () => {
       <div className="w-full max-w-3xl px-6 py-[4.75rem]">
         <div className="flex flex-col gap-14">
           <div>
-            <BackButton />
+          <BackButton label={'Back to page'} />
             <p className="text-white text-4xl font-bold leading-[125%] mt-8 mb-9">
               プライバシーポリシー
             </p>
