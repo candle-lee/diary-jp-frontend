@@ -10,18 +10,16 @@ import initSocket from "./app/initSocket";
 function App() {
   const client = new QueryClient();
   const router = createBrowserRouter([PrivateRoutes(), PublicRoutes()]);
-  
+
   useEffect(() => {
     initSocket();
   }, []);
 
   return (
-    <>
-      <QueryClientProvider client={client}>
-        <ToastContainer />
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={client}>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 
