@@ -39,7 +39,7 @@ const SignUpForm: React.FC = () => {
             Sign up
           </h1>
           <p className="text-white text-opacity-60 font-sans text-base font-normal leading-5">
-            Enter your name, email and password to sign up!
+            Enter your email and password to sign up!
           </p>
         </div>
         <div className="">
@@ -91,12 +91,12 @@ const SignUpForm: React.FC = () => {
                   htmlFor="remember"
                   className="text-white text-opacity-60 font-sans text-xs lg:text-sm font-normal leading-[1.09375rem] cursor-pointer tracking-[-0.0175rem]"
                 >
-                  Agree to UDATA’s{" "}
+                  I agree to the {" "}
                   <a
                     onClick={() => navigate("/privacy-policy")}
                     className="text-white font-bold"
                   >
-                    Privacy Policy
+                    Privacy Policy and Terms of Use
                   </a>
                 </label>
               </div>
