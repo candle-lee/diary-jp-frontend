@@ -9,7 +9,7 @@ declare global {
 export default () => {
     // Create Socket.IO connection
     let socket: Socket;
-    socket = io(import.meta.env.VITE_API_DEEPGRAM_URL + "/deepgram",); // Replace with your server URL
+    socket = io(import.meta.env.VITE_API_URL + "/deepgram"); // Replace with your server URL
 
     // Event handlers
     socket.on('connect', () => {
